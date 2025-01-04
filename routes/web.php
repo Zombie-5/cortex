@@ -20,3 +20,11 @@ Route::get('/', function () {
 Route::get('/dash', function () {
     return view('admin.dashboard');
 });
+
+Route::get('/login', function () {
+    return view('auth.login');
+});
+
+Route::get('/register', function () {
+    return view('auth.register');
+});
