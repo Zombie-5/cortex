@@ -66,7 +66,7 @@ return new class extends Migration
             $table->id();
             $table->float('income_total')->default(0);
             $table->timestamp('last_collection')->nullable();
-            $table->timestamp('expires_at');
+            $table->timestamp('expires_at')->nullable();
             $table->timestamps();
 
             $table->unsignedBigInteger('user_id');

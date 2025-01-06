@@ -11,18 +11,23 @@
 
     <title>Cortex - Dashboard</title>
 
+    <!-- Stilled -->
+    <link href="{{ asset('assets/admin/assets/css/style.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/admin/assets/css/styles.css') }}" rel="stylesheet" />
+    <script src="{{ asset('assets/admin/assets/js/all.js') }}" crossorigin="anonymous"></script>
+    <link href="{{ asset('assets/toastr/toastr.min.css') }}" rel="stylesheet">
+
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-     
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     <!-- Custom styles for tables -->
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-
-    
-
 
 </head>
 
@@ -118,6 +123,61 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+
+    <!-- Stilled -->
+    <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/assets/js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/admin/assets/js/scripts.js') }}"></script>
+    <script src="{{ asset('assets/admin/assets/js/Chart.min.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/admin/assets/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('assets/admin/assets/js/demo/chart-bar-demo.js') }}"></script>
+    <script src="{{ asset('assets/admin/assets/js/simple-datatables.min.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/admin/assets/js/datatables-simple-demo.js') }}"></script>
+    <script src="{{ asset('assets/toastr/toastr.min.js') }}"></script>
+
+    <script src="{{ asset('assets/js/validate/jquery.mask.min.js') }}"></script>
+    <script src="{{ asset('assets/js/validate/jquery.validate.js') }}"></script>
+    <script src="{{ asset('assets/js/validate/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('assets/js/validate/messages_pt_PT.js') }}"></script>
+
+    <script>
+        toastr.options = {
+            closeButton: true, // Exibe o botão de fechar
+            timeOut: 0, // Define o tempo de exibição (0 = permanente)
+            extendedTimeOut: 0, // Define o tempo adicional ao passar o mouse (0 = permanente)
+            progressBar: true, // Exibe uma barra de progresso
+            positionClass: 'toast-top-right' // Define a posição do alerta na tela
+        };
+
+        function msgSuccess(msg) {
+            toastr.success(msg, 'Sucesso');
+        }
+
+        function msgWarning(msg) {
+            toastr.warning(msg, 'Aviso');
+        }
+
+        function msgError(msg) {
+            toastr.error(msg, 'Erro');
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('success'))
+                msgSuccess('{{ session('success') }}');
+            @elseif (session('warning'))
+                msgWarning('{{ session('warning') }}');
+            @elseif (session('error'))
+                msgError('{{ session('error') }}');
+            @endif
+        });
+
+        const sucessMessage = sessionStorage.getItem('sucessMessage');
+
+        if (sucessMessage) {
+            msgSuccess(sucessMessage);
+            sessionStorage.removeItem('sucessMessage');
+        }
+    </script>
+    @yield('script')
 
 
 </body>
