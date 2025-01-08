@@ -28,6 +28,30 @@
 
     <!-- Custom styles for tables -->
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/toastr/toastr.min.css') }}" rel="stylesheet">
+
+
+    <style>
+        .obrigatorio
+        {
+            color: red;
+        }
+        .nav-link
+        {
+            color: red;
+        }
+        .toast 
+        {
+            opacity: 1 !important;
+        }
+        .error
+        {
+            color: red;
+            font-size: 0.90rem;
+            width: 100%;
+        }
+        
+    </style>
 
 </head>
 

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\product\DestroyProductController;
+use App\Http\Controllers\admin\product\StoreProductController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\SignInController;
 use App\Http\Controllers\auth\signUpController;
@@ -33,20 +35,12 @@ Route::prefix('/admin')->group(function () {
     Route::get('/product-index', [IndexProductsController::class, 'index'])->name('admin.product.index');
     Route::get('/bank-index', [IndexBanksController::class, 'index'])->name('admin.bank.index');
 
+    Route::post('/product-store', [StoreProductController::class, 'store'])->name('admin.product.store');
+
+    Route::delete('/machine/{id}/delete', [DestroyProductController::class, 'destroy'])->name('admin.product.destroy');
+
 });
 
 Route::get('/welcome', function () {
     return view('welcome');
-});
-
-Route::get('/dash', function () {
-    return view('admin.dashboard');
-});
-
-Route::get('/login', function () {
-    return view('auth.login');
-});
-
-Route::get('/register', function () {
-    return view('auth.register');
 });
