@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\user\IndexUsersController;
 use App\Http\Controllers\admin\product\IndexProductsController;
 use App\Http\Controllers\admin\bank\IndexBanksController;
+use App\Http\Controllers\admin\product\UpdateProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,10 +38,12 @@ Route::prefix('/admin')->group(function () {
 
     Route::post('/product-store', [StoreProductController::class, 'store'])->name('admin.product.store');
 
-    Route::delete('/machine/{id}/delete', [DestroyProductController::class, 'destroy'])->name('admin.product.destroy');
+    //Route::put('/product/update/{produto}', [UpdateProductController::class, 'update'])->name('admin.product.update');
+
+    Route::delete('/product/{id}/delete', [DestroyProductController::class, 'destroy'])->name('admin.product.destroy');
 
 });
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+Route::put('/welcome', function () {
+    return dd('oioi directo');
+})->name('admin.product.update');
