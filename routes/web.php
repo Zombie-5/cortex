@@ -13,6 +13,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\user\IndexUsersController;
 use App\Http\Controllers\admin\product\IndexProductsController;
 use App\Http\Controllers\admin\bank\IndexBanksController;
+use App\Http\Controllers\admin\product\UpdateProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +51,6 @@ Route::prefix('/admin')->group(function () {
 
 });
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+Route::put('/welcome', function () {
+    return dd('oioi directo');
+})->name('admin.product.update');
