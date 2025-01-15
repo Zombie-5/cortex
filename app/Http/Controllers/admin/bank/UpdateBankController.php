@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\admin\product;
+namespace App\Http\Controllers\admin\bank;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateUpdateProductRequest;
-use App\Models\Product;
+use App\Http\Requests\CreateUpdateBankRequest;
+use App\Models\Bank;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
 
-
-class UpdateProductController extends Controller
+class UpdateBankController extends Controller
 {
     public function update(Request $request, $id)
     {
@@ -19,21 +18,21 @@ class UpdateProductController extends Controller
         try
         {   
             $id = Crypt::decryptString($id);
-            $validacao = new CreateUpdateProductRequest;
+            $validacao = new CreateUpdateBankRequest;
 
             $erro = Validator::make($request->all(), $validacao->rulesUpdate($id), $validacao->messages());
 
             if($erro->fails()) return json_encode(['errors'=>$erro->errors()->all()]);
 
-            $product = Product::findOrFail($id);
+            $banco = Bank::findOrFail($id);
 
-            $update = $product->update($request->all());
+            $update = $banco->update($request->all());
 
             if ($update) {
-                return response()->json(["success" => true, "msg" => "Produto atualizado com sucesso!"], 200);
+                return response()->json(["success" => true, "msg" => "Banco atualizado com sucesso!"], 200);
             }
 
-            return json_encode(["success" => false, "errors" => ["Ocorreu um erro ao actualizar Produto!".$update]]);
+            return json_encode(["success" => false, "errors" => ["Ocorreu um erro ao actualizar Banco!".$update]]);
         }
         catch (Exception $e)
         {

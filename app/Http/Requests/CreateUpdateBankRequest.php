@@ -24,32 +24,25 @@ class CreateUpdateBankRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'owner' => ['required', 'string', 'max:255'],
-            'iban' => ['required', 'numeric'],
+            'iban' => ['required', 'numeric', 'unique:banks,iban'],
         ];
     }
 
-    /* public function rulesUpdate($id)
+    public function rulesUpdate($id)
     {
         return [
-            'nome_servico' => ['required', 'string', 'max:255', Rule::unique('servico', 'nome_servico')->where('tipo', "EXTENSAO")->ignore($id, 'id')],
-            'duracao' => ['required', 'in:DIARIO,MENSAL,ANUAL'],
-            'recurso' => ['required', 'in:PARTILHADO,DEDICADO,PRIVADO'],
-            'preco_fornecedor' => ['required', 'numeric'],
-            'preco_venda' => ['required', 'numeric'],
-            'armazenamento' => ['required', 'string'],
-            'qtd_dominio' => ['required', 'numeric'],
-            'qtd_base_dado' => ['required', 'numeric'],
-            'qtd_email' => ['required', 'numeric'],
-            'trafego' => ['required', 'in:LIMITADO,ILIMITADO'],
-            'tipo' => ['required', 'in:ALOJAMENTO'],
+            'name' => ['required', 'string', 'max:255'],
+            'owner' => ['required', 'string', 'max:255'],
+            'iban' => ['required', 'numeric', 'unique:banks,iban,' . $id],
         ];
-    } */
+    }
 
     public function messages()
     {
         return [
             'required' => 'Preenchimento obrigatório para o campo :attribute',
             'numeric' => 'Este campo precisa ser numerico',
+            'unique' => 'Este Iban já está em uso.',
         ];
     }
 }

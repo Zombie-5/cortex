@@ -29,8 +29,14 @@
                                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                             aria-labelledby="dropdownMenuLink">
                                             <div class="dropdown-header">Opções:</div>
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#modal_edit">Editar</a>
+                                            
+                                            <a class="dropdown-item" href="#" 
+                                                data-id="{{ Crypt::encryptString($bank->id) }}"
+                                                data-name="{{ $bank->name }}" 
+                                                data-owner="{{ $bank->owner }}"
+                                                data-iban="{{ $bank->iban }}"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modal_edit">Editar</a>
                                             
                                             <a class="dropdown-item" href="#"
                                                 data-id="{{ Crypt::encryptString($bank->id) }}"
@@ -47,7 +53,7 @@
                             </div>
                         @empty
                             <tr>
-                                <td colspan="6">Nenhum produto encontrado.</td>
+                                <td colspan="6">Nenhum Banco encontrado.</td>
                             </tr>
                         @endforelse
                     </div>
@@ -189,6 +195,23 @@
     <script>
         var IndexRoute = '{{ route('admin.bank.index') }}';
 
+        $('#modal_edit').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget); // Botão que acionou a modal
+            var id = button.data('id');
+            var name = button.data('name'); // Pegando o nome
+            var owner = button.data('owner'); // Pegando a duração
+            var iban = button.data('iban'); // Pegando a duração
+           
+            // Preenchendo os campos da modal com os dados
+            $(this).find('#name').val(name);
+            $(this).find('#owner').val(owner);
+            $(this).find('#iban').val(iban);
+
+            var actionUrl = "{{ route('admin.product.update', ':id') }}";
+            actionUrl = actionUrl.replace(':id', id);
+            $(this).find('#frm_edit').attr('action', actionUrl);
+        });
+
         $('#modal_destroy').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Botão que acionou a modal
             var id = button.data('id'); // Pegando o id do servico
@@ -196,7 +219,7 @@
 
             $(this).find('#msg').html("Deseja Realmente eliminar o Banco '" + name + "'?");
 
-            var actionUrl = "{{ route('admin.product.destroy', ':id') }}";
+            var actionUrl = "{{ route('admin.bank.destroy', ':id') }}";
             actionUrl = actionUrl.replace(':id', id);
             $(this).find('#frm_destroy').attr('action', actionUrl);
         });
