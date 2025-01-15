@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\admin\bank\DestroybankController;
+use App\Http\Controllers\admin\bank\StorebankController;
+use App\Http\Controllers\admin\GiftController;
+use App\Http\Controllers\admin\IndexTransactionController;
 use App\Http\Controllers\admin\product\DestroyProductController;
 use App\Http\Controllers\admin\product\StoreProductController;
 use App\Http\Controllers\auth\LoginController;
@@ -34,10 +38,15 @@ Route::prefix('/admin')->group(function () {
     Route::get('/user-index', [IndexUsersController::class, 'index'])->name('admin.user.index');
     Route::get('/product-index', [IndexProductsController::class, 'index'])->name('admin.product.index');
     Route::get('/bank-index', [IndexBanksController::class, 'index'])->name('admin.bank.index');
+    Route::get('/transaction-index', [IndexTransactionController::class, 'index'])->name('admin.transaction.index');
+    Route::get('/gift-index', [GiftController::class, 'index'])->name('admin.gift.index');
 
     Route::post('/product-store', [StoreProductController::class, 'store'])->name('admin.product.store');
+    Route::post('/bank-store', [StorebankController::class, 'store'])->name('admin.bank.store');
+    Route::post('/gift-store', [GiftController::class, 'store'])->name('admin.gift.store');
 
-    Route::delete('/machine/{id}/delete', [DestroyProductController::class, 'destroy'])->name('admin.product.destroy');
+    Route::delete('/product/{id}/delete', [DestroyProductController::class, 'destroy'])->name('admin.product.destroy');
+    Route::delete('/bank/{id}/delete', [DestroybankController::class, 'destroy'])->name('admin.product.destroy');
 
 });
 

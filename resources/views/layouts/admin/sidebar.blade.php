@@ -50,7 +50,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('admin.transaction.index') }}">
             <i class="fas fa-fw fa-cog"></i>
             <span>Transações</span>
         </a>
@@ -65,16 +65,16 @@
     </div>
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('admin.gift.index') }}">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Actividades</span>
+            <span>Presentes</span>
         </a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="#">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Presentes</span>
+            <span>Actividades</span>
         </a>
     </li>
 
