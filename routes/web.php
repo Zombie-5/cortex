@@ -15,6 +15,7 @@ use App\Http\Controllers\admin\product\IndexProductsController;
 use App\Http\Controllers\admin\bank\IndexBanksController;
 use App\Http\Controllers\admin\bank\UpdateBankController;
 use App\Http\Controllers\admin\product\UpdateProductController;
+use App\Http\Controllers\auth\SignOutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,24 +35,28 @@ Route::post('/sign-in', [SignInController::class, 'authenticate'])->name('auth.a
 Route::get('/sign-up', [signUpController::class, 'signUp'])->name('auth.signUp');
 Route::post('/store/sign-up', [signUpController::class, 'store'])->name('auth.store');
 
-Route::prefix('/admin')->group(function () {
+Route::prefix('/site')->group(function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/user-index', [IndexUsersController::class, 'index'])->name('admin.user.index');
-    Route::get('/product-index', [IndexProductsController::class, 'index'])->name('admin.product.index');
-    Route::get('/bank-index', [IndexBanksController::class, 'index'])->name('admin.bank.index');
-    Route::get('/transaction-index', [IndexTransactionController::class, 'index'])->name('admin.transaction.index');
-    Route::get('/gift-index', [GiftController::class, 'index'])->name('admin.gift.index');
+    Route::post('/sign-out', [SignOutController::class, 'signOut'])->name('auth.signOut');
 
-    Route::post('/product-store', [StoreProductController::class, 'store'])->name('admin.product.store');
-    Route::post('/bank-store', [StorebankController::class, 'store'])->name('admin.bank.store');
-    Route::post('/gift-store', [GiftController::class, 'store'])->name('admin.gift.store');
+    Route::prefix('/admin')->group(function () {
 
-    Route::put('/products/{id}/update', [UpdateProductController::class, 'update'])->name('admin.product.update');
-    Route::put('/bank/{id}/update', [UpdateBankController::class, 'update'])->name('admin.bank.update');
-
-
-    Route::delete('/product/{id}/delete', [DestroyProductController::class, 'destroy'])->name('admin.product.destroy');
-    Route::delete('/bank/{id}/delete', [DestroybankController::class, 'destroy'])->name('admin.bank.destroy');
-
+        Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+        Route::get('/user-index', [IndexUsersController::class, 'index'])->name('admin.user.index');
+        Route::get('/product-index', [IndexProductsController::class, 'index'])->name('admin.product.index');
+        Route::get('/bank-index', [IndexBanksController::class, 'index'])->name('admin.bank.index');
+        Route::get('/transaction-index', [IndexTransactionController::class, 'index'])->name('admin.transaction.index');
+        Route::get('/gift-index', [GiftController::class, 'index'])->name('admin.gift.index');
+    
+        Route::post('/product-store', [StoreProductController::class, 'store'])->name('admin.product.store');
+        Route::post('/bank-store', [StorebankController::class, 'store'])->name('admin.bank.store');
+        Route::post('/gift-store', [GiftController::class, 'store'])->name('admin.gift.store');
+    
+        Route::put('/products/{id}/update', [UpdateProductController::class, 'update'])->name('admin.product.update');
+        Route::put('/bank/{id}/update', [UpdateBankController::class, 'update'])->name('admin.bank.update');
+        
+        Route::delete('/product/{id}/delete', [DestroyProductController::class, 'destroy'])->name('admin.product.destroy');
+        Route::delete('/bank/{id}/delete', [DestroybankController::class, 'destroy'])->name('admin.bank.destroy');
+    
+    });
 });

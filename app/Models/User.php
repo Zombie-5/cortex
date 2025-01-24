@@ -3,10 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
+
 
 class User extends Authenticatable
 {
@@ -44,6 +48,22 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function login($request)
+    {
+        try
+        {
+            if (Auth::attempt(['tel' => $request["tel"], 'password' => $request["password"]]))
+            {
+                $request->session()->regenerate();
+                return true;
+            }
+            else return false;
+        }
+        catch (Exception $e)
+        {
+            return $e->getMessage();
+        }
+    }
     
     /* Relacionamento com o Wallet (um para um).
      */
