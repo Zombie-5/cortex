@@ -35,6 +35,10 @@ Route::post('/sign-in', [SignInController::class, 'authenticate'])->name('auth.a
 Route::get('/sign-up', [signUpController::class, 'signUp'])->name('auth.signUp');
 Route::post('/store/sign-up', [signUpController::class, 'store'])->name('auth.store');
 
+Route::get('/callback', function () {
+    return view('client.wallet');
+});
+
 Route::prefix('/site')->group(function () {
 
     Route::post('/sign-out', [SignOutController::class, 'signOut'])->name('auth.signOut');
