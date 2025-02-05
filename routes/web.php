@@ -16,6 +16,10 @@ use App\Http\Controllers\admin\bank\IndexBanksController;
 use App\Http\Controllers\admin\bank\UpdateBankController;
 use App\Http\Controllers\admin\product\UpdateProductController;
 use App\Http\Controllers\auth\SignOutController;
+use App\Http\Controllers\client\AccountController;
+use App\Http\Controllers\client\HoldingController;
+use App\Http\Controllers\client\HomeController;
+use App\Http\Controllers\client\MarketController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,12 +40,21 @@ Route::get('/sign-up', [signUpController::class, 'signUp'])->name('auth.signUp')
 Route::post('/store/sign-up', [signUpController::class, 'store'])->name('auth.store');
 
 Route::get('/callback', function () {
-    return view('client.wallet');
+    return view('client.market');
 });
 
 Route::prefix('/site')->group(function () {
 
     Route::post('/sign-out', [SignOutController::class, 'signOut'])->name('auth.signOut');
+
+    Route::prefix('/client')->group(function () {
+
+        Route::get('/home', [HomeController::class, 'home'])->name('client.home');
+        Route::get('/market', [MarketController::class, 'market'])->name('client.market');
+        Route::get('/holdings', [HoldingController::class, 'holdings'])->name('client.holdings');
+        Route::get('/account', [AccountController::class, 'account'])->name('client.account');
+    
+    });
 
     Route::prefix('/admin')->group(function () {
 

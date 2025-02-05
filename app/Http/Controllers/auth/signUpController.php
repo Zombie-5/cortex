@@ -16,7 +16,9 @@ class signUpController extends Controller
 {
     public function signUp(Request $request)
     {
-        return view('auth2.register');
+        //return view('auth2.register');
+        return view('auth.signUp');
+
     }
 
     public function store(Request $request)

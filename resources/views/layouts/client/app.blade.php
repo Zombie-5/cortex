@@ -7,10 +7,19 @@
     <title>Trading Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
     <style>
         :root {
             --primary-green: #1dc37a;
             --light-gray: #f8f9fa;
+            --background-color: #f8f9fa;
+            --card-bg: white;
+            --text-primary: #333;
+            --text-secondary: #666;
+        }
+
+        body {
+            background-color: var(--background-color);
         }
 
         .navbar-balance {
@@ -85,7 +94,7 @@
             right: 20px;
             z-index: 1050;
         }
-
+        
         .support-button {
             width: 48px;
             height: 48px;
@@ -155,6 +164,130 @@
             .support-button-wrapper {
                 bottom: 70px;
             }
+        }
+
+        .banner-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+        
+        .news-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 70px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .news-card {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 8px;
+            background: var(--light-gray);
+            margin-bottom: 10px;
+        }
+        
+        .news-stats {
+            display: flex;
+            gap: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .action-button {
+            border: none;
+            color: white;
+            background-color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: opacity 0.2s;
+        }
+        
+        .action-button:hover {
+            opacity: 0.9;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 15px;
+        }
+        
+        .menu-item {
+            color: var(--text-primary);
+            text-align: center;
+            text-decoration: none;
+            padding: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-2px);
+            color: var(--primary-green);
+        }
+        
+        .menu-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--primary-green);
+        }
+        
+        .verify-button {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 20px;
+        }
+        
+        .amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+        
+        .label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
     </style>
 </head>

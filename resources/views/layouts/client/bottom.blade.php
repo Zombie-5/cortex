@@ -1,25 +1,21 @@
 <!-- Bottom Navigation -->
 <nav class="bottom-nav">
     <div class="row text-center g-0">
-        <div class="col">
+        <a class="col text-dark text-decoration-none" href="{{ route('client.home') }}">
             <i class="bi bi-house-door nav-icon d-block"></i>
             <small>Home</small>
-        </div>
-        <div class="col">
-            <i class="bi bi-star nav-icon d-block"></i>
-            <small>Segundo</small>
-        </div>
-        <div class="col">
-            <i class="bi bi-pie-chart nav-icon d-block"></i>
-            <small>Terceiro</small>
-        </div>
-        <div class="col">
-            <i class="bi bi-search nav-icon d-block"></i>
-            <small>Quarto</small>
-        </div>
-        <div class="col">
-            <i class="bi bi-wallet2 nav-icon d-block text-success"></i>
-            <small>Quinto</small>
-        </div>
+        </a>
+        <a class="col text-dark text-decoration-none" href="{{ route('client.market') }}">
+            <i class="bi bi-graph-up nav-icon d-block"></i>
+            <small>Markets</small>
+        </a>
+        <a class="col text-dark text-decoration-none" href="{{ route('client.holdings') }}">
+            <i class="bi bi-coin nav-icon d-block"></i>
+            <small>Holdings</small>
+        </a>
+        <a class="col text-dark text-decoration-none" href="{{ route('client.account') }}">
+            <i class="bi bi-person-circle nav-icon d-block"></i>
+            <small>Account</small>
+        </a>
     </div>
 </nav>

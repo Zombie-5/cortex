@@ -48,20 +48,26 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function login($request)
+    public function showWithRelations($id)
     {
-        try
-        {
-            if (Auth::attempt(['tel' => $request["tel"], 'password' => $request["password"]]))
-            {
-                $request->session()->regenerate();
-                return true;
-            }
-            else return false;
-        }
-        catch (Exception $e)
-        {
-            return $e->getMessage();
+        try {
+            $user = User::with([
+                'wallet',          // Relacionamento com o Wallet
+                'bank',            // Relacionamento com o Bank
+                'products',        // Relacionamento com o ProductUser
+                'superior',        // Relacionamento auto-referencial
+                'subordinates',    // Relacionamento com subordinados
+            ])->findOrFail($id);
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Usuário não encontrado ou erro ao carregar as relações.'
+            ], 404);
         }
     }
     

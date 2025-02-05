@@ -1,44 +1,142 @@
-@extends('layouts.auth.app')
+<!-- resources/views/auth/login.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-    <div id="layoutAuthentication">
-        <div id="layoutAuthentication_content">
-            <main>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-5">
-                            <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                <div class="card-header">
-                                    <h3 class="text-center font-weight-light my-4">Login</h3>
-                                </div>
-                                <div class="card-body">
-                                    <form method="POST" action="{{ route('auth.authenticate') }}">
-                                        @csrf
-                                        <div class="form-floating mb-3">
-                                            <input name="tel" class="form-control" id="inputTel" type="text"
-                                                placeholder="(+244) 923 000 000" />
-                                            <label for="inputTel">Telefone</label>
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <input name="password" class="form-control" id="inputPassword" type="password"
-                                                placeholder="Password" />
-                                            <label for="inputPassword">Password</label>
-                                        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #1dc37a;
+            --background-color: #f8f9fa;
+            --text-primary: #333;
+            --text-secondary: #666;
+        }
 
-                                        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a class="small" href="password.html">Esqueceu a sua senha?</a>
-                                            <button class="btn btn-primary"  type="submit">Entrar</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="card-footer text-center py-3">
-                                    <div class="small"><a href="{{ route('auth.signUp') }}">Não tem uma conta? Criar conta!</a></div>
-                                </div>
-                            </div>
-                        </div>
+        body {
+            background-color: var(--background-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .auth-title {
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 0.2rem rgba(29, 195, 122, 0.25);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+
+        .btn-primary:hover {
+            background-color: #18a268;
+            border-color: #18a268;
+        }
+
+        .phone-input-group {
+            display: flex;
+        }
+
+        .phone-prefix {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-right: none;
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.25rem 0 0 0.25rem;
+        }
+
+        .phone-input {
+            border-left: none;
+            border-radius: 0 0.25rem 0.25rem 0;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .toggle-form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .toggle-form a {
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .toggle-form a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="auth-container">
+            <h2 class="auth-title">Login</h2>
+            <form action="{{ route('auth.authenticate') }}" method="POST" id="loginForm">
+                @csrf
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Número de telefone</label>
+                    <div class="phone-input-group">
+                        <span class="phone-prefix">+244</span>
+                        <input type="tel" class="form-control phone-input" id="tel" name="tel"
+                            placeholder="9XXXXXXXX" required>
                     </div>
+                    @error('phone')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
-            </main>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    @error('password')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            </form>
+            <div class="toggle-form">
+                <a href="{{ route('auth.signUp') }}">Não tem uma conta? Cadastre-se</a>
+            </div>
         </div>
     </div>
-@endsection
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            const phoneInput = document.getElementById('tel');
+            const phoneRegex = /^(admin@cortex\.com|9\d{8})$/;
+            if (!phoneRegex.test(phoneInput.value)) {
+                e.preventDefault();
+                alert('Número de telefone inválido. Use o formato 9XXXXXXXX.');
+            }
+        });
+    </script>
+</body>
+
+</html>
