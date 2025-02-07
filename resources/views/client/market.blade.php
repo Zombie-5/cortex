@@ -10,7 +10,29 @@
                         <div class="card-content">
                             <div class="price-section">
                                 <div class="price-amount">{{ number_format($product['price'], 2, ',', '.') }} USDT</div>
-                                <button class="feed-button">Invest</button>
+
+                                @php
+                                    $buttonState = '';
+                                    $buttonText = '';
+                                    $disabled = false;
+
+                                    if (!$product['is_active']) {
+                                        $buttonState = 'Coming Soon';
+                                        $disabled = true;
+                                    } elseif ($product->hasUser()) {
+                                        $buttonState = 'Investing';
+                                        $disabled = true;
+                                    } else {
+                                        $buttonState = 'Invest';
+                                    }
+                                @endphp
+
+                                <button class="feed-button"
+                                    @if (!$disabled) onclick="event.preventDefault(); document.getElementById('invest-form-{{ $product['id'] }}').submit();" @endif
+                                    @disabled($disabled)>
+                                    {{ $buttonState }}
+                                </button>
+
                             </div>
                             <div class="stats-grid">
                                 <div class="stat-item">
@@ -22,12 +44,18 @@
                                     <div class="stat-label">Duration</div>
                                 </div>
                                 <div class="stat-item">
-                                    <div class="stat-value">{{ number_format($product['income'] * $product['duration'], 2, ',', '.')}}</div>
+                                    <div class="stat-value">
+                                        {{ number_format($product['income'] * $product['duration'], 2, ',', '.') }}</div>
                                     <div class="stat-label">Total</div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <form id="invest-form-{{ $product['id'] }}" action="{{ route('client.invest', $product['id']) }}"
+                        method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
             @endforeach
         </div>

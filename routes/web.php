@@ -17,9 +17,16 @@ use App\Http\Controllers\admin\bank\UpdateBankController;
 use App\Http\Controllers\admin\product\UpdateProductController;
 use App\Http\Controllers\auth\SignOutController;
 use App\Http\Controllers\client\AccountController;
+use App\Http\Controllers\client\BankController;
+use App\Http\Controllers\client\ChangePasswordController;
+use App\Http\Controllers\client\DepositController;
+use App\Http\Controllers\client\GiftController as ClientGiftController;
 use App\Http\Controllers\client\HoldingController;
 use App\Http\Controllers\client\HomeController;
 use App\Http\Controllers\client\MarketController;
+use App\Http\Controllers\client\RecordController;
+use App\Http\Controllers\client\TeamController;
+use App\Http\Controllers\client\WithdrawController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,7 +47,7 @@ Route::get('/sign-up', [signUpController::class, 'signUp'])->name('auth.signUp')
 Route::post('/store/sign-up', [signUpController::class, 'store'])->name('auth.store');
 
 Route::get('/callback', function () {
-    return view('client.market');
+    return view('client.test');
 });
 
 Route::prefix('/site')->group(function () {
@@ -53,6 +60,16 @@ Route::prefix('/site')->group(function () {
         Route::get('/market', [MarketController::class, 'market'])->name('client.market');
         Route::get('/holdings', [HoldingController::class, 'holdings'])->name('client.holdings');
         Route::get('/account', [AccountController::class, 'account'])->name('client.account');
+        Route::get('/deposit', [DepositController::class, 'deposit'])->name('client.deposit');
+        Route::get('/withdraw', [WithdrawController::class, 'withdraw'])->name('client.withdraw');
+        Route::get('/team', [TeamController::class, 'team'])->name('client.team');
+        Route::get('/record', [RecordController::class, 'record'])->name('client.record');
+        Route::get('/change-passord', [ChangePasswordController::class, 'change'])->name('client.change-passord');
+        Route::get('/gift', [ClientGiftController::class, 'gift'])->name('client.gift');
+        Route::get('/bank', [BankController::class, 'bank'])->name('client.bank');
+
+        Route::post('/market/invest/{productId}', [MarketController::class, 'invest'])->name('client.invest');
+        Route::post('/holding/claim', [HoldingController::class, 'claim'])->name('client.claim');
     
     });
 

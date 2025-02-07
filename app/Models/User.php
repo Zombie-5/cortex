@@ -48,29 +48,25 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function showWithRelations($id)
+    /* protected static function boot()
     {
-        try {
-            $user = User::with([
-                'wallet',          // Relacionamento com o Wallet
-                'bank',            // Relacionamento com o Bank
-                'products',        // Relacionamento com o ProductUser
+        parent::boot();
+
+        static::retrieved(function ($user) {
+            $user->load([
+                'wallet',          // Relacionamento com Wallet
+                'bank',            // Relacionamento com Bank
+                'products',        // Relacionamento com ProductUser
                 'superior',        // Relacionamento auto-referencial
                 'subordinates',    // Relacionamento com subordinados
-            ])->findOrFail($id);
-
-            return response()->json([
-                'success' => true,
-                'user' => $user
+                'superiors1',      // Superiores de nível 1
+                'superiors2',      // Superiores de nível 2
+                'subordinates1',   // Subordinados de nível 1
+                'subordinates2',   // Subordinados de nível 2
             ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Usuário não encontrado ou erro ao carregar as relações.'
-            ], 404);
-        }
-    }
-    
+        });
+    } */
+
     /* Relacionamento com o Wallet (um para um).
      */
     public function wallet()
@@ -94,6 +90,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Product::class, 'product_users')
             ->withPivot('income_total', 'last_collection', 'expires_at')
             ->withTimestamps();
+    }
+
+    public function hasProduct($productId)
+    {
+        return $this->products()->where('product_users.product_id', $productId)->exists();
     }
 
     /**

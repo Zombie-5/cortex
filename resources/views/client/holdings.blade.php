@@ -4,25 +4,40 @@
     <div class="container" style="margin-top: 70px">
         <div class="row">
             @foreach ($products as $product)
+                @php
+                    $expiresAt = \Carbon\Carbon::parse($product->pivot->expires_at);
+                    $lastCollection = \Carbon\Carbon::parse($product->pivot->last_collection);
+                    $remainingDays = now()->diffInDays($expiresAt);
+                    $collectedToday = $lastCollection->isToday();
+                @endphp
+
                 <div class="col-md-6 col-lg-4">
                     <div class="animal-card">
                         <div class="card-image"></div>
                         <div class="card-content">
                             <div class="price-section">
-                                <div class="price-amount">{{ number_format($product['price'], 2, ',', '.') }} USDT</div>
+                                <div class="price-amount">{{ $product['name'] }}</div>
                                 <button class="feed-button bg-danger">Investing</button>
                             </div>
                             <div class="stats-grid">
                                 <div class="stat-item">
-                                    <div class="stat-value">{{ number_format($product['income'], 2, ',', '.') }}</div>
+                                    <div class="stat-value">
+                                        @if ($collectedToday)
+                                            {{ number_format($product['income'], 2, ',', '.') }}
+                                        @else
+                                            {{ number_format(0, 2, ',', '.') }}
+                                        @endif
+                                    </div>
                                     <div class="stat-label">Today</div>
                                 </div>
                                 <div class="stat-item">
-                                    <div class="stat-value">{{ $product['duration'] }}</div>
+                                    <div class="stat-value">
+                                        {{ $remainingDays }}
+                                    </div>
                                     <div class="stat-label">Remmaining</div>
                                 </div>
                                 <div class="stat-item">
-                                    <div class="stat-value">{{ number_format($product['income'] * $product['duration'], 2, ',', '.')}}</div>
+                                    <div class="stat-value">{{ number_format($product->pivot->income_total, 2, ',', '.') }}</div>
                                     <div class="stat-label">Total</div>
                                 </div>
                             </div>
@@ -32,6 +47,16 @@
             @endforeach
         </div>
     </div>
+
+    <!-- Floating Support Button -->
+    <form action="{{ route('client.claim') }}" method="POST" class="support-button-wrapper" style="margin-bottom: 120px">
+        @csrf
+        <button class="btn rounded-circle support-button bg-warning">
+            <i class="bi bi-hand-index-fill text-white"></i>
+        </button>
+
+    </form>
+    
 @endsection
 
 <style>

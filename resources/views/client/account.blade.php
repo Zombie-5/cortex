@@ -49,35 +49,35 @@
 
         <!-- Action Buttons -->
         <div class="action-buttons">
-            <button class="action-button">
+            <a href="{{ route('client.deposit') }}" class="action-button text-decoration-none">
                 <span>Deposit</span>
                 <i class="bi bi-arrow-right"></i>
-            </button>
-            <button class="action-button">
+            </a>
+            <a href="{{ route('client.withdraw') }}" class="action-button text-decoration-none">
                 <span>Withdraw</span>
                 <i class="bi bi-arrow-right"></i>
-            </button>
+            </a>
         </div>
 
         <!-- Menu Grid -->
         <div class="menu-grid">
-            <a href="#" class="menu-item">
+            <a href="{{ route('client.gift') }}" class="menu-item">
                 <i class="bi bi-gift menu-icon d-block"></i>
                 <span>Gifts</span>
             </a>
-            <a href="#" class="menu-item">
+            <a href="{{ route('client.record') }}" class="menu-item">
                 <i class="bi bi-receipt menu-icon d-block"></i>
                 <span>Records</span>
             </a>
-            <a href="#" class="menu-item">
+            <a href="{{ route('client.change-passord') }}" class="menu-item">
                 <i class="bi bi-lock menu-icon d-block"></i>
                 <span>Password</span>
             </a>
-            <a href="#" class="menu-item">
+            <a href="{{ route('client.bank') }}" class="menu-item">
                 <i class="bi bi-wallet2 menu-icon d-block"></i>
                 <span>Bank</span>
             </a>
-            <a href="#" class="menu-item">
+            <a href="{{ route('client.team') }}" class="menu-item">
                 <i class="bi bi-people menu-icon d-block"></i>
                 <span>Team</span>
             </a>
