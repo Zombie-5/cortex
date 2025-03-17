@@ -37,10 +37,10 @@
 
         <!-- Feature Grid -->
         <div class="feature-grid">
-            <div class="feature-card">
+            <a class="feature-card text-dark text-decoration-none" href="{{ route('client.market') }}">
                 <i class="bi bi-graph-up feature-icon"></i>
                 <h5>Markets</h5>
-            </div>
+            </a>
             <div class="feature-card">
                 <i class="bi bi-download feature-icon"></i>
                 <h5>Download</h5>
@@ -49,10 +49,10 @@
                 <i class="bi bi-people feature-icon"></i>
                 <h5>Invite</h5>
             </div>
-            <div class="feature-card">
+            <a class="feature-card text-dark text-decoration-none" href="{{ route('client.holdings') }}">
                 <i class="bi bi-coin feature-icon"></i>
                 <h5>Holdings</h5>
-            </div>
+            </a>
         </div>
 
         <!-- News Section -->

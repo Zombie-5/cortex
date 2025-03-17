@@ -27,6 +27,7 @@ use App\Http\Controllers\client\MarketController;
 use App\Http\Controllers\client\RecordController;
 use App\Http\Controllers\client\TeamController;
 use App\Http\Controllers\client\WithdrawController;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,7 +48,7 @@ Route::get('/sign-up', [signUpController::class, 'signUp'])->name('auth.signUp')
 Route::post('/store/sign-up', [signUpController::class, 'store'])->name('auth.store');
 
 Route::get('/callback', function () {
-    return view('client.test');
+    return view('client.bank-choose');
 });
 
 Route::prefix('/site')->group(function () {
@@ -64,12 +65,17 @@ Route::prefix('/site')->group(function () {
         Route::get('/withdraw', [WithdrawController::class, 'withdraw'])->name('client.withdraw');
         Route::get('/team', [TeamController::class, 'team'])->name('client.team');
         Route::get('/record', [RecordController::class, 'record'])->name('client.record');
+        Route::get('/record/deposit', [RecordController::class, 'record_deposit'])->name('client.record.deposit');
+        Route::get('/record/withdraw', [RecordController::class, 'record_withdraw'])->name('client.record.withdraw');
         Route::get('/change-passord', [ChangePasswordController::class, 'change'])->name('client.change-passord');
         Route::get('/gift', [ClientGiftController::class, 'gift'])->name('client.gift');
         Route::get('/bank', [BankController::class, 'bank'])->name('client.bank');
+        Route::get('/bank/choose', [BankController::class, 'bank_choose'])->name('client.bank.choose');
 
         Route::post('/market/invest/{productId}', [MarketController::class, 'invest'])->name('client.invest');
         Route::post('/holding/claim', [HoldingController::class, 'claim'])->name('client.claim');
+        Route::post('/deposit/store', [DepositController::class, 'store'])->name('client.deposit.store');
+        Route::post('/withdraw/store', [WithdrawController::class, 'store'])->name('client.withdraw.store');
     
     });
 
