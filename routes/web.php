@@ -78,6 +78,8 @@ Route::prefix('/site')->group(function () {
         Route::post('/withdraw/store', [WithdrawController::class, 'store'])->name('client.withdraw.store');
         Route::post('/bank/store', [BankController::class, 'store'])->name('client.bank.store');
         Route::post('/change/passord', [ChangePasswordController::class, 'changePassword'])->name('client.change.passord');
+        Route::post('/gift/redeem', [ClientGiftController::class, 'redeem'])->name('client.gift.redeem');
+
 
     });
 

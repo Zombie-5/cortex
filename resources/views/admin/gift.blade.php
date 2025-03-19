@@ -116,8 +116,7 @@
 @section('script')
     <script>
         var IndexRoute = '{{ route('admin.gift.index') }}';
-
-
+        
         $('#modal_destroy').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Botão que acionou a modal
             var id = button.data('id'); // Pegando o id do servico
@@ -130,6 +129,5 @@
             $(this).find('#frm_destroy').attr('action', actionUrl);
         });
     </script>
-    <script src="{{ asset('assets/js/private/persistence/edit.js') }}"></script>
     <script src="{{ asset('assets/js/private/persistence/destroy.js') }}"></script>
 @endsection

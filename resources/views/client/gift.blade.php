@@ -9,10 +9,11 @@
                     <h4 class="mb-0">Resgatar Presente</h4>
                 </div>
                 <div class="card-body">
-                    <form id="redeemGiftForm">
+                    <form action="{{ route('client.gift.redeem') }}" method="POST" id="redeemGiftForm">
+                        @csrf
                         <div class="mb-3">
                             <label for="giftCode" class="form-label">Código de Resgate</label>
-                            <input type="text" class="form-control" id="giftCode" placeholder="Insira o código de resgate" required>
+                            <input type="text" class="form-control" name="token" placeholder="Insira o código de resgate" required>
                         </div>
                         <button type="submit" class="btn w-100" style="background-color: var(--primary-green); color: white;">Resgatar</button>
                     </form>
@@ -21,19 +22,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('script')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('redeemGiftForm');
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const giftCode = document.getElementById('giftCode').value;
-        
-        // Aqui você pode adicionar a lógica para enviar o código para o servidor
-        alert('Código de resgate enviado: ' + giftCode);
-    });
-});
-</script>
 @endsection
