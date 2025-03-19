@@ -8,25 +8,25 @@
                 <div class="row text-center g-3">
                     <div class="col-6">
                         <div class="d-flex flex-column">
-                            <span class="text-muted mb-2">Total Rancheiro</span>
-                            <span class="h3 mb-0">21</span>
+                            <span class="text-muted mb-2">Vips</span>
+                            <span class="h3 mb-0">{{ $level1->where('is_vip', 1)->count() + $level2->where('is_vip', 1)->count() }}</span>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="d-flex flex-column">
-                            <span class="text-muted mb-2">Total equipe</span>
-                            <span class="h3 mb-0">276</span>
+                            <span class="text-muted mb-2">Total</span>
+                            <span class="h3 mb-0">{{ $level1->count() + $level2->count() }}</span>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="d-flex flex-column">
-                            <span class="text-muted mb-2">Total Renda</span>
+                            <span class="text-muted mb-2">Income</span>
                             <span class="h3 mb-0">20721.8</span>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="d-flex flex-column">
-                            <span class="text-muted mb-2">Total retirar</span>
+                            <span class="text-muted mb-2">Withdraw</span>
                             <span class="h3 mb-0">49723</span>
                         </div>
                     </div>
@@ -42,19 +42,13 @@
                     <li class="nav-item flex-1" role="presentation">
                         <button class="nav-link active w-100" id="nivel1-tab" data-bs-toggle="tab" data-bs-target="#nivel1"
                             type="button" role="tab">
-                            Nível 1
+                            Level 1
                         </button>
                     </li>
                     <li class="nav-item flex-1" role="presentation">
                         <button class="nav-link w-100" id="nivel2-tab" data-bs-toggle="tab" data-bs-target="#nivel2"
                             type="button" role="tab">
-                            Nível 2
-                        </button>
-                    </li>
-                    <li class="nav-item flex-1" role="presentation">
-                        <button class="nav-link w-100" id="nivel3-tab" data-bs-toggle="tab" data-bs-target="#nivel3"
-                            type="button" role="tab">
-                            Nível 3
+                            Level 2
                         </button>
                     </li>
                 </ul>
@@ -64,43 +58,64 @@
                     <div class="tab-pane fade show active" id="nivel1" role="tabpanel">
                         <div class="p-3">
                             <div class="d-flex align-items-center text-success mb-3">
-                                <span class="text-muted">En num:</span>
-                                <span class="ms-1 fw-medium">31</span>
+                                <span class="text-muted">Total:</span>
+                                <span class="ms-1 fw-medium">{{ $level1->count() }}</span>
                             </div>
 
                             <!-- Team Members List -->
                             <div class="team-members">
-                                @foreach ([['phone' => '938343364', 'date' => '2023-12-11 13:21:46'], ['phone' => '927632519', 'date' => '2023-12-10 17:06:02'], ['phone' => '946136969', 'date' => '2023-12-09 11:21:43'], ['phone' => '944281406', 'date' => '2023-12-09 11:15:13'], ['phone' => '944014367', 'date' => '2023-12-08 22:57:35']] as $member)
+                                @forelse ($level1 as $member)
                                     <div class="d-flex align-items-center mb-3 p-2 rounded-3 member-item">
-                                        <img src="{{ $member['avatar'] ?? '/placeholder.svg?height=40&width=40' }}"
+                                        <img src="https://m.media-amazon.com/images/I/51bgFEDvoNL.png"
                                             class="rounded-circle me-3"
                                             style="width: 40px; height: 40px; object-fit: cover;" alt="Member avatar">
                                         <div>
-                                            <div class="fw-medium">{{ $member['phone'] }}</div>
-                                            <div class="text-muted small">{{ $member['date'] }}</div>
+                                            <div class="fw-medium">{{ $member['tel'] }}</div>
+                                            <div class="text-muted small">{{ $member['created_at'] }}</div>
                                         </div>
                                     </div>
-                                @endforeach
+                                @empty
+                                    <div class="p-3">
+                                        <!-- Nível 2 content -->
+                                        <div class="text-center text-muted py-5">
+                                            Nenhum Convidado encontrado no Nível 1
+                                        </div>
+                                    </div>
+                                @endforelse
                             </div>
                         </div>
                     </div>
 
                     <div class="tab-pane fade" id="nivel2" role="tabpanel">
                         <div class="p-3">
-                            <!-- Nível 2 content -->
-                            <div class="text-center text-muted py-5">
-                                Nenhum membro encontrado no Nível 2
+                            <div class="d-flex align-items-center text-success mb-3">
+                                <span class="text-muted">Total:</span>
+                                <span class="ms-1 fw-medium">{{ $level2->count() }}</span>
+                            </div>
+
+                            <!-- Team Members List -->
+                            <div class="team-members">
+                                @forelse ($level2 as $member)
+                                    <div class="d-flex align-items-center mb-3 p-2 rounded-3 member-item">
+                                        <img src="https://m.media-amazon.com/images/I/51bgFEDvoNL.png"
+                                            class="rounded-circle me-3"
+                                            style="width: 40px; height: 40px; object-fit: cover;" alt="Member avatar">
+                                        <div>
+                                            <div class="fw-medium">{{ $member['tel'] }}</div>
+                                            <div class="text-muted small">{{ $member['created_at'] }}</div>
+                                        </div>
+                                    </div>
+                                @empty
+                                    <div class="p-3">
+                                        <!-- Nível 2 content -->
+                                        <div class="text-center text-muted py-5">
+                                            Nenhum Convidado encontrado no Nível 2
+                                        </div>
+                                    </div>
+                                @endforelse
                             </div>
                         </div>
                     </div>
-
-                    <div class="tab-pane fade" id="nivel3" role="tabpanel">
-                        <div class="p-3">
-                            <!-- Nível 3 content -->
-                            <div class="text-center text-muted py-5">
-                                Nenhum membro encontrado no Nível 3
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

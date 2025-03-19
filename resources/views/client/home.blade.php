@@ -3,37 +3,40 @@
 @section('content')
     <div class="container mt-5 pt-4">
         <!-- Banner Section -->
-            <div id="carouselExampleIndicators" class="carousel slide mb-2 rounded" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="https://haberf.com/wp-content/uploads/2024/10/okxtr-kapak-100-774x388.webp" class="d-block w-100 rounded" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://images.prismic.io/contrary-research/65834bbe531ac2845a26d51b_4.png?auto=format,compress" class="d-block w-100 rounded" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://www.cifinancial.com/ci-gam/ca/en/expert-insights/articles/what-is-bitcoin/_jcr_content/root/responsivegrid/custom_container_left/custom_container_main/container_1320966451/image_copy.coreimg.jpeg/1629384723085/what-is-bitcoin.jpeg" class="d-block w-100 rounded" alt="...">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+        <div id="carouselExampleIndicators" class="carousel slide mb-2 rounded" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
             </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://haberf.com/wp-content/uploads/2024/10/okxtr-kapak-100-774x388.webp"
+                        class="d-block w-100 rounded" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.prismic.io/contrary-research/65834bbe531ac2845a26d51b_4.png?auto=format,compress"
+                        class="d-block w-100 rounded" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://www.cifinancial.com/ci-gam/ca/en/expert-insights/articles/what-is-bitcoin/_jcr_content/root/responsivegrid/custom_container_left/custom_container_main/container_1320966451/image_copy.coreimg.jpeg/1629384723085/what-is-bitcoin.jpeg"
+                        class="d-block w-100 rounded" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
 
         <!-- Feature Grid -->
         <div class="feature-grid">
@@ -45,10 +48,10 @@
                 <i class="bi bi-download feature-icon"></i>
                 <h5>Download</h5>
             </div>
-            <div class="feature-card">
+            <button id="copyLinkButton" class="feature-card border-0" onclick="copyToClipboard('{{ $inviteLink }}')">
                 <i class="bi bi-people feature-icon"></i>
                 <h5>Invite</h5>
-            </div>
+            </button>
             <a class="feature-card text-dark text-decoration-none" href="{{ route('client.holdings') }}">
                 <i class="bi bi-coin feature-icon"></i>
                 <h5>Holdings</h5>
@@ -71,4 +74,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        function copyToClipboard(link) {
+            navigator.clipboard.writeText(link);
+        }
+    </script>
 @endsection

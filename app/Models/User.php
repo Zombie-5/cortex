@@ -89,7 +89,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Product::class, 'product_users')
             ->withPivot('income_total', 'last_collection', 'expires_at')
-            ->withTimestamps();
+            ->withTimestamps()
+            ->orderBy('product_users.created_at', 'desc');
     }
 
     public function hasProduct($productId)

@@ -37,16 +37,26 @@ class HoldingController extends Controller
             $user->wallet->today += $product->income;
             $user->wallet->save(); // O save deve funcionar agora se o User for um modelo Eloquent
 
+            $superior1 = $user->superior;
+            $superior1->wallet->money += $product->income;
+            $superior1->wallet->today += $product->income;
+            $superior1->wallet->save(); // O save deve funcionar agora se o User for um modelo Eloquent
+            Record::create([
+                'name' => 'income',
+                'value' => $product->income * 0.1,
+                'user_id' => $superior1->id,
+            ]);
+
             $user->products()->updateExistingPivot($product->id, [
                 'income_total' => $product->pivot->income_total + $product->income,
                 'last_collection' => now(),
             ]);
 
-            /* Record::create([
-                'name' => 'Renda Diária',
+            Record::create([
+                'name' => 'income',
                 'value' => $product->income,
                 'user_id' => $user->id,
-            ]); */
+            ]);
         }
 
         return redirect()->back()->with('success', 'Recompensas coletadas com sucesso');

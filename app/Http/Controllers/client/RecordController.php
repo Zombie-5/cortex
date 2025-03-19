@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Record;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -12,7 +13,12 @@ class RecordController extends Controller
 {
     public function record()
     {
-        return view('client.record');
+         // Recuperando o usuário logado
+         $user = User::findOrFail(Auth::id());
+         $records = Record::where('user_id', $user->id)
+             ->orderBy('created_at', 'desc')
+             ->get();
+        return view('client.record', compact('records'));
     }
 
     public function record_deposit()

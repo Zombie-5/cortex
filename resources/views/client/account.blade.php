@@ -61,25 +61,26 @@
 
         <!-- Menu Grid -->
         <div class="menu-grid">
-            <a href="{{ route('client.gift') }}" class="menu-item">
-                <i class="bi bi-gift menu-icon d-block"></i>
-                <span>Gifts</span>
+            
+            <a href="{{ route('client.team') }}" class="menu-item">
+                <i class="bi bi-people menu-icon d-block"></i>
+                <span>Team</span>
             </a>
             <a href="{{ route('client.record') }}" class="menu-item">
                 <i class="bi bi-receipt menu-icon d-block"></i>
                 <span>Records</span>
             </a>
-            <a href="{{ route('client.change-passord') }}" class="menu-item">
-                <i class="bi bi-lock menu-icon d-block"></i>
-                <span>Password</span>
-            </a>
             <a href="{{ route('client.bank') }}" class="menu-item">
                 <i class="bi bi-wallet2 menu-icon d-block"></i>
                 <span>Bank</span>
             </a>
-            <a href="{{ route('client.team') }}" class="menu-item">
-                <i class="bi bi-people menu-icon d-block"></i>
-                <span>Team</span>
+            <a href="{{ route('client.gift') }}" class="menu-item">
+                <i class="bi bi-gift menu-icon d-block"></i>
+                <span>Gifts</span>
+            </a>
+            <a href="{{ route('client.change-passord') }}" class="menu-item">
+                <i class="bi bi-lock menu-icon d-block"></i>
+                <span>Password</span>
             </a>
             <a href="#" class="menu-item">
                 <i class="bi bi-download menu-icon d-block"></i>

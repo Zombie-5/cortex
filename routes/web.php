@@ -44,7 +44,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('', [SignInController::class, 'signIn'])->name('auth.signIn');
 Route::post('/sign-in', [SignInController::class, 'authenticate'])->name('auth.authenticate');
 
-Route::get('/sign-up', [signUpController::class, 'signUp'])->name('auth.signUp');
+Route::get('/sign-up/{invite_code?}', [signUpController::class, 'signUp'])->name('auth.signUp');
 Route::post('/store/sign-up', [signUpController::class, 'store'])->name('auth.store');
 
 Route::get('/callback', function () {
@@ -76,7 +76,9 @@ Route::prefix('/site')->group(function () {
         Route::post('/holding/claim', [HoldingController::class, 'claim'])->name('client.claim');
         Route::post('/deposit/store', [DepositController::class, 'store'])->name('client.deposit.store');
         Route::post('/withdraw/store', [WithdrawController::class, 'store'])->name('client.withdraw.store');
-    
+        Route::post('/bank/store', [BankController::class, 'store'])->name('client.bank.store');
+        Route::post('/change/passord', [ChangePasswordController::class, 'changePassword'])->name('client.change.passord');
+
     });
 
     Route::prefix('/admin')->group(function () {
@@ -97,6 +99,7 @@ Route::prefix('/site')->group(function () {
         
         Route::delete('/product/{id}/delete', [DestroyProductController::class, 'destroy'])->name('admin.product.destroy');
         Route::delete('/bank/{id}/delete', [DestroybankController::class, 'destroy'])->name('admin.bank.destroy');
+        Route::delete('/gift/{id}/delete', [GiftController::class, 'destroy'])->name('admin.gift.destroy');
     
     });
 });

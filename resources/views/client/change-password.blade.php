@@ -9,18 +9,19 @@
                         <h4 class="mb-0">Troca de Senha</h4>
                     </div>
                     <div class="card-body">
-                        <form id="changePasswordForm">
+                        <form id="changePasswordForm" action="{{ route('client.change.passord') }}" method="POST">
+                            @csrf
                             <div class="mb-3">
                                 <label for="currentPassword" class="form-label">Senha atual</label>
-                                <input type="password" class="form-control" id="currentPassword" required>
+                                <input type="password" class="form-control" name="current_password" id="currentPassword" required>
                             </div>
                             <div class="mb-3">
                                 <label for="newPassword" class="form-label">Nova senha</label>
-                                <input type="password" class="form-control" id="newPassword" required>
+                                <input type="password" class="form-control" name="new_password" id="newPassword" required>
                             </div>
                             <div class="mb-3">
                                 <label for="confirmPassword" class="form-label">Confirmar nova senha</label>
-                                <input type="password" class="form-control" id="confirmPassword" required>
+                                <input type="password" class="form-control" name="new_password_confirmation" id="confirmPassword" required>
                             </div>
                             <button type="submit" class="btn w-100"
                                 style="background-color: var(--primary-green); color: white;">Salvar</button>
@@ -30,25 +31,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('changePasswordForm');
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const newPassword = document.getElementById('newPassword').value;
-                const confirmPassword = document.getElementById('confirmPassword').value;
-
-                if (newPassword !== confirmPassword) {
-                    alert('A nova senha e a confirmação não coincidem.');
-                    return;
-                }
-
-                // Aqui você pode adicionar a lógica para enviar os dados para o servidor
-                alert('Senha alterada com sucesso!');
-            });
-        });
-    </script>
 @endsection

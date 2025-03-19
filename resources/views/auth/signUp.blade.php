@@ -187,11 +187,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="invite_code" class="form-label">Código de convite</label>
-                    <input type="text" class="form-control" id="invite_code" name="invite_code" required>
+                    <input type="text" class="form-control" value="{{ old('invite_code', $invite_code) }}" id="invite_code" name="invite_code" required>
                     @error('invite_code')
                         <div class="error-message">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
             </form>
             <div class="toast-container" id="toastContainer"></div>

@@ -1,45 +1,31 @@
 @extends('layouts.client.app')
 
 @section('content')
-    @php
-        // Exemplo de dados bancários (simulando dados do banco de dados)
-        $bankInfo = (object) [
-            'bank_name' => 'BFA',
-            'account_number' => '1234567890',
-            'account_holder' => 'João da Silva',
-            'iban' => 'AO06000600000100037131174',
-            'swift' => 'BFMXAOLN',
-        ];
-    @endphp
     <div class="container py-4" style="margin-top: 50px">
         <div class="card bg-white shadow-sm">
             <div class="card-body">
                 <h5 class="mb-4" style="color: var(--primary-green);">Informações Bancárias</h5>
 
-                <form action="#" method="POST" id="bankInfoForm">
+                <form action="{{ route('client.bank.store') }}" method="POST" id="bankInfoForm">
                     @csrf
-                    @method('PUT')
-
                     <!-- Nome do Banco -->
                     <div class="mb-3">
                         <label class="form-label">Nome do Banco</label>
-                        <select class="form-select" name="bank_name" required>
-                            <option value="BAI" {{ $bankInfo->bank_name == 'BAI' ? 'selected' : '' }}>BAI</option>
-                            <option value="BFA" {{ $bankInfo->bank_name == 'BFA' ? 'selected' : '' }}>BFA</option>
-                            <option value="BIC" {{ $bankInfo->bank_name == 'BIC' ? 'selected' : '' }}>BIC</option>
-                            <option value="BPC" {{ $bankInfo->bank_name == 'BPC' ? 'selected' : '' }}>BPC</option>
+                        <select class="form-select" name="name" required>
+                            <option value="BAI" {{ isset($bankInfo) && $bankInfo->name == 'BAI' ? 'selected' : '' }}>BAI
+                            </option>
+                            <option value="BFA" {{ isset($bankInfo) && $bankInfo->name == 'BFA' ? 'selected' : '' }}>BFA
+                            </option>
+                            <option value="BIC" {{ isset($bankInfo) && $bankInfo->name == 'BIC' ? 'selected' : '' }}>BIC
+                            </option>
+                            <option value="BPC" {{ isset($bankInfo) && $bankInfo->name == 'BPC' ? 'selected' : '' }}>BPC
+                            </option>
+                            <option value="ATL" {{ isset($bankInfo) && $bankInfo->name == 'ATL' ? 'selected' : '' }}>ATL
+                            </option>
+                            <option value="BINANCE"
+                                {{ isset($bankInfo) && $bankInfo->name == 'BINANCE' ? 'selected' : '' }}>BINANCE</option>
                         </select>
-                        @error('bank_name')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <!-- Número da Conta -->
-                    <div class="mb-3">
-                        <label class="form-label">Número da Conta</label>
-                        <input type="text" class="form-control" name="account_number"
-                            value="{{ old('account_number', $bankInfo->account_number ?? '') }}" required>
-                        @error('account_number')
+                        @error('name')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
                     </div>
@@ -47,29 +33,19 @@
                     <!-- Titular da Conta -->
                     <div class="mb-3">
                         <label class="form-label">Titular da Conta</label>
-                        <input type="text" class="form-control" name="account_holder"
-                            value="{{ old('account_holder', $bankInfo->account_holder ?? '') }}" required>
-                        @error('account_holder')
+                        <input type="text" class="form-control" name="owner"
+                            value="{{ old('owner', $bankInfo->owner ?? '') }}" required>
+                        @error('owner')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <!-- IBAN -->
                     <div class="mb-3">
-                        <label class="form-label">IBAN</label>
+                        <label class="form-label">Iban / Address</label>
                         <input type="text" class="form-control" name="iban"
                             value="{{ old('iban', $bankInfo->iban ?? '') }}">
                         @error('iban')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <!-- SWIFT/BIC -->
-                    <div class="mb-4">
-                        <label class="form-label">Endereço (Opcional)</label>
-                        <input type="text" class="form-control" name="swift"
-                            value="{{ old('swift', $bankInfo->swift ?? '') }}">
-                        @error('swift')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
                     </div>
@@ -126,42 +102,30 @@
             // Form validation
             $("#bankInfoForm").validate({
                 rules: {
-                    bank_name: {
+                    name: {
                         required: true
                     },
-                    account_number: {
-                        required: true,
-                        minlength: 10
-                    },
-                    account_holder: {
+                    owner: {
                         required: true,
                         minlength: 3
                     },
                     iban: {
+                        required: true,
                         minlength: 15
                     },
-                    swift: {
-                        minlength: 8
-                    }
                 },
                 messages: {
-                    bank_name: {
+                    name: {
                         required: "Por favor, selecione o banco"
                     },
-                    account_number: {
-                        required: "Por favor, insira o número da conta",
-                        minlength: "O número da conta deve ter pelo menos 10 caracteres"
-                    },
-                    account_holder: {
+                    owner: {
                         required: "Por favor, insira o nome do titular",
                         minlength: "O nome deve ter pelo menos 3 caracteres"
                     },
                     iban: {
-                        minlength: "O IBAN deve ter pelo menos 15 caracteres"
+                        required: "Por favor, insira o iban / endereço",
+                        minlength: "O Iban / endereço deve ter pelo menos 15 caracteres"
                     },
-                    swift: {
-                        minlength: "O código SWIFT deve ter pelo menos 8 caracteres"
-                    }
                 },
                 errorElement: 'span',
                 errorPlacement: function(error, element) {

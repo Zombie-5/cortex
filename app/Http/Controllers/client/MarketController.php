@@ -40,6 +40,12 @@ class MarketController extends Controller
             'expires_at' => now()->addDays($product->duration),
         ]);
 
+        Record::create([
+            'name' => 'income',
+            'value' => $product->income,
+            'user_id' => $user->id,
+        ]);
+
         // Subtrair o preço do produto do saldo do usuário
         $user->wallet->money -= $product->price;
         $user->wallet->money += $product->income;
@@ -47,7 +53,13 @@ class MarketController extends Controller
         $user->wallet->daily += $product->income;
         $user->wallet->save(); // O save deve funcionar agora se o User for um modelo Eloquent
 
-        if (!$user->is_active) {
+        Record::create([
+            'name' => 'invest',
+            'value' => $product->price,
+            'user_id' => $user->id,
+        ]);
+
+        if (!$user->is_vip) {
 
             // Comissão de 10% para o superior de nível 1 (direto)
             $superiorNivel1 = $user->superior;
@@ -55,31 +67,33 @@ class MarketController extends Controller
                 $comissaoNivel1 = $product->price * 0.1;
                 $superiorNivel1->wallet->money += $comissaoNivel1;
                 $superiorNivel1->wallet->today += $comissaoNivel1;
+                $superiorNivel1->wallet->total += $comissaoNivel1;
                 $superiorNivel1->wallet->save();
 
                 Record::create([
-                    'name' => 'Bônus Convidado',
+                    'name' => 'reward',
                     'value' => $comissaoNivel1,
                     'user_id' => $superiorNivel1->id,
                 ]);
             }
 
             // Comissão de 5% para o superior de nível 2 (indiretamente)
-            $superiorNivel2 = $user->superiors2;
+            $superiorNivel2 = $superiorNivel1->superior;
             if ($superiorNivel2) {
                 $comissaoNivel2 = $product->price * 0.05;
                 $superiorNivel2->wallet->money += $comissaoNivel2;
                 $superiorNivel2->wallet->today += $comissaoNivel2;
+                $superiorNivel2->wallet->total += $comissaoNivel2;
                 $superiorNivel2->wallet->save();
 
                 Record::create([
-                    'name' => 'Bônus Convidado',
+                    'name' => 'reward',
                     'value' => $comissaoNivel2,
                     'user_id' => $superiorNivel2->id,
                 ]);
             }
 
-            $user->is_active = true;
+            $user->is_vip = true;
             $user->save();
         }
 

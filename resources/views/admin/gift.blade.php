@@ -31,9 +31,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td colspan="6">Nenhum produto encontrado.</td>
-                            </tr>
+                            @forelse ($gifts as $gift)
+                                <tr>
+                                    <td style="text-align: center">{{ $gift->id }}</td>
+                                    <td>{{ $gift->value }}</td>
+                                    <td>{{ $gift->token }}</td>
+                                    <td>{{ $gift->status }}</td>
+                                    <td style="text-align: center">{{ $gift->user->id ?? '-' }}</td>
+                                    <th>
+                                        <a href="#" data-id="{{ Crypt::encryptString($gift->id) }}"
+                                            data-value="{{ $gift->value }}" data-bs-toggle="modal"
+                                            data-bs-target="#modal_destroy">
+                                            <i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </th>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6">Nenhum presente encontrado.</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -42,9 +59,7 @@
 
         <div class="modal fade modal_create" id="modal_create" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-md">
-                <form method="POST" id="frm_create" class="form-horizontal form-label-left frm_create"
-                    action="{{ route('admin.gift.store') }}">
-
+                <form method="POST" id="frm_create" class="form-horizontal form-label-left frm_create" action="{{ route('admin.gift.store') }}">
                     @csrf
                     <div class="modal-content">
                         <div class="modal-header">
@@ -75,7 +90,7 @@
                     @method('DELETE')
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel2">Eliminar Produto</h4>
+                            <h4 class="modal-title" id="myModalLabel2">Eliminar Presente</h4>
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -102,21 +117,19 @@
     <script>
         var IndexRoute = '{{ route('admin.gift.index') }}';
 
-        
+
         $('#modal_destroy').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Botão que acionou a modal
             var id = button.data('id'); // Pegando o id do servico
-            var name = button.data('name'); // Pegando o nome
+            var value = button.data('value'); // Pegando o nome
 
-            $(this).find('#msg').html("Deseja realmente eliminar o produto '" + name + "'?");
+            $(this).find('#msg').html("Deseja realmente eliminar o presente de '" + value + "'?");
 
-            var actionUrl = "{{ route('admin.product.destroy', ':id') }}";
+            var actionUrl = "{{ route('admin.gift.destroy', ':id') }}";
             actionUrl = actionUrl.replace(':id', id);
             $(this).find('#frm_destroy').attr('action', actionUrl);
         });
     </script>
-    <script src="{{ asset('assets/js/private/form-validate/product.js') }}"></script>
-    <script src="{{ asset('assets/js/private/persistence/save.js') }}"></script>
     <script src="{{ asset('assets/js/private/persistence/edit.js') }}"></script>
     <script src="{{ asset('assets/js/private/persistence/destroy.js') }}"></script>
 @endsection
