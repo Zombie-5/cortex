@@ -19,8 +19,8 @@
                     <a class="nav-link" id="v-pills-performance-tab" data-toggle="pill" href="#v-pills-performance"
                         role="tab" aria-controls="v-pills-performance" aria-selected="false">Retiradas</a>
 
-                    <a class="nav-link" id="v-pills-performance-tab" data-toggle="pill" href="#v-pills-performance"
-                        role="tab" aria-controls="v-pills-performance" aria-selected="false">Histórico</a>
+                    <a class="nav-link" id="v-pills-perfo-tab" data-toggle="pill" href="#v-pills-perfo"
+                        role="tab" aria-controls="v-pills-perfo" aria-selected="false">Histórico</a>
 
                 </div>
             </div>
@@ -44,7 +44,7 @@
                                                 <th>ID</th>
                                                 <th>Banco</th>
                                                 <th>Iban</th>
-                                                <th>Tipo</th>
+                                                <th>Acção</th>
                                                 <th>Valor</th>
                                                 <th>Status</th>
                                             </tr>
@@ -52,12 +52,33 @@
                                         <tbody>
                                             @forelse ($transactionsDeposited as $transaction)
                                                 <tr>
-                                                    <td style="text-align: center">{{ $transaction->id }}</td>
-                                                    <td>{{ $transaction->type }}</td>
-                                                    <td>{{ $transaction->type }}</td>
+                                                    <td style="text-align: center">{{ $transaction->user->id }}</td>
+                                                    <td>{{ $transaction->user->bank->name }}</td>
+                                                    <td>{{ $transaction->user->bank->iban }}</td>
                                                     <td>{{ $transaction->type }}</td>
                                                     <td>{{ number_format($transaction->value, 2, ',', '.') }} Kz</td>
-                                                    <td>{{ $transaction->status }}</td>
+                                                    <td>
+                                                        <form action="{{ route('admin.transaction.status', $transaction->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('PATCH')
+                                                            <select name="status" onchange="this.form.submit()"
+                                                                class="select @if ($transaction->status == 'pendente') status-pendente @elseif ($transaction->status == 'processando') status-processando @elseif ($transaction->status == 'concluido') status-concluido @elseif ($transaction->status == 'rejeitado') status-rejeitado @endif">
+                                                                <option value="pendente"
+                                                                    {{ $transaction->status == 'pendente' ? 'selected' : '' }}>
+                                                                    Pendente</option>
+                                                                <option value="processando"
+                                                                    {{ $transaction->status == 'processando' ? 'selected' : '' }}>
+                                                                    Processando
+                                                                </option>
+                                                                <option value="concluido"
+                                                                    {{ $transaction->status == 'concluido' ? 'selected' : '' }}>Aprovado
+                                                                </option>
+                                                                <option value="rejeitado"
+                                                                    {{ $transaction->status == 'rejeitado' ? 'selected' : '' }}>Rejeitado
+                                                                </option>
+                                                            </select>
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                             @empty
                                                 <tr>
@@ -74,8 +95,125 @@
                     <!--listagem de alojamento-->
                     <div class="tab-pane fade" id="v-pills-performance" role="tabpanel"
                         aria-labelledby="v-pills-performance-tab">
-                        <div class="row d-flex">
-                            Retir
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Lista de Retiradas</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Banco</th>
+                                                <th>Iban</th>
+                                                <th>Acção</th>
+                                                <th>Valor</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse ($transactionsWithdrawn as $transaction)
+                                                <tr>
+                                                    <td style="text-align: center">{{ $transaction->user->id }}</td>
+                                                    <td>{{ $transaction->user->bank->name }}</td>
+                                                    <td>{{ $transaction->user->bank->iban }}</td>
+                                                    <td>{{ $transaction->type }}</td>
+                                                    <td>{{ number_format($transaction->value, 2, ',', '.') }} Kz</td>
+                                                    <td>
+                                                        <form action="{{ route('admin.transaction.status', $transaction->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('PATCH')
+                                                            <select name="status" onchange="this.form.submit()"
+                                                                class="select @if ($transaction->status == 'pendente') status-pendente @elseif ($transaction->status == 'processando') status-processando @elseif ($transaction->status == 'concluido') status-concluido @elseif ($transaction->status == 'rejeitado') status-rejeitado @endif">
+                                                                <option value="pendente"
+                                                                    {{ $transaction->status == 'pendente' ? 'selected' : '' }}>
+                                                                    Pendente</option>
+                                                                <option value="processando"
+                                                                    {{ $transaction->status == 'processando' ? 'selected' : '' }}>
+                                                                    Processando
+                                                                </option>
+                                                                <option value="concluido"
+                                                                    {{ $transaction->status == 'concluido' ? 'selected' : '' }}>Aprovado
+                                                                </option>
+                                                                <option value="rejeitado"
+                                                                    {{ $transaction->status == 'rejeitado' ? 'selected' : '' }}>Rejeitado
+                                                                </option>
+                                                            </select>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="6">Nenhuma Transação encontrada.</td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="v-pills-perfo" role="tabpanel"
+                        aria-labelledby="v-pills-performance-tab">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Histórico</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Banco</th>
+                                                <th>Iban</th>
+                                                <th>Acção</th>
+                                                <th>Valor</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse ($transactions as $transaction)
+                                                <tr>
+                                                    <td style="text-align: center">{{ $transaction->user->id }}</td>
+                                                    <td>{{ $transaction->user->bank->name }}</td>
+                                                    <td>{{ $transaction->user->bank->iban }}</td>
+                                                    <td>{{ $transaction->type }}</td>
+                                                    <td>{{ number_format($transaction->value, 2, ',', '.') }} Kz</td>
+                                                    <td>
+                                                        <form action="{{ route('admin.transaction.status', $transaction->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('PATCH')
+                                                            <select name="status" onchange="this.form.submit()"
+                                                                class="select @if ($transaction->status == 'pendente') status-pendente @elseif ($transaction->status == 'processando') status-processando @elseif ($transaction->status == 'concluido') status-concluido @elseif ($transaction->status == 'rejeitado') status-rejeitado @endif">
+                                                                <option value="pendente"
+                                                                    {{ $transaction->status == 'pendente' ? 'selected' : '' }}>
+                                                                    Pendente</option>
+                                                                <option value="processando"
+                                                                    {{ $transaction->status == 'processando' ? 'selected' : '' }}>
+                                                                    Processando
+                                                                </option>
+                                                                <option value="concluido"
+                                                                    {{ $transaction->status == 'concluido' ? 'selected' : '' }}>Aprovado
+                                                                </option>
+                                                                <option value="rejeitado"
+                                                                    {{ $transaction->status == 'rejeitado' ? 'selected' : '' }}>Rejeitado
+                                                                </option>
+                                                            </select>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="6">Nenhuma Transação encontrada.</td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,3 +222,32 @@
 
     </div>
 @endsection
+
+<style>
+    /* Define as cores para cada status */
+    .status-pendente {
+        color: gray;
+    }
+
+    .status-processando {
+        color: orange;
+    }
+
+    .status-concluido {
+        color: green;
+    }
+
+    .status-rejeitado {
+        color: red;
+    }
+
+    /* Remove a borda ao clicar */
+    select {
+        border: none;
+        outline: none;
+        box-shadow: none;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+</style>

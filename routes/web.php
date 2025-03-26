@@ -3,7 +3,6 @@
 use App\Http\Controllers\admin\bank\DestroybankController;
 use App\Http\Controllers\admin\bank\StorebankController;
 use App\Http\Controllers\admin\GiftController;
-use App\Http\Controllers\admin\IndexTransactionController;
 use App\Http\Controllers\admin\product\DestroyProductController;
 use App\Http\Controllers\admin\product\StoreProductController;
 use App\Http\Controllers\auth\LoginController;
@@ -14,7 +13,9 @@ use App\Http\Controllers\admin\user\IndexUsersController;
 use App\Http\Controllers\admin\product\IndexProductsController;
 use App\Http\Controllers\admin\bank\IndexBanksController;
 use App\Http\Controllers\admin\bank\UpdateBankController;
+use App\Http\Controllers\admin\IndexTransactionController;
 use App\Http\Controllers\admin\product\UpdateProductController;
+use App\Http\Controllers\admin\transaction\updateTransactionController;
 use App\Http\Controllers\auth\SignOutController;
 use App\Http\Controllers\client\AccountController;
 use App\Http\Controllers\client\BankController;
@@ -80,7 +81,6 @@ Route::prefix('/site')->group(function () {
         Route::post('/change/passord', [ChangePasswordController::class, 'changePassword'])->name('client.change.passord');
         Route::post('/gift/redeem', [ClientGiftController::class, 'redeem'])->name('client.gift.redeem');
 
-
     });
 
     Route::prefix('/admin')->group(function () {
@@ -102,6 +102,8 @@ Route::prefix('/site')->group(function () {
         Route::delete('/product/{id}/delete', [DestroyProductController::class, 'destroy'])->name('admin.product.destroy');
         Route::delete('/bank/{id}/delete', [DestroybankController::class, 'destroy'])->name('admin.bank.destroy');
         Route::delete('/gift/{id}/delete', [GiftController::class, 'destroy'])->name('admin.gift.destroy');
+
+        Route::patch('/transactions/status/{id}', [updateTransactionController::class, 'updateStatus'])->name('admin.transaction.status');
     
     });
 });

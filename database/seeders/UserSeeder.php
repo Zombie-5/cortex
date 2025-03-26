@@ -14,21 +14,38 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $adminUser = User::firstOrCreate(
-            ['tel' => 'admin@cortex.com'], // Condições para verificar existência
-            [ // Dados a serem criados se não existir
+        $admins = [
+            [
+                'tel' => 'lilcrypto@cortex.com',
+                'remember_token' => 'Lil Crypto',
+                'password' => 'safewallet',
+            ],
+            [
+                'tel' => 'youngvisa@cortex.com',
+                'remember_token' => 'Young Visa',
+                'password' => 'fastpay',
+            ],
+            [
                 'tel' => 'admin@cortex.com',
-                'password' => Hash::make('cortex@25'),
-                'is_admin' => true,
-            ]
-        );
+                'password' => 'cortex@27',
+            ],
+        ];
 
-        if ($adminUser->wasRecentlyCreated) {
-            // Exibe mensagem se o usuário foi criado agora
-            $this->command->info('Usuário admin foi criado com sucesso!');
-        } else {
-            // Exibe mensagem se o usuário já existia
-            $this->command->info('Usuário admin já existe.');
+        foreach ($admins as $adminData) {
+            $adminUser = User::firstOrCreate(
+                ['tel' => $adminData['tel']], // Verifica se já existe pelo e-mail/telefone
+                [
+                    'password' => Hash::make($adminData['password']),
+                    'is_admin' => true,
+                    'remember_token' => $adminData['remember_token'] ?? null,
+                ]
+            );
+        
+            if ($adminUser->wasRecentlyCreated) {
+                $this->command->info("Usuário admin {$adminData['tel']} foi criado com sucesso!");
+            } else {
+                $this->command->info("Usuário admin {$adminData['tel']} já existe.");
+            }
         }
     }
 }

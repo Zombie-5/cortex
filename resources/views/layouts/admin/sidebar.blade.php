@@ -30,28 +30,28 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.user.index')}}">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-user"></i>
             <span>Usúarios</span>
         </a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.product.index')}}">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-box"></i>
             <span>Produtos</span>
         </a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.bank.index')}}">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-bank"></i>
             <span>Bancos</span>
         </a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.transaction.index') }}">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-file-invoice-dollar"></i>
             <span>Transações</span>
         </a>
     </li>
@@ -66,15 +66,15 @@
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.gift.index') }}">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-gift"></i>
             <span>Presentes</span>
         </a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Actividades</span>
+            <i class="fas fa-file-alt"></i>
+            <span>Relatórios</span>
         </a>
     </li>
 
