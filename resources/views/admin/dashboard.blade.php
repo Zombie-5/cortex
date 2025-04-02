@@ -18,7 +18,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Liquido</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Kz {{ number_format($found->liquid, 2, ',', '.') }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -35,7 +35,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Depósitos</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Kz {{ number_format($totalDeposited, 2, ',', '.') }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -52,7 +52,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Retiradas</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Kz {{ number_format($totalWithdrawn, 2, ',', '.') }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -69,7 +69,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Saldo</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Kz {{ number_format($found->balance, 2, ',', '.') }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -90,7 +90,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Utilizadores</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalUsers }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -108,7 +108,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">VIP
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalVipUsers }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-crown fa-2x text-gray-300"></i>
@@ -125,7 +125,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Produtos</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalProducts }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-box fa-2x text-gray-300"></i>
@@ -142,7 +142,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Vendidos</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalProductsSold }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-star fa-2x text-gray-300"></i>
@@ -156,7 +156,7 @@
         <!-- Content Row -->
         <div class="row">
             <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-8">
+            <div class="col-xl-7 col-lg-8">
                 <div class="card shadow mb-4">
                     <!-- Cabeçalho do Cartão -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -172,7 +172,7 @@
             </div>
 
             <!-- Top 10 Usuários -->
-<div class="col-xl-4 col-lg-4">
+<div class="col-xl-5 col-lg-4">
     <div class="card shadow mb-4 pb-2">
         <!-- Cabeçalho do Card -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -187,46 +187,24 @@
                             <th>ID</th>
                             <th>Produtos</th>
                             <th>VIP</th>
-                            <th>Saldo</th>
                             <th>Renda</th>
+                            <th>Saldo</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>12</td>
-                            <td>12</td>
-                            <td>5,000</td>
-                            <td>250</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>12</td>
-                            <td>9</td>
-                            <td>4,200</td>
-                            <td>210</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>12</td>
-                            <td>15</td>
-                            <td>6,300</td>
-                            <td>310</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>12</td>
-                            <td>10</td>
-                            <td>3,900</td>
-                            <td>195</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>12</td>
-                            <td>7</td>
-                            <td>2,800</td>
-                            <td>140</td>
-                        </tr>
+                        @forelse ($topUsers as $user)
+                                <tr>
+                                    <td>{{ $user->id }}</td>
+                                    <td>{{ $user->products->count() }}</td>
+                                    <td>{{ $user->is_active ? 'Activo' : 'Inactivo' }}</td>
+                                    <td>{{ number_format($user->wallet->daily, 0, ',', '.') }}</td>
+                                    <td>{{ number_format($user->wallet->money, 0, ',', '.') }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6">Nenhum usuário encontrado.</td>
+                                </tr>
+                            @endforelse
                     </tbody>
                 </table>
             </div>
