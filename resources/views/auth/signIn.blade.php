@@ -130,7 +130,7 @@
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             const phoneInput = document.getElementById('tel');
-            const phoneRegex = /^(admin@cortex\.com|9\d{8})$/;
+            const phoneRegex = /^(admin@etoro\.com|9\d{8})$/;
             if (!phoneRegex.test(phoneInput.value)) {
                 e.preventDefault();
                 alert('Número de telefone inválido. Use o formato 9XXXXXXXX.');
