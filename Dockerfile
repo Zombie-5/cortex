@@ -31,7 +31,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # Instalar as dependências do Node.js e compilar os assets
-RUN npm install
+RUN npm install && npm run prod
 
 # Permissões corretas para as pastas
 RUN chown -R www-data:www-data /var/www/html \
