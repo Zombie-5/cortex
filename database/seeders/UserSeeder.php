@@ -29,11 +29,7 @@ class UserSeeder extends Seeder
                 'tel' => 'admin@etoro.com',
                 'remember_token' => 'Administrador Geral',
                 'password' => 'etoro@27',
-            ],
-            [
-                'tel' => '921621790',
-                'password' => '123456789',
-            ],
+            ]
         ];
 
         foreach ($admins as $adminData) {
