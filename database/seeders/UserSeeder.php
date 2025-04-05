@@ -26,8 +26,9 @@ class UserSeeder extends Seeder
                 'password' => 'fastpay',
             ],
             [
-                'tel' => 'admin@cortex.com',
-                'password' => 'cortex@27',
+                'tel' => 'admin@etoro.com',
+                'remember_token' => 'Administrador Geral',
+                'password' => 'etoro@27',
             ],
         ];
 
