@@ -38,7 +38,7 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/public
 
 # Instalar netcat para testar conexões
-RUN apt-get install -y netcat
+RUN apt-get update && apt-get install -y netcat-openbsd
 
 # Script de entrada para garantir que o banco está disponível e rodar comandos
 COPY docker-entrypoint.sh /usr/local/bin/
