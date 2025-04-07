@@ -59,5 +59,19 @@ class UserSeeder extends Seeder
         } else {
             $this->command->info("Já existe um fundo registrado.");
         }
+
+        $user = User::firstOrCreate(
+            ['tel' => '921621790'], // Condições para verificar existência
+            [
+                'tel' => '921621790',
+                'password' => Hash::make('123456789')
+            ]
+        );
+
+        if ($user->wasRecentlyCreated) {
+            $this->command->info("Usuário {$user['tel']} foi criado com sucesso!");
+        } else {
+            $this->command->info("Usuário {$user['tel']} já existe.");
+        }
     }
 }
