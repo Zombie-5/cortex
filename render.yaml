@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: etoro
+    env: docker
+    region: oregon  # ou outra região mais próxima de você
+    plan: free
+    branch: main  # troque se usar outra branch
+    autoDeploy: true
+
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://etoro.onrender.com
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: etoro-db
+          property: host
+      - key: DB_PORT
+        value: 5432
+      - key: DB_DATABASE
+        fromDatabase:
+          name: etoro-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: etoro-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: etoro-db
+          property: password
