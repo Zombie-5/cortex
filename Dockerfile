@@ -32,6 +32,9 @@ RUN composer install --optimize-autoloader --no-dev
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
+# Ajustar permissões para o diretório public/assets/
+RUN chmod -R 755 /var/www/html/public/assets/
+
 # Copia o virtual host customizado
 COPY apache.conf /etc/apache2/sites-available/000-default.conf
 
