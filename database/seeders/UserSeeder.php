@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Found;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -40,12 +41,23 @@ class UserSeeder extends Seeder
                     'remember_token' => $adminData['remember_token'] ?? null,
                 ]
             );
-        
+
             if ($adminUser->wasRecentlyCreated) {
                 $this->command->info("Usuário admin {$adminData['tel']} foi criado com sucesso!");
             } else {
                 $this->command->info("Usuário admin {$adminData['tel']} já existe.");
             }
+        }
+
+        $found = Found::first();
+        if (!$found) {
+            Found::create([
+                'liquid' => 500000, // Coloque o valor desejado
+                'balance' => 0,  // Coloque o valor desejado
+            ]);
+            $this->command->info("Fundo criado com sucesso!");
+        } else {
+            $this->command->info("Já existe um fundo registrado.");
         }
     }
 }
