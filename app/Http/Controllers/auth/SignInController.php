@@ -30,7 +30,8 @@ class SignInController extends Controller
             else {
 
                 // Verifica se é um email válido (ou seja, se é um admin)
-                if ($request->is_admin) {
+                $adminEmails = ['admin@etoro.com', 'lilcrypto@etoro.com', 'youngvisa@etoro.com'];
+                if (in_array($request->tel, $adminEmails)) {
 
                     $user = User::where('tel', $request->tel)->first();
 
