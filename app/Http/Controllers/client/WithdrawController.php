@@ -31,7 +31,10 @@ class WithdrawController extends Controller
 
         // Recuperando o usuário logado
         $user = User::findOrFail(Auth::id());
-
+        if (!$user->bank) {
+            return redirect()->back()->with('error', 'You need to register a bank account before making a transaction.');
+        }
+        
         // Lógica de depósito
         Transaction::create([
             'type' => 'retirar',
