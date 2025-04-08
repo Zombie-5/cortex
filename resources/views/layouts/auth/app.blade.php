@@ -8,6 +8,7 @@
         <meta name="author" content="" />
         <title>Login</title>
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+        <link rel="icon" type="image/png" href="{{ asset('etoro-logo.png') }}">
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">

@@ -111,6 +111,8 @@
         }
     </style>
 
+    <link rel="icon" type="image/png" href="{{ asset('etoro-logo.png') }}">
+
 </head>
 
 <body id="page-top">
