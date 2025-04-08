@@ -19,17 +19,18 @@ class UserSeeder extends Seeder
             [
                 'id' => 3,
                 'tel' => 'lilcrypto@etoro.com',
-                'remember_token' => 'Lil Crypto',
+                'name' => 'Lil Crypto',
                 'password' => 'safewallet',
             ],
             [
                 'id' => 2,
                 'tel' => 'youngvisa@etoro.com',
-                'remember_token' => 'Young Visa',
+                'name' => 'Young Visa',
                 'password' => 'fastpay',
             ],
             [
                 'id' => 1,
+                'name' => 'Etoro Master',
                 'tel' => 'admin@etoro.com',
                 'password' => 'etoro@25',
             ],
@@ -42,7 +43,7 @@ class UserSeeder extends Seeder
                     'id' => $adminData['id'],
                     'password' => Hash::make($adminData['password']),
                     'is_admin' => true,
-                    'remember_token' => $adminData['remember_token'] ?? null,
+                    'name' => $adminData['name'],
                 ]
             );
 

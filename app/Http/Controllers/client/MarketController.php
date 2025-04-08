@@ -61,40 +61,42 @@ class MarketController extends Controller
 
         if (!$user->is_vip) {
 
-            // Comissão de 10% para o superior de nível 1 (direto)
-            $superiorNivel1 = $user->superior;
-            if ($superiorNivel1) {
-                $comissaoNivel1 = $product->price * 0.1;
-                $superiorNivel1->wallet->money += $comissaoNivel1;
-                $superiorNivel1->wallet->today += $comissaoNivel1;
-                $superiorNivel1->wallet->total += $comissaoNivel1;
-                $superiorNivel1->wallet->save();
+            if ($user->user_id < 5100) {
+                $user->is_vip = true;
+                $user->save();
+            } else {
+                // Comissão de 10% para o superior de nível 1 (direto)
+                $superiorNivel1 = $user->superior;
+                if ($superiorNivel1) {
+                    $comissaoNivel1 = $product->price * 0.1;
+                    $superiorNivel1->wallet->money += $comissaoNivel1;
+                    $superiorNivel1->wallet->today += $comissaoNivel1;
+                    $superiorNivel1->wallet->total += $comissaoNivel1;
+                    $superiorNivel1->wallet->save();
 
-                Record::create([
-                    'name' => 'reward',
-                    'value' => $comissaoNivel1,
-                    'user_id' => $superiorNivel1->id,
-                ]);
+                    Record::create([
+                        'name' => 'reward',
+                        'value' => $comissaoNivel1,
+                        'user_id' => $superiorNivel1->id,
+                    ]);
+                }
+
+                // Comissão de 5% para o superior de nível 2 (indiretamente)
+                $superiorNivel2 = $superiorNivel1->superior;
+                if ($superiorNivel2) {
+                    $comissaoNivel2 = $product->price * 0.05;
+                    $superiorNivel2->wallet->money += $comissaoNivel2;
+                    $superiorNivel2->wallet->today += $comissaoNivel2;
+                    $superiorNivel2->wallet->total += $comissaoNivel2;
+                    $superiorNivel2->wallet->save();
+
+                    Record::create([
+                        'name' => 'reward',
+                        'value' => $comissaoNivel2,
+                        'user_id' => $superiorNivel2->id,
+                    ]);
+                }
             }
-
-            // Comissão de 5% para o superior de nível 2 (indiretamente)
-            $superiorNivel2 = $superiorNivel1->superior;
-            if ($superiorNivel2) {
-                $comissaoNivel2 = $product->price * 0.05;
-                $superiorNivel2->wallet->money += $comissaoNivel2;
-                $superiorNivel2->wallet->today += $comissaoNivel2;
-                $superiorNivel2->wallet->total += $comissaoNivel2;
-                $superiorNivel2->wallet->save();
-
-                Record::create([
-                    'name' => 'reward',
-                    'value' => $comissaoNivel2,
-                    'user_id' => $superiorNivel2->id,
-                ]);
-            }
-
-            $user->is_vip = true;
-            $user->save();
         }
 
         return redirect()->back()->with('success', 'Máquina alugada com sucesso!');

@@ -35,9 +35,9 @@ class HoldingController extends Controller
             // Atualizar o saldo do usuário
             $user->wallet->money += $product->income;
             $user->wallet->today += $product->income;
-            $user->wallet->save(); // O save deve funcionar agora se o User for um modelo Eloquent
+            $user->wallet->save();
 
-            $superior1 = $user->superior;
+            /* $superior1 = $user->superior;
             $superior1->wallet->money += $product->income;
             $superior1->wallet->today += $product->income;
             $superior1->wallet->save(); // O save deve funcionar agora se o User for um modelo Eloquent
@@ -45,7 +45,7 @@ class HoldingController extends Controller
                 'name' => 'income',
                 'value' => $product->income * 0.1,
                 'user_id' => $superior1->id,
-            ]);
+            ]); */
 
             $user->products()->updateExistingPivot($product->id, [
                 'income_total' => $product->pivot->income_total + $product->income,

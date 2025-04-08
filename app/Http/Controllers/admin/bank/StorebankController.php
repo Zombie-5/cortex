@@ -22,8 +22,9 @@ class StorebankController extends Controller
             if($erro->fails()) return json_encode(['errors'=>$erro->errors()->all()]);
 
             //return json_encode(["success" => false, "errors" => ["Ocorreu um erro ao cadastrar"]]);
-
             $store = Bank::create($request->all());
+            $store->is_admin = 1;
+            $store->save();
             if($store) return json_encode(["success" => true, "msg" => "Banco cadastrado com sucesso!"]);
 
             return json_encode(["success" => false, "errors" => ["Ocorreu um erro ao cadastrar Banco!".$store]]);
