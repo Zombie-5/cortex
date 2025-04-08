@@ -17,13 +17,13 @@ class DashboardController extends Controller
     {
 
         /* User data */
-        $totalUsers = User::count();
-        $totalVipUsers = User::where('is_vip', true)->count();
+        $totalUsers = User::where('manager_id', Auth::id())->count();
+        $totalVipUsers = User::where('manager_id', Auth::id())->where('is_vip', true)->count();
 
         $topUsers = User::where('manager_id', Auth::id()) // Filtra pelo usuário logado
-        ->whereNotIn('tel', ['admin@cortex.com', '921621790','lilcrypto@cortex.com','tel' => 'youngvisa@cortex.com']) // Exclui os admins
-        ->orderBy('id', 'asc')
-        ->get();
+            ->whereNotIn('tel', ['admin@cortex.com', '921621790', 'lilcrypto@cortex.com', 'tel' => 'youngvisa@cortex.com']) // Exclui os admins
+            ->orderBy('id', 'asc')
+            ->get();
 
         /* User::with('subordinates1') // Apenas subordinates1 pode ser carregado diretamente
             ->get() // Pega os dados do banco primeiro
@@ -45,13 +45,31 @@ class DashboardController extends Controller
 
 
         /* Product data */
+        //$totalProductsSold = DB::table('product_users')->count();
         $totalProducts = Product::count();
-        $totalProductsSold = DB::table('product_users')->count();
+        $totalProductsSold = DB::table('product_users')
+            ->join('users', 'product_users.user_id', '=', 'users.id')
+            ->where('users.manager_id', Auth::id())
+            ->count();
 
         /* Money Data */
-        $totalDeposited = Transaction::where('type', 'depositar')->where('status', 'concluido')->sum('value');
-        $totalWithdrawn = Transaction::where('type', 'retirar')->where('status', 'concluido')->sum('value');
+        //$totalDeposited = Transaction::where('type', 'depositar')->where('status', 'concluido')->sum('value');
+        //$totalWithdrawn = Transaction::where('type', 'retirar')->where('status', 'concluido')->sum('value');
         $found = Found::first();
+
+        $totalDeposited = Transaction::where('type', 'depositar')
+            ->where('status', 'concluido')
+            ->whereHas('user', function ($query) {
+                $query->where('manager_id', Auth::id());
+            })
+            ->sum('value');
+
+        $totalWithdrawn = Transaction::where('type', 'retirar')
+            ->where('status', 'concluido')
+            ->whereHas('user', function ($query) {
+                $query->where('manager_id', Auth::id());
+            })
+            ->sum('value');
 
         return view('admin.dashboard', compact(
             'totalUsers',

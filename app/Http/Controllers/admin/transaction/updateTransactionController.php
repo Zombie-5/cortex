@@ -35,10 +35,10 @@ class updateTransactionController extends Controller
                 DB::beginTransaction(); // Inicia uma transação no banco de dados
 
                 // Verifica a ação da transação
-                if ($transaction->action == 'depositar') {
+                if ($transaction->type == 'depositar') {
                     // Lógica para adicionar o dinheiro ao saldo do usuário (apenas para depósito)
-                    $user = User::findOrFail($transaction->userId);
-                    $user->wallet->money +=  $transaction->money;
+                    $user = User::findOrFail($transaction->user_id);
+                    $user->wallet->money +=  $transaction->value;
                     $user->wallet->save();
 
                     // Atualiza o status da transação
@@ -48,7 +48,7 @@ class updateTransactionController extends Controller
                     DB::commit(); // Confirma a transação no banco de dados
 
                     return redirect()->back()->with('success', 'Depósito concluído e dinheiro depositado com sucesso.');
-                } elseif ($transaction->action == 'retirar') {
+                } elseif ($transaction->type == 'retirar') {
                     $transaction->status = 'concluido';
                     $transaction->save();
                     DB::commit(); // Confirma a transação sem alterar nada
@@ -66,7 +66,7 @@ class updateTransactionController extends Controller
                 DB::beginTransaction(); // Inicia uma transação no banco de dados
 
                 // Verifica a ação da transação
-                if ($transaction->action == 'depositar') {
+                if ($transaction->type == 'depositar') {
                     // Atualiza o status da transação
                     $transaction->status = 'rejeitado';
                     $transaction->save();
@@ -74,10 +74,10 @@ class updateTransactionController extends Controller
                     DB::commit(); // Confirma a transação no banco de dados
 
                     return redirect()->back()->with('success', 'Depósito rejeitado com sucesso.');
-                } elseif ($transaction->action == 'retirar') {
+                } elseif ($transaction->type == 'retirar') {
 
-                    $user = User::findOrFail($transaction->userId);
-                    $user->wallet->money += $transaction->money; // Adiciona o valor ao saldo do usuário
+                    $user = User::findOrFail($transaction->user_id);
+                    $user->wallet->money += $transaction->value; // Adiciona o valor ao saldo do usuário
                     $user->wallet->save();
 
                     $transaction->status = 'rejeitado';

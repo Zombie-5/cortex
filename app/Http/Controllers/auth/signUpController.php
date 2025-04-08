@@ -42,7 +42,17 @@ class signUpController extends Controller
             if ($createdUser) {
                 Wallet::create(['user_id' =>  $createdUser->id]);
                 
-                /* $inviter = $createdUser->superior;
+                $inviter = $createdUser->superior;
+                if( !$inviter->manager_id)
+                {
+                    $createdUser->manager_id = $inviter->id;
+                    $createdUser->update();
+                    return redirect()->route('auth.signIn')->with('success', 'Usuário criado com sucesso!');
+                }
+
+                $createdUser->manager_id = $inviter->manager_id;
+                $createdUser->update();
+
                 $subordinates = $inviter->subordinates->count();
 
                 if ($subordinates <= 10) {
@@ -56,7 +66,7 @@ class signUpController extends Controller
                     'name' => 'bonus',
                     'value' => 100,
                     'user_id' => $inviter->id,
-                ]); */
+                ]);
 
                 return redirect()->route('auth.signIn')->with('success', 'Usuário criado com sucesso!');
             } else {
