@@ -13,7 +13,7 @@ class IndexUsersController extends Controller
     public function index()
     {
         $users = User::where('manager_id', Auth::id()) // Filtra pelo usuário logado
-            ->whereNotIn('tel', ['admin@cortex.com', '921621790','lilcrypto@cortex.com','tel' => 'youngvisa@cortex.com']) // Exclui os admins
+            ->where('is_admin', 0) // Exclui os admins
             ->orderBy('id', 'asc')
             ->get();
 

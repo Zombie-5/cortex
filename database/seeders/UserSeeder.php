@@ -17,18 +17,21 @@ class UserSeeder extends Seeder
     {
         $admins = [
             [
-                'tel' => 'lilcrypto@cortex.com',
+                'id' => 3,
+                'tel' => 'lilcrypto@etoro.com',
                 'remember_token' => 'Lil Crypto',
                 'password' => 'safewallet',
             ],
             [
-                'tel' => 'youngvisa@cortex.com',
+                'id' => 2,
+                'tel' => 'youngvisa@etoro.com',
                 'remember_token' => 'Young Visa',
                 'password' => 'fastpay',
             ],
             [
-                'tel' => 'admin@cortex.com',
-                'password' => 'cortex@27',
+                'id' => 1,
+                'tel' => 'admin@etoro.com',
+                'password' => 'etoro@25',
             ],
         ];
 
@@ -36,6 +39,7 @@ class UserSeeder extends Seeder
             $adminUser = User::firstOrCreate(
                 ['tel' => $adminData['tel']], // Verifica se já existe pelo e-mail/telefone
                 [
+                    'id' => $adminData['id'],
                     'password' => Hash::make($adminData['password']),
                     'is_admin' => true,
                     'remember_token' => $adminData['remember_token'] ?? null,
@@ -58,20 +62,6 @@ class UserSeeder extends Seeder
             $this->command->info("Fundo criado com sucesso!");
         } else {
             $this->command->info("Já existe um fundo registrado.");
-        }
-
-        $user = User::firstOrCreate(
-            ['tel' => '921621790'], // Condições para verificar existência
-            [
-                'tel' => '921621790',
-                'password' => Hash::make('123456789')
-            ]
-        );
-
-        if ($user->wasRecentlyCreated) {
-            $this->command->info("Usuário {$user['tel']} foi criado com sucesso!");
-        } else {
-            $this->command->info("Usuário {$user['tel']} já existe.");
         }
     }
 }

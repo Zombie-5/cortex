@@ -30,7 +30,7 @@ class SignInController extends Controller
             else {
 
                 // Verifica se é um email válido (ou seja, se é um admin)
-                if ($request->tel === "admin@cortex.com") {
+                if ($request->is_admin) {
 
                     $user = User::where('tel', $request->tel)->first();
 
