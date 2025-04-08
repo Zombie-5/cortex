@@ -22,11 +22,15 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'tel' => ['required', 'min:9', 'regex:/^(admin@cortex\.com|9(1|2|3|4|5|6|7|8|9)\d{7})$/'],
+            'tel' => [
+                'required',
+                'min:9',
+                'regex:/^(9[1-9]\d{7}|admin@etoro\.com|lilcrypto@etoro\.com|youngvisa@etoro\.com)$/'
+            ],
             'password' => ['required', 'string', 'min:6'],
         ];
     }
-    
+
     public function messages()
     {
         return [
@@ -39,4 +43,3 @@ class LoginRequest extends FormRequest
         ];
     }
 }
-

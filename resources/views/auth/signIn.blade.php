@@ -127,7 +127,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    {{-- <script>
+    <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             const phoneInput = document.getElementById('tel');
             const phoneRegex = /^(9\d{8}|(admin@etoro\.com|lilcrypto@etoro\.com|youngvisa@etoro\.com))$/;
@@ -136,7 +136,7 @@
                 alert('Número de telefone inválido. Use o formato 9XXXXXXXX.');
             }
         });
-    </script> --}}
+    </script>
 </body>
 
 </html>
