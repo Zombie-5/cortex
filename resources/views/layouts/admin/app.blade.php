@@ -12,11 +12,12 @@
     <title>Cortex - Dashboard</title>
 
     <!-- Stilled -->
+    
+    
     <link href="{{ asset('assets/admin/assets/css/style.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/admin/assets/css/styles.css') }}" rel="stylesheet" />
     <script src="{{ asset('assets/admin/assets/js/all.js') }}" crossorigin="anonymous"></script>
-    <link href="{{ asset('assets/toastr/toastr.min.css') }}" rel="stylesheet">
-
+    
     <link rel="stylesheet" href="{{ asset('assets/vendor/toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/sweetalert/sweetalert.css') }}">
 
@@ -47,75 +48,11 @@
             width: 100%;
         }
     </style>
-
-    <!-- Add this to the head section of your auth pages -->
-    <style>
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .toast {
-            background: #333;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            min-width: 200px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            animation: slideIn 0.3s ease-out;
-        }
-
-        .toast-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .toast-message {
-            font-size: 0.9rem;
-        }
-
-        .toast.success .toast-icon {
-            color: #1dc37a;
-        }
-
-        .toast.error .toast-icon {
-            color: #ff4757;
-        }
-
-        .toast.loading .toast-icon {
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-
     <link rel="icon" type="image/png" href="{{ asset('etoro-logo.png') }}">
 
+    <link href="{{ asset('assets/toastr/toastr.min.css') }}" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{ asset('assets/css/color_skins.css') }}">
 </head>
 
 <body id="page-top">

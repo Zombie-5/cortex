@@ -20,15 +20,17 @@ class StoreProductController extends Controller
 
             $erro = Validator::make($request->all(), $validacao->rulesInsert(), $validacao->messages());
 
-            if($erro->fails()) return json_encode(['errors'=>$erro->errors()->all()]);
+            if ($erro->fails()) {
+                // Passando um array de erros para a sessão
+                return redirect()->back()->with('error', implode(', ', $erro->errors()->all()));
+            }
 
             //return json_encode(["success" => false, "errors" => ["Ocorreu um erro ao cadastrar"]]);
 
             $store =  Product::create($request->all());
             if($store) return redirect()->back()->with('success', 'Produto cadastrado com sucesso!');
-            //json_encode(["success" => true, "msg" => "Produto cadastrado com sucesso!"]);
-
-            return json_encode(["success" => false, "errors" => ["Ocorreu um erro ao cadastrar Produto!".$store]]);
+            
+            return redirect()->back()->with('error', "Ocorreu um erro ao cadastrar Produto!".$store);
         }
         catch (Exception $e)
         {

@@ -1,0 +1,43 @@
+
+.sidebar-nav {
+    /* Estilos para sua barra lateral, se necessário */
+    background-color: #f4f4f4;
+    width: 250px;
+    padding: 0px;
+}
+
+.main-menu::-webkit-scrollbar {
+    width: 0px;  /* Para navegadores baseados em WebKit, como Chrome/Safari/Opera */
+}
+
+.main-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 400px; /* Define a altura máxima da lista */
+    overflow-y: auto; /* Adiciona uma barra de rolagem vertical se necessário */
+    scrollbar-width: none;  /* Para Firefox */
+}
+
+.main-menu li {
+    margin-bottom: 0px; /* Adiciona espaço entre os itens da lista */
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 55px; /* Ajuste conforme necessário */
+    /*background-color: #333;  Cor de fundo da barra de navegação */
+    z-index: 1000; /* Certifique-se de que a barra de navegação esteja acima de outros elementos */
+}
+
+/* Estilos para o conteúdo principal */
+.main-content {
+    padding-top: 50px; /* Igual à altura da barra de navegação */
+}
+
+.error{
+    color: red;
+}
