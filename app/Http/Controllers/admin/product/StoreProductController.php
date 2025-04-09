@@ -25,7 +25,8 @@ class StoreProductController extends Controller
             //return json_encode(["success" => false, "errors" => ["Ocorreu um erro ao cadastrar"]]);
 
             $store =  Product::create($request->all());
-            if($store) return json_encode(["success" => true, "msg" => "Produto cadastrado com sucesso!"]);
+            if($store) return redirect()->back()->with('success', 'Produto cadastrado com sucesso!');
+            //json_encode(["success" => true, "msg" => "Produto cadastrado com sucesso!"]);
 
             return json_encode(["success" => false, "errors" => ["Ocorreu um erro ao cadastrar Produto!".$store]]);
         }

@@ -265,8 +265,8 @@
             $(this).find('#frm_destroy').attr('action', actionUrl);
         });
     </script>
-    <script src="{{ asset('assets/js/private/form-validate/product.js') }}"></script>
-    <script src="{{ asset('assets/js/private/persistence/save.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/private/form-validate/product.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/private/persistence/save.js') }}"></script> --}}
     <script src="{{ asset('assets/js/private/persistence/edit.js') }}"></script>
     <script src="{{ asset('assets/js/private/persistence/destroy.js') }}"></script>
 @endsection
