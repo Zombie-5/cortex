@@ -17,6 +17,9 @@
     <script src="{{ asset('assets/admin/assets/js/all.js') }}" crossorigin="anonymous"></script>
     <link href="{{ asset('assets/toastr/toastr.min.css') }}" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{ asset('assets/vendor/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/sweetalert/sweetalert.css') }}">
+
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -226,78 +229,55 @@
     <script src="{{ asset('assets/js/validate/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('assets/js/validate/messages_pt_PT.js') }}"></script>
 
-    <!-- Add this before closing body tag -->
-    <div class="toast-container" id="toastContainer"></div>
+    <script src="{{ asset('assets/vendor/toastr/toastr.js') }}"></script>
+    <script src="{{ asset('assets/vendor/sweetalert/sweetalert.min.js') }}"></script>
+
     <script>
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
+        toastr.options = {
+            closeButton: true, // Exibe o botão de fechar
+            timeOut: 5000, // Define o tempo de exibição (0 = permanente)
+            extendedTimeOut: 3000, // Define o tempo adicional ao passar o mouse (0 = permanente)
+            progressBar: true, // Exibe uma barra de progresso
+            positionClass: 'toast-top-right' // Define a posição do alerta na tela
+        };
 
-            let icon = '';
-            switch (type) {
-                case 'success':
-                    icon =
-                        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-                    break;
-                case 'error':
-                    icon =
-                        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
-                    break;
-                case 'loading':
-                    icon =
-                        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>';
-                    break;
-            }
-
-            toast.innerHTML = `
-                <div class="toast-icon">${icon}</div>
-                <div class="toast-message">${message}</div>
-            `;
-
-            container.appendChild(toast);
-
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(100%)';
-                toast.style.transition = 'all 0.3s ease-out';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
+        function msgToastrInfo(msg) {
+            toastr.info(msg, 'Sucesso');
         }
 
-        // Update your form submission handlers to use the toast
-        document.getElementById('registrationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        function msgToastrSuccess(msg) {
+            toastr.success(msg, 'Sucesso');
+        }
 
-            const phoneInput = document.getElementById('phone');
-            const phoneRegex = /^9\d{8}$/;
+        function msgToastrWarning(msg) {
+            toastr.warning(msg, 'Aviso');
+        }
 
-            if (!phoneRegex.test(phoneInput.value)) {
-                showToast('Número de telefone inválido. Use o formato 9XXXXXXXX.', 'error');
-                return;
-            }
+        function msgToastrError(msg) {
+            toastr.error(msg, 'Erro');
+        }
 
-            showToast('Processando...', 'loading');
-
-            // Submit the form
-            this.submit();
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('success'))
+                msgToastrSuccess('{{ session('success') }}');
+            @elseif (session('warning'))
+                msgToastrWarning('{{ session('warning') }}');
+            @elseif (session('error'))
+                msgToastrError('{{ session('error') }}');
+            @endif
         });
 
-        // If there are any Laravel flash messages, show them as toasts
-        @if (session('success'))
-            showToast("{{ session('success') }}", 'success');
-        @endif
-
-        @if (session('error'))
-            showToast("{{ session('error') }}", 'error');
-        @endif
-
-        @if ($errors->any())
-            @foreach ($errors->all() as $error)
-                showToast("{{ $error }}", 'error');
-            @endforeach
-        @endif
+        const sucessMessage = sessionStorage.getItem('sucessMessage');
+        if (sucessMessage) {
+            msgToastrSuccess(sucessMessage);
+            sessionStorage.removeItem('sucessMessage');
+        }
+        /*msgToastrInfo("1");
+        msgToastrSuccess("2");
+        msgToastrWarning("3");
+        msgToastrError("4");*/
     </script>
+
     @yield('script')
 
 
