@@ -27,6 +27,8 @@
                                 <th>Preço</th>
                                 <th>Renda Diária</th>
                                 <th>Duração</th>
+                                <th>Visível</th>
+                                <th>Disponível</th>
                                 <th>Opções</th>
                             </tr>
                         </thead>
@@ -38,14 +40,26 @@
                                     <td>{{ number_format($product->price, 2, ',', '.') }} Kz</td>
                                     <td>{{ number_format($product->income, 2, ',', '.') }} Kz</td>
                                     <td>{{ $product->duration }} dias</td>
+                                    <td data-bs-toggle="modal" data-bs-target="#modal_set_is_displayed"
+                                        data-id="{{ Crypt::encryptString($product->id) }}" data-name="{{ $product->name }}"
+                                        data-is_displayed ="{{ $product->is_displayed }}"
+                                        style="cursor: pointer;">
+                                        {{ $product->is_displayed ? 'Sim' : 'Não' }}
+                                    </td>
+                                    <td data-bs-toggle="modal" data-bs-target="#modal_set_is_active"
+                                        data-id="{{ Crypt::encryptString($product->id) }}" data-name="{{ $product->name }}"
+                                        data-is_active="{{ $product->is_active }}"
+                                        style="cursor: pointer;">
+                                        {{ $product->is_active ? 'Sim' : 'Não' }}
+                                    </td>
+
                                     <th>
-                                        <a href="#" class="mx-2"><i class="fas fa-eye"></i></a>
                                         <a href="#" class="mr-2" data-id="{{ Crypt::encryptString($product->id) }}"
                                             data-name="{{ $product->name }}" data-duration="{{ $product->duration }}"
                                             data-desc="{{ $product->desc }}" data-price="{{ $product->price }}"
                                             data-income="{{ $product->income }}" data-bs-toggle="modal"
                                             data-bs-target="#modal_edit"><i class="fa fa-pencil"></i></a>
-                                            
+
                                         <a href="#" data-id="{{ Crypt::encryptString($product->id) }}"
                                             data-name="{{ $product->name }}" data-bs-toggle="modal"
                                             data-bs-target="#modal_destroy">
@@ -225,6 +239,62 @@
             </div>
         </div>
 
+        <div class="modal fade modal_set_is_active" id="modal_set_is_active" tabindex="-1" role="dialog"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <form method="POST" id="frm_set_active" class="form-horizontal form-label-left frm_set_active">
+                    @csrf
+                    @method('PATCH')
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel2">Editar Disponibilidade</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 inputs">
+                                    <div class="form-group select-wrapper">
+                                        <h5 id="msg"></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success">Confirmar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="modal fade modal_set_is_displayed" id="modal_set_is_displayed" tabindex="-1" role="dialog"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <form method="POST" id="frm_set_display" class="form-horizontal form-label-left frm_set_display">
+                    @csrf
+                    @method('PATCH')
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel2">Editar Visibilidade</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 inputs">
+                                    <div class="form-group select-wrapper">
+                                        <h5 id="msg"></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success">Confirmar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </div>
 @endsection
 
@@ -263,6 +333,46 @@
             var actionUrl = "{{ route('admin.product.destroy', ':id') }}";
             actionUrl = actionUrl.replace(':id', id);
             $(this).find('#frm_destroy').attr('action', actionUrl);
+        });
+
+        $('#modal_set_is_active').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget); // Botão que acionou a modal
+            var id = button.data('id'); // Pegando o id do servico
+            var name = button.data('name'); // Pegando o nome
+            var is_active = button.data('is_active'); // Pegando o nome
+
+            // Alterar a mensagem da modal com base no status 'is_active'
+            if (is_active) {
+                $(this).find('#msg').html("Deseja realmente tornar o produto '" + name +
+                    "' indisponível para investimento?");
+            } else {
+                $(this).find('#msg').html("Deseja realmente disponibilizar o produto '" + name +
+                    "' para investimento?");
+            }
+
+            var actionUrl = "{{ route('admin.product.active', ':id') }}";
+            actionUrl = actionUrl.replace(':id', id);
+            $(this).find('#frm_set_active').attr('action', actionUrl);
+        });
+
+        $('#modal_set_is_displayed').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget); // Botão que acionou a modal
+            var id = button.data('id'); // Pegando o id do servico
+            var name = button.data('name'); // Pegando o nome
+            var is_displayed = button.data('is_displayed'); // Pegando o nome
+
+            // Alterar a mensagem da modal com base no status 'is_displayed'
+            if (is_displayed) {
+                $(this).find('#msg').html("Deseja realmente tornar o produto '" + name +
+                    "' invisivel para o cliente?");
+            } else {
+                $(this).find('#msg').html("Deseja realmente tornar o produto '" + name +
+                    "' visivel para o cliente?");
+            }
+
+            var actionUrl = "{{ route('admin.product.displayed', ':id') }}";
+            actionUrl = actionUrl.replace(':id', id);
+            $(this).find('#frm_set_display').attr('action', actionUrl);
         });
     </script>
     {{-- <script src="{{ asset('assets/js/private/form-validate/product.js') }}"></script> --}}

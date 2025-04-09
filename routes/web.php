@@ -14,6 +14,7 @@ use App\Http\Controllers\admin\product\IndexProductsController;
 use App\Http\Controllers\admin\bank\IndexBanksController;
 use App\Http\Controllers\admin\bank\UpdateBankController;
 use App\Http\Controllers\admin\IndexTransactionController;
+use App\Http\Controllers\admin\product\SetProductStatusController;
 use App\Http\Controllers\admin\product\UpdateProductController;
 use App\Http\Controllers\admin\transaction\updateTransactionController;
 use App\Http\Controllers\auth\SignOutController;
@@ -98,6 +99,8 @@ Route::prefix('/site')->group(function () {
     
         Route::put('/products/{id}/update', [UpdateProductController::class, 'update'])->name('admin.product.update');
         Route::put('/bank/{id}/update', [UpdateBankController::class, 'update'])->name('admin.bank.update');
+        Route::patch('/product/{product}/set-is-active', [SetProductStatusController::class, 'updateIsActive'])->name('admin.product.active');
+        Route::patch('/product/{product}/set-is-displayed', [SetProductStatusController::class, 'updateIsDisplayed'])->name('admin.product.displayed');
         
         Route::delete('/product/{id}/delete', [DestroyProductController::class, 'destroy'])->name('admin.product.destroy');
         Route::delete('/bank/{id}/delete', [DestroybankController::class, 'destroy'])->name('admin.bank.destroy');

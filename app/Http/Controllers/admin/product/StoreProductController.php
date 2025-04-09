@@ -25,8 +25,6 @@ class StoreProductController extends Controller
                 return redirect()->back()->with('error', implode(', ', $erro->errors()->all()));
             }
 
-            //return json_encode(["success" => false, "errors" => ["Ocorreu um erro ao cadastrar"]]);
-
             $store =  Product::create($request->all());
             if($store) return redirect()->back()->with('success', 'Produto cadastrado com sucesso!');
             
@@ -34,7 +32,8 @@ class StoreProductController extends Controller
         }
         catch (Exception $e)
         {
-            return json_encode(["success" => false, "errors" => ["Erro do servidor. Contacte o administrador do sistema!".$e->getMessage()]]);
+            return redirect()->back()->with('error', "Erro do servidor. Contacte o desenvovedor do sistema! ");
+            //return redirect()->back()->with('error', "Erro do servidor. Contacte o desenvovedor do sistema! " . $e->getMessage());
         }
     }
 }
