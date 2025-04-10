@@ -126,7 +126,11 @@
                         <div class="row mb-2">
                             <div class="col-md-4 font-weight-bold">IBAN:</div>
                             <div class="col-md-8">
-                                {{ $user->bank->iban ? chunk_split($user->bank->iban, 4, ' ') : 'Não definido' }}
+                                @if ($user->bank)
+                                    {{ $user->bank->iban ? chunk_split($user->bank->iban, 4, ' ') : 'Não definido' }}
+                                @else
+                                    Não definido
+                                @endif
                             </div>
                         </div>
                     </div>
