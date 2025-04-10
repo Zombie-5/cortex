@@ -162,12 +162,12 @@ class User extends Authenticatable
 
     public function totalDepositado()
     {
-        return $this->transactions()->where('type', 'deposit')->sum('value');
+        return $this->transactions()->where('type', 'depositar')->sum('value');
     }
 
     public function totalRetirado()
     {
-        return $this->transactions()->where('type', 'withdraw')->sum('value');
+        return $this->transactions()->where('type', 'retirar')->sum('value');
     }
 
     public function gifts()
