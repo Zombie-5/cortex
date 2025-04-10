@@ -53,7 +53,7 @@ Route::get('/sign-up/{invite_code?}', [signUpController::class, 'signUp'])->name
 Route::post('/store/sign-up', [signUpController::class, 'store'])->name('auth.store');
 
 Route::get('/callback', function () {
-    return view('admin.showUsers');
+    return view('admin.showUsers2');
 });
 
 Route::prefix('/site')->group(function () {

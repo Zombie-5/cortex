@@ -152,15 +152,13 @@
     <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
 
     <!-- Stilled -->
-    <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script> --}}
     <script src="{{ asset('assets/admin/assets/js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
     <script src="{{ asset('assets/admin/assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/admin/assets/js/Chart.min.js') }}" crossorigin="anonymous"></script>
     <script src="{{ asset('assets/admin/assets/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('assets/admin/assets/js/demo/chart-bar-demo.js') }}"></script>
-    <script src="{{ asset('assets/admin/assets/js/simple-datatables.min.js') }}" crossorigin="anonymous"></script>
-    <script src="{{ asset('assets/admin/assets/js/datatables-simple-demo.js') }}"></script>
-
+    
     <script src="{{ asset('assets/js/validate/jquery.mask.min.js') }}"></script>
     <script src="{{ asset('assets/js/validate/jquery.validate.js') }}"></script>
     <script src="{{ asset('assets/js/validate/jquery.validate.min.js') }}"></script>
