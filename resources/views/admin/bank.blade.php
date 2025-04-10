@@ -207,7 +207,7 @@
             $(this).find('#owner').val(owner);
             $(this).find('#iban').val(iban);
 
-            var actionUrl = "{{ route('admin.product.update', ':id') }}";
+            var actionUrl = "{{ route('admin.bank.update', ':id') }}";
             actionUrl = actionUrl.replace(':id', id);
             $(this).find('#frm_edit').attr('action', actionUrl);
         });

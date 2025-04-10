@@ -17,6 +17,7 @@ use App\Http\Controllers\admin\IndexTransactionController;
 use App\Http\Controllers\admin\product\SetProductStatusController;
 use App\Http\Controllers\admin\product\UpdateProductController;
 use App\Http\Controllers\admin\transaction\updateTransactionController;
+use App\Http\Controllers\admin\user\showUserController;
 use App\Http\Controllers\auth\SignOutController;
 use App\Http\Controllers\client\AccountController;
 use App\Http\Controllers\client\BankController;
@@ -50,7 +51,7 @@ Route::get('/sign-up/{invite_code?}', [signUpController::class, 'signUp'])->name
 Route::post('/store/sign-up', [signUpController::class, 'store'])->name('auth.store');
 
 Route::get('/callback', function () {
-    return view('client.bank-choose');
+    return view('admin.showUsers');
 });
 
 Route::prefix('/site')->group(function () {
@@ -88,6 +89,7 @@ Route::prefix('/site')->group(function () {
 
         Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('/user-index', [IndexUsersController::class, 'index'])->name('admin.user.index');
+        Route::get('/user-show/{id}', [showUserController::class, 'show'])->name('admin.user.show');
         Route::get('/product-index', [IndexProductsController::class, 'index'])->name('admin.product.index');
         Route::get('/bank-index', [IndexBanksController::class, 'index'])->name('admin.bank.index');
         Route::get('/transaction-index', [IndexTransactionController::class, 'index'])->name('admin.transaction.index');

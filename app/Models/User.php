@@ -107,12 +107,22 @@ class User extends Authenticatable
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function manager()
+    {
+        return $this->belongsTo(User::class, 'manager_id');
+    }
+
     /**
      * Relacionamento inverso de superior, onde um usuário pode ter muitos subordinados.
      */
     public function subordinates()
     {
         return $this->hasMany(User::class, 'user_id');
+    }
+
+    public function subordinatesVip()
+    {
+        return $this->hasMany(User::class, 'user_id')->where('is_vip', true);
     }
 
     /**
@@ -143,5 +153,25 @@ class User extends Authenticatable
         return $this->subordinates1()->flatMap(function ($subordinate) {
             return $subordinate->subordinates;
         });
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function totalDepositado()
+    {
+        return $this->transactions()->where('type', 'deposit')->sum('value');
+    }
+
+    public function totalRetirado()
+    {
+        return $this->transactions()->where('type', 'withdraw')->sum('value');
+    }
+
+    public function gifts()
+    {
+        return $this->hasMany(Gift::class);
     }
 }

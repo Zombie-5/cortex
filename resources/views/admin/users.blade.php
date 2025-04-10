@@ -39,7 +39,7 @@
                                     <td>{{ number_format($user->wallet->daily, 2, ',', '.') }} Kz</td>
                                     <td>{{ number_format($user->wallet->money, 2, ',', '.') }} Kz</td>
                                     <th>
-                                        <a href="#">Visualizar</a>
+                                        <a href="{{ route('admin.user.show', Crypt::encryptString($user->id)) }}" class="mx-2"><i class="fas fa-eye"></i></a>
                                     </th>
                                 </tr>
                             @empty
