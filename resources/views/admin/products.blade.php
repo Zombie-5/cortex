@@ -44,13 +44,15 @@
                                         data-id="{{ Crypt::encryptString($product->id) }}" data-name="{{ $product->name }}"
                                         data-is_displayed ="{{ $product->is_displayed }}"
                                         style="cursor: pointer;">
-                                        {{ $product->is_displayed ? 'Sim' : 'Não' }}
+                                        {{ $product->is_displayed ? 'Sim ' : 'Não ' }}
+                                         <i class="fa fa-hand-pointer" aria-hidden="true"></i>
                                     </td>
                                     <td data-bs-toggle="modal" data-bs-target="#modal_set_is_active"
                                         data-id="{{ Crypt::encryptString($product->id) }}" data-name="{{ $product->name }}"
                                         data-is_active="{{ $product->is_active }}"
                                         style="cursor: pointer;">
-                                        {{ $product->is_active ? 'Sim' : 'Não' }}
+                                        {{ $product->is_active ? 'Sim ' : 'Não ' }}
+                                        <i class="fa fa-hand-pointer" aria-hidden="true"></i>
                                     </td>
 
                                     <th>

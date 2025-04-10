@@ -18,6 +18,8 @@ use App\Http\Controllers\admin\product\SetProductStatusController;
 use App\Http\Controllers\admin\product\UpdateProductController;
 use App\Http\Controllers\admin\transaction\updateTransactionController;
 use App\Http\Controllers\admin\user\showUserController;
+use App\Http\Controllers\admin\user\specialTransactionController;
+use App\Http\Controllers\admin\user\ToggleUserStatusController;
 use App\Http\Controllers\auth\SignOutController;
 use App\Http\Controllers\client\AccountController;
 use App\Http\Controllers\client\BankController;
@@ -94,6 +96,7 @@ Route::prefix('/site')->group(function () {
         Route::get('/bank-index', [IndexBanksController::class, 'index'])->name('admin.bank.index');
         Route::get('/transaction-index', [IndexTransactionController::class, 'index'])->name('admin.transaction.index');
         Route::get('/gift-index', [GiftController::class, 'index'])->name('admin.gift.index');
+        Route::get('user/toggleStatus/{id}', [ToggleUserStatusController::class, 'toggleStatus'])->name('admin.user.toggleStatus');
     
         Route::post('/product-store', [StoreProductController::class, 'store'])->name('admin.product.store');
         Route::post('/bank-store', [StorebankController::class, 'store'])->name('admin.bank.store');
@@ -101,6 +104,7 @@ Route::prefix('/site')->group(function () {
     
         Route::put('/products/{id}/update', [UpdateProductController::class, 'update'])->name('admin.product.update');
         Route::put('/bank/{id}/update', [UpdateBankController::class, 'update'])->name('admin.bank.update');
+        Route::put('admin/user/{user}/update-wallet', [specialTransactionController::class, 'updateWallet'])->name('admin.user.updateWallet');
         Route::patch('/product/{product}/set-is-active', [SetProductStatusController::class, 'updateIsActive'])->name('admin.product.active');
         Route::patch('/product/{product}/set-is-displayed', [SetProductStatusController::class, 'updateIsDisplayed'])->name('admin.product.displayed');
         
