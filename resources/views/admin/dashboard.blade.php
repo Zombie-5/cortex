@@ -192,19 +192,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($topUsers as $user)
-                                <tr>
-                                    <td>{{ $user->id }}</td>
-                                    <td>{{ $user->products->count() }}</td>
-                                    <td>{{ $user->is_active ? 'Activo' : 'Inactivo' }}</td>
-                                    <td>{{ number_format($user->wallet->daily, 0, ',', '.') }}</td>
-                                    <td>{{ number_format($user->wallet->money, 0, ',', '.') }}</td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="6">Nenhum usuário encontrado.</td>
-                                </tr>
-                            @endforelse
+                        
                     </tbody>
                 </table>
             </div>

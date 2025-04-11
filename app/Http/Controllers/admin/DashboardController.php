@@ -20,11 +20,11 @@ class DashboardController extends Controller
         $totalUsers = User::where('manager_id', Auth::id())->count();
         $totalVipUsers = User::where('manager_id', Auth::id())->where('is_vip', true)->count();
 
-        $topUsers = User::where('manager_id', Auth::id()) // Filtra pelo usuário logado
+        /* $topUsers = User::where('manager_id', Auth::id()) // Filtra pelo usuário logado
             ->whereNotIn('tel', ['admin@cortex.com', '921621790', 'lilcrypto@cortex.com', 'tel' => 'youngvisa@cortex.com']) // Exclui os admins
             ->orderBy('id', 'asc')
             ->get();
-
+ */
         /* User::with('subordinates1') // Apenas subordinates1 pode ser carregado diretamente
             ->get() // Pega os dados do banco primeiro
             ->map(function ($user) {
@@ -72,7 +72,6 @@ class DashboardController extends Controller
             ->sum('value');
 
         return view('admin.dashboard', compact(
-            'totalUsers',
             'totalVipUsers',
             'topUsers',
             'totalProducts',
