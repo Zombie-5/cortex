@@ -72,8 +72,8 @@ class DashboardController extends Controller
             ->sum('value');
 
         return view('admin.dashboard', compact(
+            'totalUsers',
             'totalVipUsers',
-            'topUsers',
             'totalProducts',
             'totalProductsSold',
             'totalDeposited',
