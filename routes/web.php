@@ -84,7 +84,6 @@ Route::prefix('/site')->group(function () {
         Route::post('/bank/store', [BankController::class, 'store'])->name('client.bank.store');
         Route::post('/change/passord', [ChangePasswordController::class, 'changePassword'])->name('client.change.passord');
         Route::post('/gift/redeem', [ClientGiftController::class, 'redeem'])->name('client.gift.redeem');
-
     });
 
     Route::prefix('/admin')->group(function () {
@@ -94,25 +93,29 @@ Route::prefix('/site')->group(function () {
         Route::get('/user-show/{id}', [showUserController::class, 'show'])->name('admin.user.show');
         Route::get('/product-index', [IndexProductsController::class, 'index'])->name('admin.product.index');
         Route::get('/bank-index', [IndexBanksController::class, 'index'])->name('admin.bank.index');
+
         Route::get('/transaction-index', [IndexTransactionController::class, 'index'])->name('admin.transaction.index');
+        Route::get('/admin/transactions/deposits', [IndexTransactionController::class, 'deposits'])->name('admin.transactions.deposits');
+        Route::get('/admin/transactions/withdrawals', [IndexTransactionController::class, 'withdrawals'])->name('admin.transactions.withdrawals');
+        Route::get('/admin/transactions/history', [IndexTransactionController::class, 'history'])->name('admin.transactions.history');
+
         Route::get('/gift-index', [GiftController::class, 'index'])->name('admin.gift.index');
         Route::get('user/toggleStatus/{id}', [ToggleUserStatusController::class, 'toggleStatus'])->name('admin.user.toggleStatus');
-    
+
         Route::post('/product-store', [StoreProductController::class, 'store'])->name('admin.product.store');
         Route::post('/bank-store', [StorebankController::class, 'store'])->name('admin.bank.store');
         Route::post('/gift-store', [GiftController::class, 'store'])->name('admin.gift.store');
-    
+
         Route::put('/products/{id}/update', [UpdateProductController::class, 'update'])->name('admin.product.update');
         Route::put('/bank/{id}/update', [UpdateBankController::class, 'update'])->name('admin.bank.update');
         Route::put('admin/user/{user}/update-wallet', [specialTransactionController::class, 'updateWallet'])->name('admin.user.updateWallet');
         Route::patch('/product/{product}/set-is-active', [SetProductStatusController::class, 'updateIsActive'])->name('admin.product.active');
         Route::patch('/product/{product}/set-is-displayed', [SetProductStatusController::class, 'updateIsDisplayed'])->name('admin.product.displayed');
-        
+
         Route::delete('/product/{id}/delete', [DestroyProductController::class, 'destroy'])->name('admin.product.destroy');
         Route::delete('/bank/{id}/delete', [DestroybankController::class, 'destroy'])->name('admin.bank.destroy');
         Route::delete('/gift/{id}/delete', [GiftController::class, 'destroy'])->name('admin.gift.destroy');
 
         Route::patch('/transactions/status/{id}', [updateTransactionController::class, 'updateStatus'])->name('admin.transaction.status');
-    
     });
 });

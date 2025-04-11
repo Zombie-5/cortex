@@ -21,7 +21,25 @@ class IndexTransactionController extends Controller
             ->where('status', '!=', 'rejeitado')
             ->where('type', 'depositar')
             ->get();
+        return view('admin.transactions.deposits', compact('transactionsDeposited'));
+    }
 
+    public function deposits()
+    {
+        $transactionsDeposited = Transaction::orderBy('created_at', 'desc')
+            ->with('user')
+            ->whereHas('user', function ($query) {
+                $query->where('manager_id', Auth::id());
+            })
+            ->where('status', '!=', 'concluido')
+            ->where('status', '!=', 'rejeitado')
+            ->where('type', 'depositar')
+            ->get();
+        return view('admin.transactions.deposits', compact('transactionsDeposited'));
+    }
+
+    public function withdrawals()
+    {
         $transactionsWithdrawn = Transaction::orderBy('created_at', 'desc')
             ->with('user')
             ->whereHas('user', function ($query) {
@@ -31,16 +49,20 @@ class IndexTransactionController extends Controller
             ->where('status', '!=', 'rejeitado')
             ->where('type', 'retirar')
             ->get();
+        return view('admin.transactions.withdrawals', compact('transactionsWithdrawn'));
+    }
 
+    public function history()
+    {
         $transactions = Transaction::orderBy('created_at', 'desc')
-            ->with('user')
-            ->whereHas('user', function ($query) {
-                $query->where('manager_id', Auth::id());
-            })
-            ->where('status', '!=', 'pendente')
-            ->where('status', '!=', 'processando')
-            ->get();
+        ->with('user')
+        ->whereHas('user', function ($query) {
+            $query->where('manager_id', Auth::id());
+        })
+        ->where('status', '!=', 'pendente')
+        ->where('status', '!=', 'processando')
+        ->get();
 
-        return view('admin.transaction', ['transactions' => $transactions, 'transactionsDeposited' => $transactionsDeposited, 'transactionsWithdrawn' => $transactionsWithdrawn]);
+        return view('admin.transactions.history', compact('transactions'));
     }
 }
