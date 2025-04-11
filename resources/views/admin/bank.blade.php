@@ -17,44 +17,44 @@
                     aria-labelledby="v-pills-performance-tab">
                     <div class="row d-flex">
                         @forelse ($banks as $bank)
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">{{ $bank->name }}</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Opções:</div>
-                                            
-                                            <a class="dropdown-item" href="#" 
-                                                data-id="{{ Crypt::encryptString($bank->id) }}"
-                                                data-name="{{ $bank->name }}" 
-                                                data-owner="{{ $bank->owner }}"
-                                                data-iban="{{ $bank->iban }}"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modal_edit">Editar</a>
-                                            
-                                            <a class="dropdown-item" href="#"
-                                                data-id="{{ Crypt::encryptString($bank->id) }}"
-                                                data-name="{{ $bank->name }}" data-bs-toggle="modal"
-                                                data-bs-target="#modal_destroy">Eliminar</a>
+                            <div class="col-md-4 mb-4"> <!-- <- Aqui está o segredo -->
+                                <div class="card shadow h-100">
+                                    <!-- Card Header -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">{{ $bank->name }}</h6>
+                                        <div class="dropdown no-arrow">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                aria-labelledby="dropdownMenuLink">
+                                                <div class="dropdown-header">Opções:</div>
+                                                <a class="dropdown-item" href="#"
+                                                    data-id="{{ Crypt::encryptString($bank->id) }}"
+                                                    data-name="{{ $bank->name }}" data-owner="{{ $bank->owner }}"
+                                                    data-iban="{{ $bank->iban }}" data-bs-toggle="modal"
+                                                    data-bs-target="#modal_edit">Editar</a>
+                                                <a class="dropdown-item" href="#"
+                                                    data-id="{{ Crypt::encryptString($bank->id) }}"
+                                                    data-name="{{ $bank->name }}" data-bs-toggle="modal"
+                                                    data-bs-target="#modal_destroy">Eliminar</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <p><strong>Proprietario: </strong>{{ $bank->owner }}</p>
-                                    <p><strong>Iban: </strong>{{ chunk_split($bank->iban, 4, ' ') }}</p>
+
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <p><strong>Proprietário:</strong> {{ $bank->owner }}</p>
+                                        <p><strong>IBAN:</strong> {{ chunk_split($bank->iban, 4, ' ') }}</p>
+                                    </div>
                                 </div>
                             </div>
                         @empty
-                            <tr>
-                                <td colspan="6">Nenhum Banco encontrado.</td>
-                            </tr>
+                            <div class="col-12">
+                                <p>Nenhum Banco encontrado.</p>
+                            </div>
                         @endforelse
                     </div>
                 </div>
@@ -125,7 +125,8 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 inputs">
                                     <div class="form-group select-wrapper">
-                                        <label class="control-label">Nome do Banco<span class="obrigatorio">*</span></label>
+                                        <label class="control-label">Nome do Banco<span
+                                                class="obrigatorio">*</span></label>
                                         <input type="text" id="name" name="name" class="form-control"
                                             placeholder="Nome do Banco">
                                     </div>
@@ -201,7 +202,7 @@
             var name = button.data('name'); // Pegando o nome
             var owner = button.data('owner'); // Pegando a duração
             var iban = button.data('iban'); // Pegando a duração
-           
+
             // Preenchendo os campos da modal com os dados
             $(this).find('#name').val(name);
             $(this).find('#owner').val(owner);
