@@ -22,8 +22,8 @@
                         @forelse ($transactions as $transaction)
                             <tr>
                                 <td style="text-align: center">{{ $transaction->user->id }}</td>
-                                <td>{{ $transaction->user->bank->name }}</td>
-                                <td>{{ $transaction->user->bank->iban }}</td>
+                                <td>{{ $transaction->user->bank->name ?? 'Indefinido' }}</td>
+                                <td>{{ $transaction->user->bank->iban ?? 'Indefinido' }}</td>
                                 <td>{{ $transaction->type }}</td>
                                 <td>{{ number_format($transaction->value, 2, ',', '.') }} Kz</td>
                                 <td>
