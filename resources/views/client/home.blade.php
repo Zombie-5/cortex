@@ -74,12 +74,64 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade show" id="inviteModal" tabindex="-1" aria-labelledby="inviteModalLabel" aria-hidden="true"
+        style="display: block; background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-dialog-centered custom-modal-beta">
+            <div class="modal-content rounded shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="inviteModalLabel">Bem-vindo à Etoro!</h5>
+                    <button type="button" class="btn-close" onclick="closeModal()" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="mb-3">Compartilhe seu link de convite com amigos e ganhe recompensas!</p>
+                    <input type="text" class="form-control mb-3 text-center" id="inviteLinkInput"
+                        value="{{ $inviteLink }}" readonly>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button onclick="copyToClipboard('{{ $inviteLink }}')" class="btn btn-outline-primary">
+                            <i class="bi bi-clipboard"></i> Copiar Link
+                        </button>
+                        <a href="https://wa.me/?text={{ urlencode($inviteLink) }}" target="_blank" class="btn btn-success">
+                            <i class="bi bi-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
     <script>
         function copyToClipboard(link) {
             navigator.clipboard.writeText(link);
+        }
+    </script>
+    <script>
+        function closeModal() {
+            const modal = document.getElementById('inviteModal');
+            modal.style.display = 'none';
+        }
+
+        function copyToClipboard(link) {
+            navigator.clipboard.writeText(link);
+            toast("Link copiado para a área de transferência!");
+        }
+
+        function toast(message) {
+            const alert = document.createElement('div');
+            alert.className =
+                'toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-4 show';
+            alert.role = 'alert';
+            alert.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">${message}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            `;
+            document.body.appendChild(alert);
+            setTimeout(() => alert.remove(), 3000);
         }
     </script>
 @endsection

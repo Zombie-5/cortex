@@ -353,6 +353,12 @@
             }
         }
     </style>
+    {{-- <style>
+        .custom-modal-beta {
+            max-width: 300px;
+            /* Ajuste a largura conforme necessário */
+        }
+    </style> --}}
 
 </head>
 
