@@ -27,7 +27,6 @@
                                 <th>Código</th>
                                 <th>Estatus</th>
                                 <th>Usuario</th>
-                                <th>*</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,13 +37,6 @@
                                     <td>{{ $gift->token }}</td>
                                     <td>{{ $gift->status }}</td>
                                     <td style="text-align: center">{{ $gift->user->id ?? '-' }}</td>
-                                    <th>
-                                        <a href="#" data-id="{{ Crypt::encryptString($gift->id) }}"
-                                            data-value="{{ $gift->value }}" data-bs-toggle="modal"
-                                            data-bs-target="#modal_destroy">
-                                            <i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </th>
                                 </tr>
                             @empty
                                 <tr>
@@ -82,52 +74,11 @@
                 </form>
             </div>
         </div>
-
-        <div class="modal fade modal_destroy" id="modal_destroy" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-                <form method="POST" id="frm_destroy" class="form-horizontal form-label-left frm_destroy">
-                    @csrf
-                    @method('DELETE')
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel2">Eliminar Presente</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 inputs">
-                                    <div class="form-group select-wrapper">
-                                        <h5 id="msg"></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success">Eliminar</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
     </div>
 @endsection
 
 @section('script')
     <script>
         var IndexRoute = '{{ route('admin.gift.index') }}';
-        
-        $('#modal_destroy').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget); // Botão que acionou a modal
-            var id = button.data('id'); // Pegando o id do servico
-            var value = button.data('value'); // Pegando o nome
-
-            $(this).find('#msg').html("Deseja realmente eliminar o presente de '" + value + "'?");
-
-            var actionUrl = "{{ route('admin.gift.destroy', ':id') }}";
-            actionUrl = actionUrl.replace(':id', id);
-            $(this).find('#frm_destroy').attr('action', actionUrl);
-        });
     </script>
-    <script src="{{ asset('assets/js/private/persistence/destroy.js') }}"></script>
 @endsection
