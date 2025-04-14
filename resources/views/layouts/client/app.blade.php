@@ -484,7 +484,13 @@
         @endif
     </script>
 
-
+    @if ($errors->any())
+        <script>
+            @foreach ($errors->all() as $error)
+                showCustomToast(@json($error), 'error');
+            @endforeach
+        </script>
+    @endif
     @yield('script')
 </body>
 
