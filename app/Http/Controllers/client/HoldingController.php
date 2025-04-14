@@ -14,6 +14,18 @@ class HoldingController extends Controller
     public function holdings()
     {
         $user = User::findOrFail(Auth::id());
+        $today = now();
+
+        $products = $user->products;
+        foreach ($products as $product) {
+            $expiresAt = $product->pivot->expires_at;
+
+            if ($expiresAt && $today->greaterThanOrEqualTo($expiresAt)) {
+                $user->wallet->daily -= $product->income;
+                $user->wallet->save();
+                $user->products()->detach($product->id);
+            }
+        }
         $products = $user->products;
         return view('client.holdings', compact('products'));
     }
