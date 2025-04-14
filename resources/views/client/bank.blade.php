@@ -59,8 +59,8 @@
         </div>
     </div>
 
-    <!-- Toast Container -->
-    <div class="toast-container position-fixed top-0 end-0 p-3"></div>
+   {{--  <!-- Toast Container -->
+    <div class="toast-container position-fixed top-0 end-0 p-3"></div> --}}
 
     <style>
         :root {
@@ -95,7 +95,7 @@
 @endsection
 
 @section('script')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -152,7 +152,7 @@
             });
         });
 
-        // Function to show toast notifications
+        /* // Function to show toast notifications
         function showToast(message, type = 'success') {
             const toastHtml = `
         <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -178,6 +178,6 @@
 
         @if (session('error'))
             showToast("{{ session('error') }}", 'error');
-        @endif
+        @endif */
     </script>
 @endsection

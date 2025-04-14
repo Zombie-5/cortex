@@ -96,7 +96,7 @@
             right: 20px;
             z-index: 1050;
         }
-        
+
         .support-button {
             width: 48px;
             height: 48px;
@@ -173,43 +173,43 @@
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
-        
+
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             margin-bottom: 20px;
         }
-        
+
         .feature-card {
             background: white;
             border-radius: 12px;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             transition: transform 0.2s;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-2px);
         }
-        
+
         .feature-icon {
             font-size: 2rem;
             color: var(--primary-green);
             margin-bottom: 10px;
         }
-        
+
         .news-section {
             background: white;
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 70px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
-        
+
         .news-card {
             display: flex;
             align-items: center;
@@ -218,7 +218,7 @@
             background: var(--light-gray);
             margin-bottom: 10px;
         }
-        
+
         .news-stats {
             display: flex;
             gap: 20px;
@@ -232,7 +232,7 @@
             gap: 15px;
             margin-bottom: 20px;
         }
-        
+
         .action-button {
             border: none;
             color: white;
@@ -242,18 +242,18 @@
             justify-content: space-between;
             transition: opacity 0.2s;
         }
-        
+
         .action-button:hover {
             opacity: 0.9;
         }
-        
+
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 15px;
             padding: 15px;
         }
-        
+
         .menu-item {
             color: var(--text-primary);
             text-align: center;
@@ -261,18 +261,18 @@
             padding: 10px;
             transition: transform 0.2s;
         }
-        
+
         .menu-item:hover {
             transform: translateY(-2px);
             color: var(--primary-green);
         }
-        
+
         .menu-icon {
             font-size: 24px;
             margin-bottom: 8px;
             color: var(--primary-green);
         }
-        
+
         .verify-button {
             background: var(--primary-green);
             color: white;
@@ -280,21 +280,89 @@
             border-radius: 20px;
             padding: 8px 20px;
         }
-        
+
         .amount {
             font-size: 2rem;
             font-weight: bold;
             color: var(--text-primary);
         }
-        
+
         .label {
             font-size: 0.9rem;
             color: var(--text-secondary);
         }
     </style>
+    <style>
+        .custom-toast {
+            background-color: #333;
+            color: #fff;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            min-width: 180px;
+            display: flex;
+            flex-direction: column;
+            /* Muda de linha ao invés de linha-horizontal */
+            align-items: center;
+            /* Centraliza tudo */
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeSlideIn 0.3s ease;
+            gap: 0.5rem;
+            /* Espaço entre ícone e texto */
+            text-align: center;
+        }
+
+        .custom-toast .icon svg {
+            width: 24px;
+            height: 24px;
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .spin {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
 </head>
 
 <body class="pb-5">
+
+    <!-- Custom Centered Toast Container -->
+    <div class="custom-toast-container position-fixed top-50 start-50 translate-middle p-3 d-flex flex-column gap-2 align-items-center"
+        style="z-index: 1055;"></div>
+
+
 
     <!-- Navbar -->
     @include('layouts.client.header')
@@ -333,6 +401,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Scripts para Toast -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const supportButton = document.getElementById('supportButton');
@@ -360,6 +431,59 @@
             });
         });
     </script>
+
+    <script>
+        function showCustomToast(message, type = 'success') {
+            let svgIcon = '';
+
+            switch (type) {
+                case 'success':
+                    svgIcon =
+                        `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>`;
+                    break;
+                case 'error':
+                    svgIcon =
+                        `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>`;
+                    break;
+                case 'loading':
+                    svgIcon =
+                        `<svg class="spin" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-opacity="0.3"/><path d="M12 2a10 10 0 0 1 10 10" /></svg>`;
+                    break;
+                case 'custom':
+                    svgIcon =
+                        `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20l9-5-9-5-9 5 9 5z"/><path d="M12 12V4"/></svg>`;
+                    break;
+                default:
+                    svgIcon =
+                        `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>`;
+            }
+
+            const toastHtml = `
+            <div class="custom-toast">
+                <div class="icon">${svgIcon}</div>
+                <div>${message}</div>
+            </div>
+        `;
+
+            const container = document.querySelector('.custom-toast-container');
+            const toastElement = document.createElement('div');
+            toastElement.innerHTML = toastHtml;
+            container.appendChild(toastElement);
+
+            setTimeout(() => {
+                toastElement.remove();
+            }, 3000);
+        }
+
+        @if (session('success'))
+            showCustomToast(@json(session('success')), 'success');
+        @endif
+
+        @if (session('error'))
+            showCustomToast(@json(session('error')), 'error');
+        @endif
+    </script>
+
 
     @yield('script')
 </body>
