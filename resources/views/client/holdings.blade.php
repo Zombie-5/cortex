@@ -17,7 +17,7 @@
                         <div class="card-content">
                             <div class="price-section">
                                 <div class="price-amount">{{ $product['name'] }}</div>
-                                <button class="feed-button bg-danger">Investing</button>
+                                <button class="feed-button bg-danger">Investindo</button>
                             </div>
                             <div class="stats-grid">
                                 <div class="stat-item">
@@ -28,17 +28,17 @@
                                             {{ number_format(0, 2, ',', '.') }}
                                         @endif
                                     </div>
-                                    <div class="stat-label">Today</div>
+                                    <div class="stat-label">Renda de Hoje</div>
                                 </div>
                                 <div class="stat-item">
                                     <div class="stat-value">
                                         {{ $remainingDays }}
                                     </div>
-                                    <div class="stat-label">Remmaining</div>
+                                    <div class="stat-label">Dias Restantes</div>
                                 </div>
                                 <div class="stat-item">
                                     <div class="stat-value">{{ number_format($product->pivot->income_total, 2, ',', '.') }}</div>
-                                    <div class="stat-label">Total</div>
+                                    <div class="stat-label">Renda Total</div>
                                 </div>
                             </div>
                         </div>

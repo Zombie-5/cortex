@@ -9,7 +9,7 @@
                         <div class="card-image"></div>
                         <div class="card-content">
                             <div class="price-section">
-                                <div class="price-amount">{{ number_format($product['price'], 2, ',', '.') }} USDT</div>
+                                <div class="price-amount">{{ number_format($product['price'], 2, ',', '.') }} Kz</div>
 
                                 @php
                                     $buttonState = '';
@@ -17,13 +17,13 @@
                                     $disabled = false;
 
                                     if (!$product['is_active']) {
-                                        $buttonState = 'Coming Soon';
+                                        $buttonState = 'Brevemente';
                                         $disabled = true;
                                     } elseif ($product->hasUser()) {
-                                        $buttonState = 'Investing';
+                                        $buttonState = 'Investindo';
                                         $disabled = true;
                                     } else {
-                                        $buttonState = 'Invest';
+                                        $buttonState = 'Investir';
                                     }
                                 @endphp
 
@@ -37,16 +37,16 @@
                             <div class="stats-grid">
                                 <div class="stat-item">
                                     <div class="stat-value">{{ number_format($product['income'], 2, ',', '.') }}</div>
-                                    <div class="stat-label">Income</div>
+                                    <div class="stat-label">Renda Diária</div>
                                 </div>
                                 <div class="stat-item">
                                     <div class="stat-value">{{ $product['duration'] }}</div>
-                                    <div class="stat-label">Duration</div>
+                                    <div class="stat-label">Duração</div>
                                 </div>
                                 <div class="stat-item">
                                     <div class="stat-value">
                                         {{ number_format($product['income'] * $product['duration'], 2, ',', '.') }}</div>
-                                    <div class="stat-label">Total</div>
+                                    <div class="stat-label">Renda Total</div>
                                 </div>
                             </div>
                         </div>

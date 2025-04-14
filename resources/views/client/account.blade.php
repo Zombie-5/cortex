@@ -22,11 +22,11 @@
                 <div class="col-6">
                     <div class="amount" style="color: var(--primary-green);">
                         {{ number_format($user->wallet->today, 2, ',', '.') }}</div>
-                    <div class="label">Today Earnings</div>
+                    <div class="label">Renda de Hoje</div>
                 </div>
                 <div class="col-6 text-end">
                     <div class="amount">{{ number_format($user->wallet->daily, 2, ',', '.') }}</div>
-                    <div class="label">Daily Earnings</div>
+                    <div class="label">Renda Diária</div>
                 </div>
             </div>
         </div>
@@ -36,13 +36,13 @@
             <div class="row">
                 <div class="col-6">
                     <div class="amount">{{ number_format(2823.6, 2, ',', '.') }}</div>
-                    <div class="label">Total Points</div>
+                    <div class="label">CashBacks</div>
                 </div>
 
                 <div class="col-6 text-end">
                     <div class="amount" style="color: var(--primary-green);">
                         {{ number_format($user->wallet->money, 2, ',', '.') }}</div>
-                    <div class="label">My Balance</div>
+                    <div class="label">Meu saldo</div>
                 </div>
             </div>
         </div>
@@ -50,11 +50,11 @@
         <!-- Action Buttons -->
         <div class="action-buttons">
             <a href="{{ route('client.deposit') }}" class="action-button text-decoration-none">
-                <span>Deposit</span>
+                <span>Depositar</span>
                 <i class="bi bi-arrow-right"></i>
             </a>
             <a href="{{ route('client.withdraw') }}" class="action-button text-decoration-none">
-                <span>Withdraw</span>
+                <span>Retirar</span>
                 <i class="bi bi-arrow-right"></i>
             </a>
         </div>
@@ -64,33 +64,33 @@
             
             <a href="{{ route('client.team') }}" class="menu-item">
                 <i class="bi bi-people menu-icon d-block"></i>
-                <span>Team</span>
+                <span>Equipe</span>
             </a>
             <a href="{{ route('client.record') }}" class="menu-item">
                 <i class="bi bi-receipt menu-icon d-block"></i>
-                <span>Records</span>
+                <span>Registros</span>
             </a>
             <a href="{{ route('client.bank') }}" class="menu-item">
                 <i class="bi bi-wallet2 menu-icon d-block"></i>
-                <span>Bank</span>
+                <span>Banco</span>
             </a>
             <a href="{{ route('client.gift') }}" class="menu-item">
                 <i class="bi bi-gift menu-icon d-block"></i>
-                <span>Gifts</span>
+                <span>Presentes</span>
             </a>
             <a href="{{ route('client.change-passord') }}" class="menu-item">
                 <i class="bi bi-lock menu-icon d-block"></i>
-                <span>Password</span>
+                <span>Senha</span>
             </a>
             <a href="#" class="menu-item">
-                <i class="bi bi-download menu-icon d-block"></i>
-                <span>Download</span>
+                <i class="bi bi-info-circle menu-icon d-block"></i>
+                <span>Nós</span>
             </a>
         </div>
 
         <form action="{{ route('auth.signOut') }}" method="POST">
             @csrf
-            <button class="log-out" type="submit">Log Out</button>
+            <button class="log-out" type="submit">Terminar Sessão</button>
         </form>
     </div>
 @endsection

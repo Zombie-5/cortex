@@ -42,25 +42,25 @@
         <div class="feature-grid">
             <a class="feature-card text-dark text-decoration-none" href="{{ route('client.market') }}">
                 <i class="bi bi-graph-up feature-icon"></i>
-                <h5>Markets</h5>
+                <h5>Mercado</h5>
             </a>
             <div class="feature-card">
                 <i class="bi bi-download feature-icon"></i>
-                <h5>Download</h5>
+                <h5>Sobre Nós</h5>
             </div>
             <button id="copyLinkButton" class="feature-card border-0" onclick="copyToClipboard('{{ $inviteLink }}')">
                 <i class="bi bi-people feature-icon"></i>
-                <h5>Invite</h5>
+                <h5>Convidar</h5>
             </button>
             <a class="feature-card text-dark text-decoration-none" href="{{ route('client.holdings') }}">
                 <i class="bi bi-coin feature-icon"></i>
-                <h5>Holdings</h5>
+                <h5>Ativos</h5>
             </a>
         </div>
 
         <!-- News Section -->
         <div class="news-section">
-            <h4 class="mb-4">Latest Updates</h4>
+            <h4 class="mb-4">Nóticias</h4>
             <div class="news-card">
                 <div class="flex-grow-1">
                     <h6 class="mb-2">Market Analysis</h6>

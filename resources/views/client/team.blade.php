@@ -20,13 +20,13 @@
                     </div>
                     <div class="col-6">
                         <div class="d-flex flex-column">
-                            <span class="text-muted mb-2">Income</span>
+                            <span class="text-muted mb-2">Renda</span>
                             <span class="h3 mb-0">20721.8</span>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="d-flex flex-column">
-                            <span class="text-muted mb-2">Withdraw</span>
+                            <span class="text-muted mb-2">Retiradas</span>
                             <span class="h3 mb-0">49723</span>
                         </div>
                     </div>
@@ -42,13 +42,13 @@
                     <li class="nav-item flex-1" role="presentation">
                         <button class="nav-link active w-100" id="nivel1-tab" data-bs-toggle="tab" data-bs-target="#nivel1"
                             type="button" role="tab">
-                            Level 1
+                            Nível 1
                         </button>
                     </li>
                     <li class="nav-item flex-1" role="presentation">
                         <button class="nav-link w-100" id="nivel2-tab" data-bs-toggle="tab" data-bs-target="#nivel2"
                             type="button" role="tab">
-                            Level 2
+                            Nível 2
                         </button>
                     </li>
                 </ul>
