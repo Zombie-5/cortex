@@ -20,11 +20,12 @@ class DepositController extends Controller
     {
         // Validação de entrada
         $request->validate([
-            'custom-amount' => 'required|numeric|min:10000',
+            'custom-amount' => 'required|numeric|min:10000 |max:1000000000',
         ], [
             'custom-amount.required' => 'O montante é obrigatório.',
             'custom-amount.numeric' => 'O montante deve ser númerico.',
-            'custom-amount.min' => 'O valor mínimo permitido para recarga é 5.000 kz',
+            'custom-amount.min' => 'O valor mínimo permitido para recarga é 10.000 kz',
+            'custom-amount.max' => 'O valor máximo permitido para recarga é 1.000.000.000 kz',
         ]);
 
         $depositAmount = $request->input('custom-amount');

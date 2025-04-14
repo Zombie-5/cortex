@@ -14,7 +14,9 @@ class MarketController extends Controller
 
     public function market()
     {
-        $products = Product::orderBy('id', 'desc')->get();
+        $products = Product::where('is_displayed', 1)
+                   ->orderBy('id', 'desc')
+                   ->get();
         return view('client.market', compact('products'));
     }
 

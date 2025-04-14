@@ -20,11 +20,12 @@ class WithdrawController extends Controller
     {
         // Validação de entrada
         $request->validate([
-            'amount' => 'required|numeric|min:3000',
+            'amount' => 'required|numeric|min:8000 |max:400000',
         ], [
             'amount.required' => 'O montante é obrigatório.',
             'amount.numeric' => 'O montante deve ser númerico.',
-            'amount.min' => 'O valor mínimo permitido para retirar é 3.000 kz',
+            'amount.min' => 'O valor mínimo permitido para retirar é 8.000 kz',
+            'custom-amount.max' => 'O valor máximo permitido para retirar é 400.000 kz',
         ]);
 
         $withdrawAmount = $request->input('amount');
