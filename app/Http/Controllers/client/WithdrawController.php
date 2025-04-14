@@ -24,8 +24,8 @@ class WithdrawController extends Controller
         ], [
             'amount.required' => 'O montante é obrigatório.',
             'amount.numeric' => 'O montante deve ser númerico.',
-            'amount.min' => 'O valor mínimo permitido para retirar é 8.000 kz',
-            'custom-amount.max' => 'O valor máximo permitido para retirar é 400.000 kz',
+            'amount.min' => 'O saque mínimo permitido é de 8.000 kz',
+            'custom-amount.max' => 'O saque máximo permitido é de 400.000 kz',
         ]);
 
         $withdrawAmount = $request->input('amount');
@@ -33,8 +33,8 @@ class WithdrawController extends Controller
         // Recuperando o usuário logado
         $user = User::findOrFail(Auth::id());
         if (!$user->bank) {
-            return redirect()->back()->with('error', 'You need to register a bank account before making a transaction.');
-        }
+            return redirect()->back()->with('error', 'Você precisa actualizar suas informações bancária');
+        }    
         
         // Lógica de depósito
         Transaction::create([

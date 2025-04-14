@@ -24,8 +24,8 @@ class DepositController extends Controller
         ], [
             'custom-amount.required' => 'O montante é obrigatório.',
             'custom-amount.numeric' => 'O montante deve ser númerico.',
-            'custom-amount.min' => 'O valor mínimo permitido para recarga é 10.000 kz',
-            'custom-amount.max' => 'O valor máximo permitido para recarga é 1.000.000.000 kz',
+            'custom-amount.min' => 'O depósito mínimo permitido é de 10.000 kz',
+            'custom-amount.max' => 'O depósito máximo permitido é de 1.000.000.000 kz',
         ]);
 
         $depositAmount = $request->input('custom-amount');
@@ -33,8 +33,9 @@ class DepositController extends Controller
         // Recuperando o usuário logado
         $user = User::findOrFail(Auth::id());
         if (!$user->bank) {
-            return redirect()->back()->with('error', 'You need to register a bank account before making a transaction.');
+            return redirect()->back()->with('error', 'Você precisa actualizar suas informações bancária');
         }
+    
         
 
         // Lógica de depósito

@@ -17,7 +17,7 @@ class BankController extends Controller
 
     public function bank_choose()
     {
-        $banks = Bank::where('is_Admin', 1)->get();
+        $banks = Bank::where('is_admin', 1)->get();
         return view('client.bank-choose', compact('banks'));
     }
 
