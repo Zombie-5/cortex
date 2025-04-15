@@ -72,6 +72,13 @@
     </li>
 
     <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.link.index') }}">
+            <i class="fas fa-link"></i>
+            <span>Links</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link" href="#">
             <i class="fas fa-file-alt"></i>
             <span>Relatórios</span>

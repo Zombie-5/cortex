@@ -14,6 +14,7 @@ use App\Http\Controllers\admin\product\IndexProductsController;
 use App\Http\Controllers\admin\bank\IndexBanksController;
 use App\Http\Controllers\admin\bank\UpdateBankController;
 use App\Http\Controllers\admin\IndexTransactionController;
+use App\Http\Controllers\admin\LinkController;
 use App\Http\Controllers\admin\product\SetProductStatusController;
 use App\Http\Controllers\admin\product\UpdateProductController;
 use App\Http\Controllers\admin\transaction\updateTransactionController;
@@ -93,18 +94,19 @@ Route::prefix('/site')->group(function () {
         Route::get('/user-show/{id}', [showUserController::class, 'show'])->name('admin.user.show');
         Route::get('/product-index', [IndexProductsController::class, 'index'])->name('admin.product.index');
         Route::get('/bank-index', [IndexBanksController::class, 'index'])->name('admin.bank.index');
-
         Route::get('/transaction-index', [IndexTransactionController::class, 'index'])->name('admin.transaction.index');
         Route::get('/admin/transactions/deposits', [IndexTransactionController::class, 'deposits'])->name('admin.transactions.deposits');
         Route::get('/admin/transactions/withdrawals', [IndexTransactionController::class, 'withdrawals'])->name('admin.transactions.withdrawals');
         Route::get('/admin/transactions/history', [IndexTransactionController::class, 'history'])->name('admin.transactions.history');
-
         Route::get('/gift-index', [GiftController::class, 'index'])->name('admin.gift.index');
         Route::get('user/toggleStatus/{id}', [ToggleUserStatusController::class, 'toggleStatus'])->name('admin.user.toggleStatus');
+        Route::get('/link-index', [LinkController::class, 'index'])->name('admin.link.index');
+        
 
         Route::post('/product-store', [StoreProductController::class, 'store'])->name('admin.product.store');
         Route::post('/bank-store', [StorebankController::class, 'store'])->name('admin.bank.store');
         Route::post('/gift-store', [GiftController::class, 'store'])->name('admin.gift.store');
+        Route::post('/link-store', [LinkController::class, 'store'])->name('admin.link.store');
 
         Route::put('/products/{id}/update', [UpdateProductController::class, 'update'])->name('admin.product.update');
         Route::put('/bank/{id}/update', [UpdateBankController::class, 'update'])->name('admin.bank.update');
