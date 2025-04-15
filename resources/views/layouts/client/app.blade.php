@@ -390,15 +390,17 @@
                     <i class="bi bi-telegram"></i>
                     <span>Telegram</span>
                 </a> --}}
-                <a href="https://wa.me/yourphone" class="support-option whatsapp">
+                <a href="{{ $links->link_manager ?? '#' }}" class="support-option whatsapp" target="_blank">
                     <i class="bi bi-whatsapp"></i>
                     <span>Gerente</span>
                 </a>
-                <a href="https://wa.me/yourphone" class="support-option whatsapp">
+                
+                <a href="{{ $links->link_customer_service ?? '#' }}" class="support-option whatsapp" target="_blank">
                     <i class="bi bi-whatsapp"></i>
                     <span>Ap.Cliente</span>
                 </a>
-                <a href="https://wa.me/yourphone" class="support-option whatsapp">
+                
+                <a href="{{ $links->link_group ?? '#' }}" class="support-option whatsapp" target="_blank">
                     <i class="bi bi-whatsapp"></i>
                     <span>Grupo</span>
                 </a>

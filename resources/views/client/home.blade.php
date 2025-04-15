@@ -85,13 +85,13 @@
                     <button type="button" class="btn-close" onclick="closeModal()" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <a href="https://wa.me/?text={{ urlencode($inviteLink) }}" target="_blank" class="btn btn-success form-control mb-3">
+                    <a href={{$links->link_manager ?? '#'}} target="_blank" class="btn btn-success form-control mb-3">
                         <i class="bi bi-whatsapp"></i> Fale com o Gerente
                     </a>
-                    <a href="https://wa.me/?text={{ urlencode($inviteLink) }}" target="_blank" class="btn btn-success form-control mb-3">
+                    <a href={{$links->link_customer_service ?? '#'}} target="_blank" class="btn btn-success form-control mb-3">
                         <i class="bi bi-whatsapp"></i> Fale com o apoio ao ciente
                     </a>
-                    <a href="https://wa.me/?text={{ urlencode($inviteLink) }}" target="_blank" class="btn btn-success form-control mb-3">
+                    <a href={{$links->link_group ?? '#'}} target="_blank" class="btn btn-success form-control mb-3">
                         <i class="bi bi-whatsapp"></i> Faça parte do grupo
                     </a>
                 </div>
