@@ -386,18 +386,26 @@
         <!-- Support Options Tooltip -->
         <div class="support-tooltip-content" id="supportTooltip">
             <div class="support-options">
-                <a href="https://t.me/yourhandle" class="support-option telegram">
+                {{-- <a href="https://t.me/yourhandle" class="support-option telegram">
                     <i class="bi bi-telegram"></i>
                     <span>Telegram</span>
+                </a> --}}
+                <a href="https://wa.me/yourphone" class="support-option whatsapp">
+                    <i class="bi bi-whatsapp"></i>
+                    <span>Gerente</span>
                 </a>
                 <a href="https://wa.me/yourphone" class="support-option whatsapp">
                     <i class="bi bi-whatsapp"></i>
-                    <span>WhatsApp</span>
+                    <span>Ap.Cliente</span>
                 </a>
-                <a href="https://m.me/yourpage" class="support-option facebook">
+                <a href="https://wa.me/yourphone" class="support-option whatsapp">
+                    <i class="bi bi-whatsapp"></i>
+                    <span>Grupo</span>
+                </a>
+                {{-- <a href="https://m.me/yourpage" class="support-option facebook">
                     <i class="bi bi-facebook"></i>
                     <span>Facebook</span>
-                </a>
+                </a> --}}
             </div>
         </div>
     </div>

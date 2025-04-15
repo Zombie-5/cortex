@@ -85,17 +85,18 @@
                     <button type="button" class="btn-close" onclick="closeModal()" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <p class="mb-3">Compartilhe seu link de convite com amigos e ganhe recompensas!</p>
-                    <input type="text" class="form-control mb-3 text-center" id="inviteLinkInput"
-                        value="{{ $inviteLink }}" readonly>
-                    <div class="d-flex justify-content-center gap-2">
-                        <button onclick="copyToClipboard('{{ $inviteLink }}')" class="btn btn-outline-primary">
-                            <i class="bi bi-clipboard"></i> Copiar Link
-                        </button>
-                        <a href="https://wa.me/?text={{ urlencode($inviteLink) }}" target="_blank" class="btn btn-success">
-                            <i class="bi bi-whatsapp"></i> WhatsApp
-                        </a>
-                    </div>
+                    <a href="https://wa.me/?text={{ urlencode($inviteLink) }}" target="_blank" class="btn btn-success form-control mb-3">
+                        <i class="bi bi-whatsapp"></i> Fale com o Gerente
+                    </a>
+                    <a href="https://wa.me/?text={{ urlencode($inviteLink) }}" target="_blank" class="btn btn-success form-control mb-3">
+                        <i class="bi bi-whatsapp"></i> Fale com o apoio ao ciente
+                    </a>
+                    <a href="https://wa.me/?text={{ urlencode($inviteLink) }}" target="_blank" class="btn btn-success form-control mb-3">
+                        <i class="bi bi-whatsapp"></i> Faça parte do grupo
+                    </a>
+                    <button onclick="copyToClipboard('{{ $inviteLink }}')" class="btn btn-outline-primary form-control mb-3">
+                        <i class="bi bi-clipboard"></i> Copiar o seu Link de convite
+                    </button>
                 </div>
             </div>
         </div>
