@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             if (Auth::check()) {
                 $user = User::findOrFail(Auth::id());
                 $links = Link::where('manager_id', $user->manager_id)->first();
-                $view->with('userLinks', $links);
+                $view->with('links', $links);
             }
         });
     }
