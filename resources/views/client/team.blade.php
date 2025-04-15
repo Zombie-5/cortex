@@ -34,6 +34,10 @@
             </div>
         </div>
 
+        <button onclick="copyToClipboard('{{ $inviteLink }}')" class="btn btn-outline-success form-control mb-3">
+            <i class="bi bi-clipboard"></i> Copiar o seu Link de convite
+        </button>
+
         <!-- Level Tabs Card -->
         <div class="card bg-white shadow-sm">
             <div class="card-body p-0">
@@ -186,3 +190,28 @@
         }
     </style>
 @endsection
+
+@section('script')
+    <script>
+        function copyToClipboard(link) {
+            navigator.clipboard.writeText(link);
+            toast("Link copiado para a área de transferência!");
+        }
+
+        function toast(message) {
+            const alert = document.createElement('div');
+            alert.className =
+                'toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-4 show';
+            alert.role = 'alert';
+            alert.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">${message}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            `;
+            document.body.appendChild(alert);
+            setTimeout(() => alert.remove(), 3000);
+        }
+    </script>
+@endsection
+
