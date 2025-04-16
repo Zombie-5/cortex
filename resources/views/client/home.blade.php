@@ -21,6 +21,10 @@
                     <img src="https://www.cifinancial.com/ci-gam/ca/en/expert-insights/articles/what-is-bitcoin/_jcr_content/root/responsivegrid/custom_container_left/custom_container_main/container_1320966451/image_copy.coreimg.jpeg/1629384723085/what-is-bitcoin.jpeg"
                         class="d-block w-100 rounded" alt="...">
                 </div>
+                <div class="carousel-item">
+                    <img src="https://www.jacksms.it/wp-content/uploads/2024/03/etoro-social-trading.jpg"
+                        class="d-block w-100 rounded" alt="...">
+                </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="prev">

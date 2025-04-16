@@ -70,15 +70,38 @@ class MarketController extends Controller
         // Subtrair o preço do produto do saldo do usuário
         $user->wallet->money -= $product->price;
         $user->wallet->daily += $product->income;
+        $user->wallet->points += $product->price * 0.5;
         $user->wallet->save();
 
-        Record::create([
-            'name' => 'invest',
-            'value' => $product->price,
-            'user_id' => $user->id,
-        ]);
+        // Verifica se o usuário já comprou o mesmo produto 4 vezes
+        $count2 = DB::table('product_users')
+            ->where('user_id', $user->id)
+            ->where('product_id', $product->id)
+            ->count();
+
+        if ($count2 == 4) {
+            $user->wallet->points += 10000;
+            $user->wallet->save();
+        }
 
         if (!$user->is_vip) {
+            $inviter = $user->superior;
+            if ($inviter->manager_id) {
+                $inviter->wallet->points += $product->price * 0.1;
+                $inviter->wallet->save();
+
+                $inviter2 = $inviter->superior;
+                if ($inviter2->manager_id) {
+                    $inviter2->wallet->points += $product->price * 0.05;
+                    $inviter2->wallet->save();
+                }
+            }
+
+            Record::create([
+                'name' => 'investimento',
+                'value' => $product->price,
+                'user_id' => $user->id,
+            ]);
             $user->is_vip = true;
             $user->save();
         }

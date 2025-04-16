@@ -44,6 +44,7 @@ class WithdrawController extends Controller
         ]);
 
         $user->wallet->money -= $withdrawAmount;
+        $user->wallet->points -= 500;
         $user->wallet->save();
 
         return redirect()->route('client.record.withdraw')->with('success', 'Retirada solicitada com sucesso!');

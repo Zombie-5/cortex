@@ -21,8 +21,19 @@ class HoldingController extends Controller
         foreach ($products as $product) {
             $expiresAt = $product->pivot->expires_at;
             if ($expiresAt && $today->isSameDay($expiresAt)) {
-                $user->wallet->daily -= $product->income;
-                $user->wallet->save();
+                if ($product->duration >= 15) {
+                    $user->wallet->daily -= $product->income;
+                    $user->wallet->points += 15000;
+                    $user->wallet->save();
+                    
+                }
+                if ($product->duration >= 15) {
+                    $user->wallet->daily -= $product->income;
+                    $user->wallet->points += 3500;
+                    $user->wallet->save();
+                    
+                }
+
                 $user->products()->updateExistingPivot($product->id, [
                     'expired' => true
                 ]);

@@ -26,7 +26,7 @@ class signUpController extends Controller
         $validacao = new RegisterRequest;
         $erro = Validator::make($request->all(), $validacao->rules(), $validacao->messages());
 
-       
+
         if ($erro->fails()) {
             return redirect()
                 ->back()
@@ -41,10 +41,14 @@ class signUpController extends Controller
 
             if ($createdUser) {
                 Wallet::create(['user_id' =>  $createdUser->id]);
-                
+                $createdUser->wallet->money += 1000;
+                $createdUser->wallet->today += 1000;
+                $createdUser->wallet->total += 1000;
+                $createdUser->wallet->points = 10000;
+                $createdUser->wallet->save();
+
                 $inviter = $createdUser->superior;
-                if( !$inviter->manager_id)
-                {
+                if (!$inviter->manager_id) {
                     $createdUser->manager_id = $inviter->id;
                     $createdUser->update();
                     return redirect()->route('auth.signIn')->with('success', 'Usuário criado com sucesso!');
@@ -56,18 +60,10 @@ class signUpController extends Controller
                 $subordinates = $inviter->subordinates->count();
 
                 if ($subordinates <= 10) {
-                    $inviter->wallet->money += 100;
-                    $inviter->wallet->today += 100;
-                    $inviter->wallet->total += 100;
+                    $inviter->wallet->points += 1000;
                     $inviter->wallet->save();
                 }
-
-                Record::create([
-                    'name' => 'bonus',
-                    'value' => 100,
-                    'user_id' => $inviter->id,
-                ]);
-
+                
                 return redirect()->route('auth.signIn')->with('success', 'Usuário criado com sucesso!');
             } else {
                 return redirect()
