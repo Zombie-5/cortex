@@ -79,25 +79,32 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-file-alt"></i>
-            <span>Relatórios</span>
+        <a class="nav-link" href="{{ route('admin.notices.index') }}">
+            <i class="fa fa-newspaper"></i>
+            <span>Noticias</span>
+        </a>
+    </li>
+
+    {{-- <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.link.index') }}">
+            <i class="fas fa-images"></i>
+            <span>Carrossel</span>
         </a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Configurações</span>
+            <i class="fas fa-file-alt"></i>
+            <span>Relatórios</span>
         </a>
-    </li>
+    </li> --}}
 
-    <!-- Divider -->
+   {{--  <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
+    </div> --}}
 </ul>
 <!-- End of Sidebar -->

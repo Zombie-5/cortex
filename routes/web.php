@@ -15,6 +15,10 @@ use App\Http\Controllers\admin\bank\IndexBanksController;
 use App\Http\Controllers\admin\bank\UpdateBankController;
 use App\Http\Controllers\admin\IndexTransactionController;
 use App\Http\Controllers\admin\LinkController;
+use App\Http\Controllers\admin\notice\DestroyNoticesController;
+use App\Http\Controllers\admin\notice\IndexNoticesController;
+use App\Http\Controllers\admin\notice\StoreNoticesController;
+use App\Http\Controllers\admin\notice\UpdateNoticesController;
 use App\Http\Controllers\admin\product\SetProductStatusController;
 use App\Http\Controllers\admin\product\UpdateProductController;
 use App\Http\Controllers\admin\transaction\updateTransactionController;
@@ -101,22 +105,25 @@ Route::prefix('/site')->group(function () {
         Route::get('/gift-index', [GiftController::class, 'index'])->name('admin.gift.index');
         Route::get('user/toggleStatus/{id}', [ToggleUserStatusController::class, 'toggleStatus'])->name('admin.user.toggleStatus');
         Route::get('/link-index', [LinkController::class, 'index'])->name('admin.link.index');
+        Route::get('/notices-index', [IndexNoticesController::class, 'index'])->name('admin.notices.index');
         
 
         Route::post('/product-store', [StoreProductController::class, 'store'])->name('admin.product.store');
         Route::post('/bank-store', [StorebankController::class, 'store'])->name('admin.bank.store');
         Route::post('/gift-store', [GiftController::class, 'store'])->name('admin.gift.store');
-        Route::post('/link-store', [LinkController::class, 'store'])->name('admin.link.store');
+        Route::post('/notices-store', [StoreNoticesController::class, 'store'])->name('admin.notices.store');
 
         Route::put('/products/{id}/update', [UpdateProductController::class, 'update'])->name('admin.product.update');
         Route::put('/bank/{id}/update', [UpdateBankController::class, 'update'])->name('admin.bank.update');
         Route::put('admin/user/{user}/update-wallet', [specialTransactionController::class, 'updateWallet'])->name('admin.user.updateWallet');
         Route::patch('/product/{product}/set-is-active', [SetProductStatusController::class, 'updateIsActive'])->name('admin.product.active');
         Route::patch('/product/{product}/set-is-displayed', [SetProductStatusController::class, 'updateIsDisplayed'])->name('admin.product.displayed');
+        Route::patch('/notices/{notice}/set-is-active', [UpdateNoticesController::class, 'update'])->name('admin.notices.active');
 
         Route::delete('/product/{id}/delete', [DestroyProductController::class, 'destroy'])->name('admin.product.destroy');
         Route::delete('/bank/{id}/delete', [DestroybankController::class, 'destroy'])->name('admin.bank.destroy');
         Route::delete('/gift/{id}/delete', [GiftController::class, 'destroy'])->name('admin.gift.destroy');
+        Route::delete('/notices/{id}/delete', [DestroyNoticesController::class, 'destroy'])->name('admin.notices.destroy');
 
         Route::patch('/transactions/status/{id}', [updateTransactionController::class, 'updateStatus'])->name('admin.transaction.status');
     });
