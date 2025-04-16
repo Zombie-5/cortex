@@ -16,25 +16,29 @@ class HoldingController extends Controller
         $user = User::findOrFail(Auth::id());
         $today = now();
 
-        $products = $user->products;
+        $products = $user->products()->wherePivot('expired', false)->get();
+
         foreach ($products as $product) {
             $expiresAt = $product->pivot->expires_at;
-
-            if ($expiresAt && $today->greaterThanOrEqualTo($expiresAt)) {
+            if ($expiresAt && $today->isSameDay($expiresAt)) {
                 $user->wallet->daily -= $product->income;
                 $user->wallet->save();
-                $user->products()->detach($product->id);
+                $user->products()->updateExistingPivot($product->id, [
+                    'expired' => true
+                ]);
             }
         }
-        $products = $user->products;
+        $products = $user->products()->wherePivot('expired', false)->get();
         return view('client.holdings', compact('products'));
     }
+
 
     public function claim()
     {
         // Obter o user e o  produto
         $user = User::findOrFail(Auth::id());
-        $products = $user->products;
+        $today = now();
+        $products = $user->products()->wherePivot('expired', false)->get();
 
         // Iterar pelas máquinas para calcular o total, atualizar incomeTotal e decrementar remainingTotal
         foreach ($products as $product) {
@@ -47,17 +51,35 @@ class HoldingController extends Controller
             // Atualizar o saldo do usuário
             $user->wallet->money += $product->income;
             $user->wallet->today += $product->income;
+            $user->wallet->total += $product->income;
             $user->wallet->save();
 
-            /* $superior1 = $user->superior;
-            $superior1->wallet->money += $product->income;
-            $superior1->wallet->today += $product->income;
-            $superior1->wallet->save(); // O save deve funcionar agora se o User for um modelo Eloquent
-            Record::create([
-                'name' => 'income',
-                'value' => $product->income * 0.1,
-                'user_id' => $superior1->id,
-            ]); */
+            if ($user->user_id >= 5100) {
+
+                $superior1 = $user->superior;
+                $superior1->wallet->money += $product->income * 0.02;
+                $superior1->wallet->today += $product->income * 0.02;
+                $superior1->wallet->total += $product->income * 0.02;
+                $superior1->wallet->save();
+                Record::create([
+                    'name' => 'Comissão',
+                    'value' => $product->income * 0.02,
+                    'user_id' => $superior1->id,
+                ]);
+
+                $superior2 =  $superior1->superior;
+                if ($superior2) {
+                    $superior2->wallet->money += $product->income * 0.01;
+                    $superior2->wallet->today += $product->income * 0.01;
+                    $superior2->wallet->total += $product->income * 0.01;
+                    $superior2->wallet->save();
+                    Record::create([
+                        'name' => 'Comissão',
+                        'value' => $product->income * 0.01,
+                        'user_id' => $superior2->id,
+                    ]);
+                }
+            }
 
             $user->products()->updateExistingPivot($product->id, [
                 'income_total' => $product->pivot->income_total + $product->income,
@@ -65,7 +87,7 @@ class HoldingController extends Controller
             ]);
 
             Record::create([
-                'name' => 'income',
+                'name' => 'Renda',
                 'value' => $product->income,
                 'user_id' => $user->id,
             ]);

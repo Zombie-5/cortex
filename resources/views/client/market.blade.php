@@ -8,6 +8,12 @@
                     <div class="animal-card">
                         <div class="card-image"></div>
                         <div class="card-content">
+                            <div class="name-section">
+                                <div class="name-amount">{{ $product['name'] }}</div>
+                                <div>
+                                    {{ $product['purchase_count'] }} / 4
+                                </div>
+                            </div>
                             <div class="price-section">
                                 <div class="price-amount">{{ number_format($product['price'], 2, ',', '.') }} Kz</div>
 
@@ -18,10 +24,8 @@
 
                                     if (!$product['is_active']) {
                                         $buttonState = 'Brevemente';
-                                        $disabled = true;
                                     } elseif ($product->hasUser()) {
                                         $buttonState = 'Investindo';
-                                        $disabled = true;
                                     } else {
                                         $buttonState = 'Investir';
                                     }
@@ -137,6 +141,19 @@
 
     .price-amount {
         font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+
+    .name-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .name-amount {
+        font-size: 1rem;
         font-weight: 500;
         color: var(--text-primary);
     }

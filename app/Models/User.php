@@ -96,7 +96,10 @@ class User extends Authenticatable
 
     public function hasProduct($productId)
     {
-        return $this->products()->where('product_users.product_id', $productId)->exists();
+        return $this->products()
+            ->wherePivot('product_id', $productId)
+            ->wherePivot('expired', false)
+            ->exists();
     }
 
     /**

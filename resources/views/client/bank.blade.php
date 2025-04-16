@@ -111,7 +111,7 @@
                     },
                     iban: {
                         required: true,
-                        minlength: 15
+                        minlength: 21
                     },
                 },
                 messages: {
@@ -124,7 +124,7 @@
                     },
                     iban: {
                         required: "Por favor, insira o iban / endereço",
-                        minlength: "O Iban / endereço deve ter pelo menos 15 caracteres"
+                        minlength: "O Iban / endereço deve ter pelo menos 21 caracteres"
                     },
                 },
                 errorElement: 'span',

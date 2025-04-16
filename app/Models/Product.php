@@ -27,6 +27,9 @@ class Product extends Model
 
     public function hasUser()
     {
-        return $this->users()->where('product_users.user_id', Auth::id())->exists();
+        return $this->users()
+            ->where('product_users.user_id', Auth::id())
+            ->wherePivot('expired', false)
+            ->exists();
     }
 }

@@ -57,7 +57,7 @@
 
                 <!-- Information Text -->
                 <div class="small text-muted">
-                    <p class="mb-2">1: O saque mínimo é 3300KZ e a taxa de saque é de 10%</p>
+                    <p class="mb-2">1: O saque mínimo é 3000KZ e a taxa de saque é de 15%</p>
                     <p class="mb-0">2: Horário de solicitação de saque: 9h às 21h (o saque pode ser solicitado de segunda a domingo). Após uma solicitação de saque, os fundos chegarão à conta em 24 horas.</p>
                 </div>
             </form>
