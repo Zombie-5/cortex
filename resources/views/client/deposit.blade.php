@@ -80,14 +80,13 @@
 
                     <!-- Instructions -->
                     <div class="small text-muted">
-                        <p class="mb-2">O valor mínimo do depósito é de 10.000KZ (horário de carregamento: 9h00 às 21h00)
+                        <p class="mb-2">O valor mínimo do depósito é de 10.000KZ (horário de carregamento: 10h00 às 22h00)
                         </p>
                         <p class="mb-2">Processo de recarga:</p>
-                        <p class="mb-2">1.° Selecione o mesmo banco para transferir fundos. Os fundos chegarão à conta em
-                            10 minutos. Se não utilizar o mesmo banco para transferência, os fundos não chegarão à sua conta
-                            a tempo.</p>
-                        <p class="mb-2">2. Copie o nome do banco, o nome, o número da conta e o valor.</p>
-                        <p class="mb-0">3. O valor da transferência deve ser consistente</p>
+                        <p class="mb-2">1.º Selecione o mesmo banco para transferir fundos. Os fundos chegarão à conta em 10 minutos. Se não
+                            utilizar o mesmo banco para transferência, os fundos não chegarão à sua conta a tempo.</p>
+                        <p class="mb-2">2. Copie o nome do banco, o nome do beneficiário, o número da conta e o valor.</p>
+                        <p class="mb-2">3. O valor da transferência deve ser consistente ao valor solicitado</p>
                     </div>
                 </form>
             </div>

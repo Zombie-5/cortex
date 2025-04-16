@@ -102,6 +102,15 @@ class User extends Authenticatable
             ->exists();
     }
 
+    public function hasActiveProduct()
+    {
+        return $this->products()
+            ->wherePivot('expired', false)
+            ->wherePivot('expires_at', '>', now())
+            ->exists();
+    }
+
+
     /**
      * Relacionamento auto-referencial (um usuário pode ter um superior).
      */

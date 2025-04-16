@@ -17,7 +17,7 @@ class MarketController extends Controller
     {
         $user = User::findOrFail(Auth::id());
         $products = Product::where('is_displayed', 1)
-            ->orderBy('id', 'desc')
+            ->orderBy('price', 'asc')
             ->get();
 
         // Adiciona o número de compras de cada produto pelo usuário atual
@@ -40,6 +40,10 @@ class MarketController extends Controller
 
         if ($user->wallet->money < $product->price) {
             return back()->withErrors(['Saldo Insuficiente.']);
+        }
+
+        if ($user->hasActiveProduct()) {
+            return back()->withErrors(['Você já está investindo']);
         }
 
         if ($user->hasProduct($productId)) {
