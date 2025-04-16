@@ -14,10 +14,6 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="https://haberf.com/wp-content/uploads/2024/10/okxtr-kapak-100-774x388.webp"
-                        class="d-block w-100 rounded" alt="...">
-                </div>
-                <div class="carousel-item">
                     <img src="https://images.prismic.io/contrary-research/65834bbe531ac2845a26d51b_4.png?auto=format,compress"
                         class="d-block w-100 rounded" alt="...">
                 </div>
@@ -60,19 +56,19 @@
 
         <!-- News Section -->
         <div class="news-section">
-            <h4 class="mb-4">Nóticias</h4>
-            <div class="news-card">
-                <div class="flex-grow-1">
-                    <h6 class="mb-2">Market Analysis</h6>
-                    <div class="news-stats">
-                        <span><i class="bi bi-eye me-1"></i>5117</span>
-                        <span><i class="bi bi-clock me-1"></i>8191</span>
+            <h4 class="mb-4">Notícias</h4>
+
+            @forelse($notices as $notice)
+                <div class="news-card d-flex align-items-center mb-3">
+                    <div class="flex-grow-1">
+                       {{$notice->notice}}
                     </div>
                 </div>
-                <img src="#" alt="News" class="ms-3 rounded"
-                    style="width: 60px; height: 60px; object-fit: cover;">
-            </div>
+            @empty
+                <p>Nenhuma notícia encontrada.</p>
+            @endforelse
         </div>
+
     </div>
 
     <!-- Modal -->
@@ -85,13 +81,14 @@
                     <button type="button" class="btn-close" onclick="closeModal()" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <a href={{$links->link_manager ?? '#'}} target="_blank" class="btn btn-success form-control mb-3">
+                    <a href={{ $links->link_manager ?? '#' }} target="_blank" class="btn btn-success form-control mb-3">
                         <i class="bi bi-whatsapp"></i> Fale com o Gerente
                     </a>
-                    <a href={{$links->link_customer_service ?? '#'}} target="_blank" class="btn btn-success form-control mb-3">
+                    <a href={{ $links->link_customer_service ?? '#' }} target="_blank"
+                        class="btn btn-success form-control mb-3">
                         <i class="bi bi-whatsapp"></i> Fale com o apoio ao ciente
                     </a>
-                    <a href={{$links->link_group ?? '#'}} target="_blank" class="btn btn-success form-control mb-3">
+                    <a href={{ $links->link_group ?? '#' }} target="_blank" class="btn btn-success form-control mb-3">
                         <i class="bi bi-whatsapp"></i> Faça parte do grupo
                     </a>
                 </div>

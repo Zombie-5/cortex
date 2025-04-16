@@ -4,6 +4,7 @@ namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Link;
+use App\Models\Notice;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -23,6 +24,9 @@ class HomeController extends Controller
             $wallet->save();
         }
         $links = Link::where('manager_id', $user->manager_id)->first();
-        return view('client.home', compact('links'));
+        $notices = Notice::where('status', 1)
+                ->orderBy('id', 'desc')
+                ->get();
+        return view('client.home', compact('links', 'notices'));
     }
 }
