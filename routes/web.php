@@ -112,6 +112,7 @@ Route::prefix('/site')->group(function () {
         Route::post('/bank-store', [StorebankController::class, 'store'])->name('admin.bank.store');
         Route::post('/gift-store', [GiftController::class, 'store'])->name('admin.gift.store');
         Route::post('/notices-store', [StoreNoticesController::class, 'store'])->name('admin.notices.store');
+        Route::post('/link-store', [LinkController::class, 'store'])->name('admin.link.store');
 
         Route::put('/products/{id}/update', [UpdateProductController::class, 'update'])->name('admin.product.update');
         Route::put('/bank/{id}/update', [UpdateBankController::class, 'update'])->name('admin.bank.update');
