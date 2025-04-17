@@ -374,7 +374,7 @@
     @include('layouts.client.header')
 
     <!-- Main Content -->
-    @yield('content');
+    @yield('content')
 
     <!-- Floating Support Button -->
     <div class="support-button-wrapper mb-5">

@@ -35,7 +35,7 @@
         <div class="balance-card">
             <div class="row">
                 <div class="col-6">
-                    <div class="amount">{{ number_format($user->wallet->points, 2, ',', '.') }}</div>
+                    <div class="amount">{{ number_format($user->wallet->points, 0, ',', '.') }}</div>
                     <div class="label">CashBacks</div>
                 </div>
 
