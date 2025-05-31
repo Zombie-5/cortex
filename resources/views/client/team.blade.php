@@ -21,13 +21,13 @@
                     <div class="col-6">
                         <div class="d-flex flex-column">
                             <span class="text-muted mb-2">Renda</span>
-                            <span class="h3 mb-0">20721.8</span>
+                            <span class="h3 mb-0">0</span>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="d-flex flex-column">
                             <span class="text-muted mb-2">Retiradas</span>
-                            <span class="h3 mb-0">49723</span>
+                            <span class="h3 mb-0">0</span>
                         </div>
                     </div>
                 </div>

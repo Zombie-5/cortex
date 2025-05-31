@@ -26,7 +26,6 @@ class signUpController extends Controller
         $validacao = new RegisterRequest;
         $erro = Validator::make($request->all(), $validacao->rules(), $validacao->messages());
 
-
         if ($erro->fails()) {
             return redirect()
                 ->back()
@@ -41,10 +40,10 @@ class signUpController extends Controller
 
             if ($createdUser) {
                 Wallet::create(['user_id' =>  $createdUser->id]);
-                $createdUser->wallet->money += 1000;
-                $createdUser->wallet->today += 1000;
-                $createdUser->wallet->total += 1000;
-                $createdUser->wallet->points = 10000;
+                $createdUser->wallet->money += 200;
+                $createdUser->wallet->today += 200;
+                $createdUser->wallet->total += 200;
+                $createdUser->wallet->points = 2000;
                 $createdUser->wallet->save();
 
                 $inviter = $createdUser->superior;
