@@ -82,7 +82,7 @@
                 <i class="bi bi-lock menu-icon d-block"></i>
                 <span>Senha</span>
             </a>
-            <a href="#" class="menu-item" href="https://www.etoro.com/about/">
+            <a href="https://www.etoro.com/about/" class="menu-item">
                 <i class="bi bi-info-circle menu-icon d-block"></i>
                 <span>Nós</span>
             </a>
