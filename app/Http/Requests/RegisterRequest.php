@@ -23,8 +23,8 @@ class RegisterRequest extends FormRequest
     {
         return [
             'tel' => ['required', 'digits:9', 'regex:/^(91|92|93|94|95|98|99)\d{7}$/', 'unique:users,tel'],
-            'password' => ['required', 'string'],
-            'invite_code' => ['required'],
+            'password' => ['required', 'string', 'min:6'],
+            'invite_code' => ['required', 'exists:users,id'],
         ];
     }
 
@@ -37,8 +37,10 @@ class RegisterRequest extends FormRequest
             'tel.max' => 'O telefone deve ter exatamente 9 dígitos!',
             'password.required' => 'O preenchimento da senha é obrigatório!',
             'password.string' => 'A senha deve ser uma sequência de caracteres válida!',
+            'password.min' => 'A senha deve ter no minimo 6 caracteres',
             'tel.regex' => 'O telefone é inválido!',
             'invite_code.required' => 'O campo invite é obrigatório!',
+            'invite_code.exists' => 'O código de convite é inválido!',
         ];
     }
 }

@@ -4,72 +4,6 @@
     <title>Cadastro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Add this to the head section of your auth pages -->
-    <style>
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .toast {
-            background: #333;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            min-width: 200px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            animation: slideIn 0.3s ease-out;
-        }
-
-        .toast-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .toast-message {
-            font-size: 0.9rem;
-        }
-
-        .toast.success .toast-icon {
-            color: #1dc37a;
-        }
-
-        .toast.error .toast-icon {
-            color: #ff4757;
-        }
-
-        .toast.loading .toast-icon {
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-
     <style>
         :root {
             --primary-green: #1dc37a;
@@ -155,11 +89,76 @@
             text-decoration: underline;
         }
     </style>
+     <style>
+        .custom-toast {
+            background-color: #333;
+            color: #fff;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            min-width: 180px;
+            display: flex;
+            flex-direction: column;
+            /* Muda de linha ao invés de linha-horizontal */
+            align-items: center;
+            /* Centraliza tudo */
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeSlideIn 0.3s ease;
+            gap: 0.5rem;
+            /* Espaço entre ícone e texto */
+            text-align: center;
+        }
+
+        .custom-toast .icon svg {
+            width: 24px;
+            height: 24px;
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .spin {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 </head>
 
 <body>
+     <!-- Custom Centered Toast Container -->
+    <div class="custom-toast-container position-fixed top-50 start-50 translate-middle p-3 d-flex flex-column gap-2 align-items-center"
+        style="z-index: 1055;"></div>
+
     <div class="container">
         <div class="auth-container">
             <h2 class="auth-title">Cadastro</h2>
@@ -182,10 +181,6 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="password_confirmation" class="form-label">Confirmar senha</label>
-                    <input type="password" class="form-control" id="password2" name="password_confirmation" required>
-                </div>
-                <div class="mb-3">
                     <label for="invite_code" class="form-label">Código de convite</label>
                     <input type="text" class="form-control" value="{{ old('invite_code', $invite_code) }}" id="invite_code" name="invite_code" required>
                     @error('invite_code')
@@ -195,7 +190,6 @@
 
                 <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
             </form>
-            <div class="toast-container" id="toastContainer"></div>
             <div class="toggle-form">
                 <a href="{{ route('auth.signIn') }}">Já tem uma conta? Faça login</a>
             </div>
@@ -205,67 +199,6 @@
     <!-- Add this before closing body tag -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-
-            let icon = '';
-            switch (type) {
-                case 'success':
-                    icon =
-                        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-                    break;
-                case 'error':
-                    icon =
-                        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
-                    break;
-                case 'loading':
-                    icon =
-                        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>';
-                    break;
-            }
-
-            toast.innerHTML = `
-            <div class="toast-icon">${icon}</div>
-            <div class="toast-message">${message}</div>
-        `;
-
-            container.appendChild(toast);
-
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(100%)';
-                toast.style.transition = 'all 0.3s ease-out';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
-        // Update your form submission handlers to use the toast
-        $("#signup-form").on('submit', function(e) {
-            if ($(this).valid()) {
-                showToast('Processando...', 'loading');
-            } else {
-                e.preventDefault();
-            }
-        });
-
-        // If there are any Laravel flash messages, show them as toasts
-        @if (session('success'))
-            showToast("{{ session('success') }}", 'success');
-        @endif
-
-        @if (session('error'))
-            showToast("{{ session('error') }}", 'error');
-        @endif
-
-        @if ($errors->any())
-            @foreach ($errors->all() as $error)
-                showToast("{{ $error }}", 'error');
-            @endforeach
-        @endif
-    </script>
     <script>
         $(document).ready(function() {
             $.validator.addMethod("noNumbers", function(value, element) {
@@ -283,10 +216,6 @@
                     password: {
                         required: true,
                         minlength: 6,
-                    },
-                    password2: {
-                        required: true,
-                        equalTo: "#password",
                     }
                 },
                 messages: {
@@ -299,10 +228,6 @@
                     password: {
                         required: "Por favor, insira uma senha",
                         minlength: "A senha deve ter pelo menos 6 caracteres"
-                    },
-                    password2: {
-                        required: "Por favor, confirme a senha",
-                        equalTo: "As senhas não coincidem"
                     }
                 },
                 errorPlacement: function(error, element) {
@@ -318,6 +243,70 @@
             });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Scripts para Toast -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        function showCustomToast(message, type = 'success') {
+            let svgIcon = '';
+
+            switch (type) {
+                case 'success':
+                    svgIcon =
+                        `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>`;
+                    break;
+                case 'error':
+                    svgIcon =
+                        `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>`;
+                    break;
+                case 'loading':
+                    svgIcon =
+                        `<svg class="spin" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-opacity="0.3"/><path d="M12 2a10 10 0 0 1 10 10" /></svg>`;
+                    break;
+                case 'custom':
+                    svgIcon =
+                        `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20l9-5-9-5-9 5 9 5z"/><path d="M12 12V4"/></svg>`;
+                    break;
+                default:
+                    svgIcon =
+                        `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>`;
+            }
+
+            const toastHtml = `
+            <div class="custom-toast">
+                <div class="icon">${svgIcon}</div>
+                <div>${message}</div>
+            </div>
+        `;
+
+            const container = document.querySelector('.custom-toast-container');
+            const toastElement = document.createElement('div');
+            toastElement.innerHTML = toastHtml;
+            container.appendChild(toastElement);
+
+            setTimeout(() => {
+                toastElement.remove();
+            }, 3000);
+        }
+
+        @if (session('success'))
+            showCustomToast(@json(session('success')), 'success');
+        @endif
+
+        @if (session('error'))
+            showCustomToast(@json(session('error')), 'error');
+        @endif
+    </script>
+
+    @if ($errors->any())
+        <script>
+            @foreach ($errors->all() as $error)
+                showCustomToast(@json($error), 'error');
+            @endforeach
+        </script>
+    @endif
     <script src="{{ asset('assets/js/validate/messages_pt_PT.js') }}"></script>
 </body>
 
