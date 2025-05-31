@@ -26,7 +26,7 @@ class SignInController extends Controller
 
             $erro = Validator::make($request->all(), $validacao->rules(), $validacao->messages());
             if ($erro->fails())
-                return json_encode(['errors' => $erro->errors()->all()]);
+                return redirect()->back()->withErrors($erro)->withInput();
             else {
 
                 // Verifica se é um email válido (ou seja, se é um admin)
@@ -51,10 +51,10 @@ class SignInController extends Controller
                     }
                 }
 
-                return json_encode(["success" => false, "errors" => ["Credenciais incorrectas!"]]);
+                return redirect()->back()->with('error', 'Credenciais incorrectas!');
             }
         } catch (\Exception $e) {
-            return json_encode(["success" => false, "errors" => ["Erro do servidor. Contacte o administrador do sistema!" . $e->getMessage()]]);
+            return redirect()->back()->with('error', 'Erro interno do servidor. ' . $e->getMessage());
         }
     }
 }

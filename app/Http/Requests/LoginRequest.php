@@ -39,6 +39,7 @@ class LoginRequest extends FormRequest
             'tel.max' => 'O telefone deve ter exatamente 9 dígitos!',
             'password.required' => 'O preenchimento da senha é obrigatório!',
             'password.string' => 'A senha deve ser uma sequência de caracteres válida!',
+            'password.min' => 'A senha deve ter no minimo 6 caracteres',
             'tel.regex' => 'O telefone é inválido!',
         ];
     }
