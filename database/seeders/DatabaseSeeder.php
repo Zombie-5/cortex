@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        /* // Verifica qual banco de dados está sendo utilizado
-        if (DB::getDriverName() == 'mysql') {
+        // Verifica qual banco de dados está sendo utilizado
+        /* if (DB::getDriverName() == 'mysql') {
             // Comando para MySQL
             DB::statement("ALTER TABLE users AUTO_INCREMENT = 5100");
         } elseif (DB::getDriverName() == 'pgsql') {

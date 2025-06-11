@@ -9,7 +9,7 @@
                 <div class="d-flex justify-content-between align-items-center text-white">
                     <div>
                         <div class="text-white-50 mb-1">Saldo disponível</div>
-                        <div class="h4 mb-0">KZ {{ number_format($user->wallet->money, 2, ',', '.') }}</div>
+                        <div class="h4 mb-0">USDT {{ number_format($user->wallet->money, 2, ',', '.') }}</div>
                     </div>
                     <i class="bi bi-wallet2 fs-4"></i>
                 </div>
@@ -41,8 +41,8 @@
                 <div class="mb-3">
                     <label class="form-label">Montante da retirada</label>
                     <div class="input-group">
-                        <span class="input-group-text">KZ</span>
-                        <input type="number" class="form-control" name="amount" min="3000" required>
+                        <span class="input-group-text">USDT</span>
+                        <input type="number" class="form-control" name="amount" min="8" required>
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@
 
                 <!-- Information Text -->
                 <div class="small text-muted">
-                    <p class="mb-2">1: O saque mínimo é 3000KZ e a taxa de saque é de 15%</p>
+                    <p class="mb-2">1: O saque mínimo é 3 USDT e a taxa de saque é de 15%</p>
                     <p class="mb-0">2: Horário de solicitação de saque: 10h às 15h.</p>
                     <p class="mb-0">3: O saque pode ser solicitado de segunda a sexta</p>
                     <p class="mb-0">4: Após uma solicitação de saque, os fundos chegarão à conta em 24 horas.</p>
@@ -88,7 +88,7 @@ $(document).ready(function() {
             },
             amount: {
                 required: true,
-                min: 3000,
+                min: 8,
                 max: function() {
                     return parseFloat(userBalance); // Replace with actual balance
                 }
@@ -103,7 +103,7 @@ $(document).ready(function() {
             },
             amount: {
                 required: "Por favor, insira o montante",
-                min: "O valor mínimo de saque é 3000KZ",
+                min: "O valor mínimo de saque é 8 USDT",
                 max: "O valor não pode exceder seu saldo disponível"
             }
         },

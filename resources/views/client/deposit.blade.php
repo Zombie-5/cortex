@@ -10,7 +10,7 @@
                     <div class="d-flex justify-content-between align-items-center text-white">
                         <div>
                             <div class="text-white-50 mb-1">Saldo da conta</div>
-                            <div class="h4 mb-0">KZ {{ number_format($user->wallet->money, 2, ',', '.') }}</div>
+                            <div class="h4 mb-0">USDT {{ number_format($user->wallet->money, 2, ',', '.') }}</div>
                         </div>
                         <i class="bi bi-wallet2 fs-4"></i>
                     </div>
@@ -26,9 +26,9 @@
                             <a href="{{ route('client.record.deposit') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">Registros</a>
                         </div>
                         <div class="input-group">
-                            <span class="input-group-text">KZ</span>
+                            <span class="input-group-text">USDT</span>
                             <input type="text" class="form-control form-control-lg" name="custom-amount"
-                                id="custom-amount" placeholder="5000">
+                                id="custom-amount">
                         </div>
                     </div>
 
@@ -37,37 +37,37 @@
                         <div class="row g-2 mb-2">
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="10000">10000</button>
+                                    data-value ="10">10</button>
                             </div>
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="20000">20000</button>
+                                    data-value ="20">20</button>
                             </div>
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="50000">50000</button>
+                                    data-value ="50">50</button>
                             </div>
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="100000">1000</button>
+                                    data-value ="100">100</button>
                             </div>
                         </div>
                         <div class="row g-2">
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="150000">15000</button>
+                                    data-value ="150">150</button>
                             </div>
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="200000">20000</button>
+                                    data-value ="200">200</button>
                             </div>
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="500000">50000</button>
+                                    data-value ="500">500</button>
                             </div>
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="1000000">10000</button>
+                                    data-value ="1000">1000</button>
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
 
                     <!-- Instructions -->
                     <div class="small text-muted">
-                        <p class="mb-2">O valor mínimo do depósito é de 10.000KZ (horário de carregamento: 10h00 às 22h00)
+                        <p class="mb-2">O valor mínimo do depósito é de 10 USDT (horário de carregamento: 10h00 às 22h00)
                         </p>
                         <p class="mb-2">Processo de recarga:</p>
                         <p class="mb-2">1.º Selecione o mesmo banco para transferir fundos. Os fundos chegarão à conta em 10 minutos. Se não

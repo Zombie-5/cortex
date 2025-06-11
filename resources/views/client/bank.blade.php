@@ -12,18 +12,10 @@
                     <div class="mb-3">
                         <label class="form-label">Nome do Banco</label>
                         <select class="form-select" name="name" required>
-                            <option value="BAI" {{ isset($bankInfo) && $bankInfo->name == 'BAI' ? 'selected' : '' }}>BAI
-                            </option>
-                            <option value="BFA" {{ isset($bankInfo) && $bankInfo->name == 'BFA' ? 'selected' : '' }}>BFA
-                            </option>
-                            <option value="BIC" {{ isset($bankInfo) && $bankInfo->name == 'BIC' ? 'selected' : '' }}>BIC
-                            </option>
-                            <option value="BPC" {{ isset($bankInfo) && $bankInfo->name == 'BPC' ? 'selected' : '' }}>BPC
-                            </option>
-                            <option value="ATL" {{ isset($bankInfo) && $bankInfo->name == 'ATL' ? 'selected' : '' }}>ATL
-                            </option>
                             <option value="BINANCE"
                                 {{ isset($bankInfo) && $bankInfo->name == 'BINANCE' ? 'selected' : '' }}>BINANCE</option>
+                            <option value="BYBIT"
+                                {{ isset($bankInfo) && $bankInfo->name == 'BYBIT' ? 'selected' : '' }}>BYBIT</option>
                         </select>
                         @error('name')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -42,7 +34,7 @@
 
                     <!-- IBAN -->
                     <div class="mb-3">
-                        <label class="form-label">Iban / Address</label>
+                        <label class="form-label">Endereço</label>
                         <input type="text" class="form-control" name="iban"
                             value="{{ old('iban', $bankInfo->iban ?? '') }}">
                         @error('iban')

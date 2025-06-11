@@ -15,7 +15,7 @@
                                 </div>
                             </div>
                             <div class="price-section">
-                                <div class="price-amount">{{ number_format($product['price'], 2, ',', '.') }} Kz</div>
+                                <div class="price-amount">{{ number_format($product['price'], 2, ',', '.') }} USDT</div>
 
                                 @php
                                     $buttonState = '';

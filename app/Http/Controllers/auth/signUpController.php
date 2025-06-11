@@ -40,9 +40,9 @@ class signUpController extends Controller
 
             if ($createdUser) {
                 Wallet::create(['user_id' =>  $createdUser->id]);
-                $createdUser->wallet->money += 200;
-                $createdUser->wallet->today += 200;
-                $createdUser->wallet->total += 200;
+                $createdUser->wallet->money += 2;
+                $createdUser->wallet->today += 2;
+                $createdUser->wallet->total += 2;
                 $createdUser->wallet->points = 2000;
                 $createdUser->wallet->save();
 
