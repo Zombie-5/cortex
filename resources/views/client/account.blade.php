@@ -21,11 +21,11 @@
             <div class="row">
                 <div class="col-6">
                     <div class="amount" style="color: var(--primary-green);">
-                        {{ number_format($user->wallet->today, 2, ',', '.') }}</div>
+                        {{ number_format($user->wallet->today, 0, ',', '.') }}</div>
                     <div class="label">Renda de Hoje</div>
                 </div>
                 <div class="col-6 text-end">
-                    <div class="amount">{{ number_format($user->wallet->daily, 2, ',', '.') }}</div>
+                    <div class="amount">{{ number_format($user->wallet->daily, 0, ',', '.') }}</div>
                     <div class="label">Renda Diária</div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
 
                 <div class="col-6 text-end">
                     <div class="amount" style="color: var(--primary-green);">
-                        {{ number_format($user->wallet->money, 2, ',', '.') }}</div>
+                        {{ number_format($user->wallet->money, 0, ',', '.') }}</div>
                     <div class="label">Meu saldo</div>
                 </div>
             </div>

@@ -23,9 +23,9 @@
                                 <div class="stat-item">
                                     <div class="stat-value">
                                         @if ($collectedToday)
-                                            {{ number_format($product['income'], 2, ',', '.') }}
+                                            {{ number_format($product['income'], 0, ',', '.') }}
                                         @else
-                                            {{ number_format(0, 2, ',', '.') }}
+                                            {{ number_format(0, 0, ',', '.') }}
                                         @endif
                                     </div>
                                     <div class="stat-label">Renda de Hoje</div>

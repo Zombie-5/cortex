@@ -10,7 +10,7 @@
                     <div class="d-flex justify-content-between align-items-center text-white">
                         <div>
                             <div class="text-white-50 mb-1">Saldo da conta</div>
-                            <div class="h4 mb-0">USDT {{ number_format($user->wallet->money, 2, ',', '.') }}</div>
+                            <div class="h4 mb-0">USDT {{ number_format($user->wallet->money, 0, ',', '.') }}</div>
                         </div>
                         <i class="bi bi-wallet2 fs-4"></i>
                     </div>

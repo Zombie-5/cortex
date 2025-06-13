@@ -12,7 +12,7 @@
                         <div class="record-item">
                             <div class="d-flex justify-content-between align-items-start border-bottom py-3">
                                 <div>
-                                    <div class="h5 mb-1">{{ number_format((float) $record['value'], 2, '.', '') }}</div>
+                                    <div class="h5 mb-1">{{ number_format((float) $record['value'], 0, '.', '') }}</div>
                                     <div class="text-muted small">{{ $record['updated_at'] }}</div>
                                 </div>
                                 <div>

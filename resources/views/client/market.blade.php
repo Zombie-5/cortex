@@ -15,7 +15,7 @@
                                 </div>
                             </div>
                             <div class="price-section">
-                                <div class="price-amount">{{ number_format($product['price'], 2, ',', '.') }} USDT</div>
+                                <div class="price-amount">{{ number_format($product['price'], 0, ',', '.') }} USDT</div>
 
                                 @php
                                     $buttonState = '';
@@ -40,7 +40,7 @@
                             </div>
                             <div class="stats-grid">
                                 <div class="stat-item">
-                                    <div class="stat-value">{{ number_format($product['income'], 2, ',', '.') }}</div>
+                                    <div class="stat-value">{{ number_format($product['income'], 0, ',', '.') }}</div>
                                     <div class="stat-label">Renda Diária</div>
                                 </div>
                                 <div class="stat-item">
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="stat-item">
                                     <div class="stat-value">
-                                        {{ number_format($product['income'] * $product['duration'], 2, ',', '.') }}</div>
+                                        {{ number_format($product['income'] * $product['duration'], 0, ',', '.') }}</div>
                                     <div class="stat-label">Renda Total</div>
                                 </div>
                             </div>
