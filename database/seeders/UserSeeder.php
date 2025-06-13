@@ -57,8 +57,8 @@ class UserSeeder extends Seeder
         $found = Found::first();
         if (!$found) {
             Found::create([
-                'liquid' => 500000, // Coloque o valor desejado
-                'balance' => 0,  // Coloque o valor desejado
+                'liquid' => 2,
+                'balance' => 0,
             ]);
             $this->command->info("Fundo criado com sucesso!");
         } else {
