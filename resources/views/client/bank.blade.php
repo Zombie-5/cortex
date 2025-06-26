@@ -14,16 +14,14 @@
                         <select class="form-select" name="name" required>
                             <option value="BAI" {{ isset($bankInfo) && $bankInfo->name == 'BAI' ? 'selected' : '' }}>BAI
                             </option>
+                            <option value="SOL" {{ isset($bankInfo) && $bankInfo->name == 'SOL' ? 'selected' : '' }}>SOL
+                            </option>
                             <option value="BFA" {{ isset($bankInfo) && $bankInfo->name == 'BFA' ? 'selected' : '' }}>BFA
-                            </option>
-                            <option value="BIC" {{ isset($bankInfo) && $bankInfo->name == 'BIC' ? 'selected' : '' }}>BIC
-                            </option>
-                            <option value="BPC" {{ isset($bankInfo) && $bankInfo->name == 'BPC' ? 'selected' : '' }}>BPC
                             </option>
                             <option value="ATL" {{ isset($bankInfo) && $bankInfo->name == 'ATL' ? 'selected' : '' }}>ATL
                             </option>
-                            <option value="BINANCE"
-                                {{ isset($bankInfo) && $bankInfo->name == 'BINANCE' ? 'selected' : '' }}>BINANCE</option>
+                            <option value="EXPRESS"
+                                {{ isset($bankInfo) && $bankInfo->name == 'EXPRESS' ? 'selected' : '' }}>EXPRESS</option>
                         </select>
                         @error('name')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -42,7 +40,7 @@
 
                     <!-- IBAN -->
                     <div class="mb-3">
-                        <label class="form-label">Iban / Address</label>
+                        <label class="form-label">Iban / Express</label>
                         <input type="text" class="form-control" name="iban"
                             value="{{ old('iban', $bankInfo->iban ?? '') }}">
                         @error('iban')
@@ -111,7 +109,7 @@
                     },
                     iban: {
                         required: true,
-                        minlength: 21
+                        minlength: 1
                     },
                 },
                 messages: {
@@ -124,7 +122,7 @@
                     },
                     iban: {
                         required: "Por favor, insira o iban / endereço",
-                        minlength: "O Iban / endereço deve ter pelo menos 21 caracteres"
+                        minlength: "O Iban / endereço deve ter pelo menos 5 caracteres"
                     },
                 },
                 errorElement: 'span',

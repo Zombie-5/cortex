@@ -42,9 +42,7 @@ class MarketController extends Controller
             return back()->withErrors(['Saldo Insuficiente.']);
         }
 
-        if ($user->hasActiveProduct()) {
-            return back()->withErrors(['Você já está investindo']);
-        }
+        
 
         if ($user->hasProduct($productId)) {
             return back()->withErrors(['Você já está investindo']);
@@ -83,6 +81,7 @@ class MarketController extends Controller
             ->where('product_id', $product->id)
             ->count();
 
+            
         if ($count2 == 4) {
             $user->wallet->points += 10000;
             $user->wallet->save();
@@ -91,12 +90,12 @@ class MarketController extends Controller
         if (!$user->is_vip) {
             $inviter = $user->superior;
             if ($inviter->manager_id) {
-                $inviter->wallet->points += $product->price * 0.1;
+                $inviter->wallet->points += $product->price * 0.2;
                 $inviter->wallet->save();
 
                 $inviter2 = $inviter->superior;
                 if ($inviter2->manager_id) {
-                    $inviter2->wallet->points += $product->price * 0.05;
+                    $inviter2->wallet->points += $product->price * 0.02;
                     $inviter2->wallet->save();
                 }
             }

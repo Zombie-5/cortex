@@ -65,32 +65,39 @@ class HoldingController extends Controller
             $user->wallet->total += $product->income;
             $user->wallet->save();
 
-            if ($user->user_id >= 5100) {
+          if ($user->user_id >= 5100) {
+    $superior1 = $user->superior;
 
-                $superior1 = $user->superior;
-                $superior1->wallet->money += $product->income * 0.02;
-                $superior1->wallet->today += $product->income * 0.02;
-                $superior1->wallet->total += $product->income * 0.02;
-                $superior1->wallet->save();
-                Record::create([
-                    'name' => 'Comissão',
-                    'value' => $product->income * 0.02,
-                    'user_id' => $superior1->id,
-                ]);
+    if ($superior1 && $superior1->wallet) {
+        $wallet1 = $superior1->wallet;
+        $wallet1->money += $product->income * 0.02;
+        $wallet1->today += $product->income * 0.02;
+        $wallet1->total += $product->income * 0.02;
+        $wallet1->save();
 
-                $superior2 =  $superior1->superior;
-                if ($superior2) {
-                    $superior2->wallet->money += $product->income * 0.01;
-                    $superior2->wallet->today += $product->income * 0.01;
-                    $superior2->wallet->total += $product->income * 0.01;
-                    $superior2->wallet->save();
-                    Record::create([
-                        'name' => 'Comissão',
-                        'value' => $product->income * 0.01,
-                        'user_id' => $superior2->id,
-                    ]);
-                }
-            }
+        Record::create([
+            'name' => 'Comissão',
+            'value' => $product->income * 0.02,
+            'user_id' => $superior1->id,
+        ]);
+    }
+
+    $superior2 = $superior1->superior ?? null;
+    if ($superior2 && $superior2->wallet) {
+        $wallet2 = $superior2->wallet;
+        $wallet2->money += $product->income * 0.01;
+        $wallet2->today += $product->income * 0.01;
+        $wallet2->total += $product->income * 0.01;
+        $wallet2->save();
+
+        Record::create([
+            'name' => 'Comissão',
+            'value' => $product->income * 0.01,
+            'user_id' => $superior2->id,
+        ]);
+    }
+}
+
 
             $user->products()->updateExistingPivot($product->id, [
                 'income_total' => $product->pivot->income_total + $product->income,

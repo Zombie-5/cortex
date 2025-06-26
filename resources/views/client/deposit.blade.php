@@ -28,7 +28,7 @@
                         <div class="input-group">
                             <span class="input-group-text">KZ</span>
                             <input type="text" class="form-control form-control-lg" name="custom-amount"
-                                id="custom-amount" placeholder="5000">
+                                id="custom-amount" placeholder="6000">
                         </div>
                     </div>
 
@@ -37,37 +37,37 @@
                         <div class="row g-2 mb-2">
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="10000">10000</button>
+                                    data-value ="6000">6.000</button>
                             </div>
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="20000">20000</button>
+                                    data-value ="12000">12.000</button>
                             </div>
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="50000">50000</button>
+                                    data-value ="45000">45.000</button>
                             </div>
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="100000">1000</button>
+                                    data-value ="100000">100.000</button>
                             </div>
                         </div>
                         <div class="row g-2">
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="150000">15000</button>
+                                    data-value ="150000">150.000</button>
                             </div>
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="200000">20000</button>
+                                    data-value ="200000">200.000</button>
                             </div>
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="500000">50000</button>
+                                    data-value ="500000">500.000</button>
                             </div>
                             <div class="col-3">
                                 <button type="button" class="btn btn-outline-primary w-100 rounded-pill amount-btn"
-                                    data-value ="1000000">10000</button>
+                                    data-value ="1000000">1.000.000</button>
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
 
                     <!-- Instructions -->
                     <div class="small text-muted">
-                        <p class="mb-2">O valor mínimo do depósito é de 10.000KZ (horário de carregamento: 10h00 às 22h00)
+                        <p class="mb-2">O valor mínimo do depósito é de 6.000KZ (horário de carregamento: 10h00 às 22h00)
                         </p>
                         <p class="mb-2">Processo de recarga:</p>
                         <p class="mb-2">1.º Selecione o mesmo banco para transferir fundos. Os fundos chegarão à conta em 10 minutos. Se não
